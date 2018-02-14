@@ -1,0 +1,8 @@
+﻿<Application
+    x:Class="Mohawk.Executive.App.UWP.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Mohawk.Executive.App.UWP"
+    RequestedTheme="Light">
+
+</Application>
