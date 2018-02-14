@@ -54,5 +54,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mohawk.Executive.Database\Mohawk.Executive.Database.csproj">
+      <Project>{566a4760-34f1-4c9a-a4bd-c824199ce58e}</Project>
+      <Name>Mohawk.Executive.Database</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
