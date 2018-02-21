@@ -107,6 +107,10 @@
     <Compile Include="Entities\UDT\DonationType.cs" />
     <Compile Include="Entities\UDT\OpportunityStep.cs" />
     <Compile Include="Entities\UDT\OpportunityPriority.cs" />
+    <Compile Include="Migrations\201802212035567_Initial.cs" />
+    <Compile Include="Migrations\201802212035567_Initial.Designer.cs">
+      <DependentUpon>201802212035567_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -116,6 +120,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abstraction\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201802212035567_Initial.resx">
+      <DependentUpon>201802212035567_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
