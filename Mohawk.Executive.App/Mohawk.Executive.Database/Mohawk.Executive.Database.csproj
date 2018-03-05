@@ -102,7 +102,7 @@
     <Compile Include="ExecutiveContext.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Contact.cs" />
-    <Compile Include="Entities\UDT\OpportunityDonations.cs" />
+    <Compile Include="Entities\UDT\OpportunityDonation.cs" />
     <Compile Include="Entities\Opportunity.cs" />
     <Compile Include="Entities\UDT\DonationType.cs" />
     <Compile Include="Entities\UDT\OpportunityStep.cs" />
@@ -118,6 +118,14 @@
     <Compile Include="Migrations\201803051640409_NavigationPropertyForOppDonations.cs" />
     <Compile Include="Migrations\201803051640409_NavigationPropertyForOppDonations.Designer.cs">
       <DependentUpon>201803051640409_NavigationPropertyForOppDonations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803051851108_ModifiedOpportunityForRemovalFunctionality.cs" />
+    <Compile Include="Migrations\201803051851108_ModifiedOpportunityForRemovalFunctionality.Designer.cs">
+      <DependentUpon>201803051851108_ModifiedOpportunityForRemovalFunctionality.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803051852523_AddedResolutionFunctionality.cs" />
+    <Compile Include="Migrations\201803051852523_AddedResolutionFunctionality.Designer.cs">
+      <DependentUpon>201803051852523_AddedResolutionFunctionality.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -138,6 +146,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803051640409_NavigationPropertyForOppDonations.resx">
       <DependentUpon>201803051640409_NavigationPropertyForOppDonations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803051851108_ModifiedOpportunityForRemovalFunctionality.resx">
+      <DependentUpon>201803051851108_ModifiedOpportunityForRemovalFunctionality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803051852523_AddedResolutionFunctionality.resx">
+      <DependentUpon>201803051852523_AddedResolutionFunctionality.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

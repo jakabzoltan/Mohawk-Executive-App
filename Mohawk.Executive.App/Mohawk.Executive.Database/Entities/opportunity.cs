@@ -15,8 +15,9 @@ namespace Mohawk.Executive.Database.Entities
 
         public string Value { get; set; }
         public string Outcome { get; set; }
+        public DateTime? RemovedOn { get; set; }
         public DateTime? ResolvedOn { get; set; }
-
+        public string ResolutionReason { get; set; }
         public virtual Contact Contact { get; set; }
         public virtual OpportunityPriority Priority { get; set; }
         public virtual IEnumerable<OpportunityStep> Steps { get; set; }

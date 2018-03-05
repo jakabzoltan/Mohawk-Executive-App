@@ -11,8 +11,8 @@
 namespace Mohawk.Executive.App.Views {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("C:\\Users\\student.user\\Documents\\Mohawk-Executive-App\\Mohawk.Executive.App\\Mohawk." +
-        "Executive.App\\Mohawk.Executive.App\\Views\\ItemDetailPage.xaml")]
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("C:\\Users\\jakabz\\Documents\\Mohawk-Executive-App\\Mohawk.Executive.App\\Mohawk.Execut" +
+        "ive.App\\Mohawk.Executive.App\\Views\\ItemDetailPage.xaml")]
     public partial class ItemDetailPage : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]

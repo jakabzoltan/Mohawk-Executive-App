@@ -84,3 +84,6 @@ C:\Users\jakabz\Documents\Mohawk-Executive-App\Mohawk.Executive.App\Mohawk.Execu
 C:\Users\jakabz\Documents\Mohawk-Executive-App\Mohawk.Executive.App\Mohawk.Executive.Database\obj\Debug\Mohawk.Executive.Database.dll
 C:\Users\jakabz\Documents\Mohawk-Executive-App\Mohawk.Executive.App\Mohawk.Executive.Database\obj\Debug\Mohawk.Executive.Database.pdb
 C:\Users\jakabz\Documents\Mohawk-Executive-App\Mohawk.Executive.App\Mohawk.Executive.Database\obj\Debug\Mohawk.Executive.Database.Migrations.Removed_Subject_From_Comments.resources
+C:\Users\jakabz\Documents\Mohawk-Executive-App\Mohawk.Executive.App\Mohawk.Executive.Database\obj\Debug\Mohawk.Executive.Database.Migrations.NavigationPropertyForOppDonations.resources
+C:\Users\jakabz\Documents\Mohawk-Executive-App\Mohawk.Executive.App\Mohawk.Executive.Database\obj\Debug\Mohawk.Executive.Database.Migrations.ModifiedOpportunityForRemovalFunctionality.resources
+C:\Users\jakabz\Documents\Mohawk-Executive-App\Mohawk.Executive.App\Mohawk.Executive.Database\obj\Debug\Mohawk.Executive.Database.Migrations.AddedResolutionFunctionality.resources

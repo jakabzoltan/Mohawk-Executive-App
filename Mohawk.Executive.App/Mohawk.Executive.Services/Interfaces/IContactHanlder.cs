@@ -1,5 +1,6 @@
 ﻿using System;
-using Mohawk.Executive.Services.Enumerables;
+using System.Collections.Generic;
+using Mohawk.Executive.Services.ViewModels;
 
 namespace Mohawk.Executive.Services.Interfaces
 {
@@ -8,7 +9,7 @@ namespace Mohawk.Executive.Services.Interfaces
         bool AddContact(string name, string role, string phoneNumber, string email, string organizationName, string location);
         bool RemoveContact(Guid id);
         bool UpdateContact(Guid id, string name, string role, string phoneNumber, string email, string organizationName, string location);
-        void GetAllContacts();
-        void SearchContacts(string queryValues, params SearchFilter[] searchFilters);
+        IEnumerable<Contact> GetAllContacts();
+        IEnumerable<Contact> SearchContacts(string queryString);
     }
 }

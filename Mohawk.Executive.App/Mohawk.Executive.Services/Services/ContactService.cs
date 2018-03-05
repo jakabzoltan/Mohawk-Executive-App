@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Mohawk.Executive.Database;
 using Mohawk.Executive.Database.Entities;
-using Mohawk.Executive.Services.Enumerables;
 using Mohawk.Executive.Services.Interfaces;
 
 namespace Mohawk.Executive.Services.Services
@@ -15,7 +15,9 @@ namespace Mohawk.Executive.Services.Services
         {
             _context = context;
         }
-        public bool AddContact(string name, string role, string phoneNumber, string email, string organizationName, string location)
+
+        public bool AddContact(string name, string role, string phoneNumber, string email, string organizationName,
+            string location)
         {
             var contact = new Contact
             {
@@ -43,7 +45,8 @@ namespace Mohawk.Executive.Services.Services
             return true;
         }
 
-        public bool UpdateContact(Guid id, string name, string role, string phoneNumber, string email, string organizationName,
+        public bool UpdateContact(Guid id, string name, string role, string phoneNumber, string email,
+            string organizationName,
             string location)
         {
             var contact = _context.Contacts.FirstOrDefault(c => c.Id == id);
@@ -59,14 +62,45 @@ namespace Mohawk.Executive.Services.Services
             return true;
         }
 
-        public void GetAllContacts()
+        public IEnumerable<ViewModels.Contact> GetAllContacts()
         {
-            
+            return _context.Contacts.Select(c => new ViewModels.Contact()
+            {
+                Id = c.Id,
+                Email = c.Email,
+                ModifiedOn = c.ModifiedOn,
+                Location = c.Location,
+                Name = c.Location,
+                Organization = c.Organization,
+                PhoneNumber = c.PhoneNumber,
+                Role = c.Role
+            })
+            .OrderBy(x=>x.Name);
         }
 
-        public void SearchContacts(string queryValues, params SearchFilter[] searchFilters)
+        public IEnumerable<ViewModels.Contact> SearchContacts(string queryString)
         {
-            throw new NotImplementedException();
+            return _context.Contacts
+                .Where(c => c.Name.Contains(queryString) ||
+                            c.Email.Contains(queryString) ||
+                            c.Location.Contains(queryString) ||
+                            c.Organization.Contains(queryString))
+                .Select(c =>
+                    new ViewModels.Contact
+                    {
+                        Id = c.Id,
+                        Email = c.Email,
+                        ModifiedOn = c.ModifiedOn,
+                        Location = c.Location,
+                        Name = c.Location,
+                        Organization = c.Organization,
+                        PhoneNumber = c.PhoneNumber,
+                        Role = c.Role
+                    })
+                .OrderBy(x => x.Name)
+                .ThenBy(x => x.Organization)
+                .ThenBy(x => x.Location)
+                .ThenBy(x => x.Email);
         }
     }
 }

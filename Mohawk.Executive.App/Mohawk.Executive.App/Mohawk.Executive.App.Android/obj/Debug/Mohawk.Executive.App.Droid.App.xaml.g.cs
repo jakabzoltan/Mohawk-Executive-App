@@ -11,8 +11,8 @@
 namespace Mohawk.Executive.App {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("C:\\Users\\student.user\\Documents\\Mohawk-Executive-App\\Mohawk.Executive.App\\Mohawk." +
-        "Executive.App\\Mohawk.Executive.App\\App.xaml")]
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("C:\\Users\\jakabz\\Documents\\Mohawk-Executive-App\\Mohawk.Executive.App\\Mohawk.Execut" +
+        "ive.App\\Mohawk.Executive.App\\App.xaml")]
     public partial class App : global::Xamarin.Forms.Application {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]

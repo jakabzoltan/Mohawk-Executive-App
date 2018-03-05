@@ -17,7 +17,9 @@ namespace Mohawk.Executive.Services.ViewModels
         public Guid ContactId { get; set; }
         public string Value { get; set; }
         public string Outcome { get; set; }
+        public DateTime? RemovedOn { get; set; }
         public DateTime? ResolvedOn { get; set; }
+        public string ResolutionReason { get; set; }
 
         public OpportunityPriority Priority { get; set; }
         public IEnumerable<OpportunityStep> Steps { get; set; }
