@@ -102,6 +102,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enumerables\SearchFilter.cs" />
+    <Compile Include="Interfaces\ICommentHandler.cs" />
+    <Compile Include="Interfaces\IContactHanlder.cs" />
+    <Compile Include="Interfaces\IDonationHandler.cs" />
+    <Compile Include="Interfaces\IOpportunityHandler.cs" />
+    <Compile Include="Interfaces\IStepHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -115,7 +121,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

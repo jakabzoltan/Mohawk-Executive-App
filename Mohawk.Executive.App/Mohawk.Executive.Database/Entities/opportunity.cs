@@ -11,8 +11,8 @@ namespace Mohawk.Executive.Database.Entities
     {
         public Guid Id { get; set; }
         public int OpportunityPriorityId { get; set; }
-
         public Guid ContactId { get; set; }
+
         public string Value { get; set; }
         public string Outcome { get; set; }
         public DateTime? ResolvedOn { get; set; }
@@ -20,7 +20,7 @@ namespace Mohawk.Executive.Database.Entities
         public virtual Contact Contact { get; set; }
         public virtual OpportunityPriority Priority { get; set; }
         public virtual IEnumerable<OpportunityStep> Steps { get; set; }
-        public virtual IEnumerable<OpportunityDonations> Donations { get; set; }
+        public virtual IEnumerable<OpportunityDonation> Donations { get; set; }
         public virtual IEnumerable<Comment> Comments { get; set; }
     }
 }

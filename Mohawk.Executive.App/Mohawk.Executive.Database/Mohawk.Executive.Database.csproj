@@ -99,7 +99,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseContext.cs" />
+    <Compile Include="ExecutiveContext.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\UDT\OpportunityDonations.cs" />
@@ -110,6 +110,14 @@
     <Compile Include="Migrations\201802212035567_Initial.cs" />
     <Compile Include="Migrations\201802212035567_Initial.Designer.cs">
       <DependentUpon>201802212035567_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803051606163_Removed_Subject_From_Comments.cs" />
+    <Compile Include="Migrations\201803051606163_Removed_Subject_From_Comments.Designer.cs">
+      <DependentUpon>201803051606163_Removed_Subject_From_Comments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803051640409_NavigationPropertyForOppDonations.cs" />
+    <Compile Include="Migrations\201803051640409_NavigationPropertyForOppDonations.Designer.cs">
+      <DependentUpon>201803051640409_NavigationPropertyForOppDonations.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,6 +132,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802212035567_Initial.resx">
       <DependentUpon>201802212035567_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803051606163_Removed_Subject_From_Comments.resx">
+      <DependentUpon>201803051606163_Removed_Subject_From_Comments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803051640409_NavigationPropertyForOppDonations.resx">
+      <DependentUpon>201803051640409_NavigationPropertyForOppDonations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -11,9 +11,9 @@ using Mohawk.Executive.Database.Entities.UDT;
 
 namespace Mohawk.Executive.Database
 {
-    public class DatabaseContext : IdentityDbContext
+    public class ExecutiveContext : IdentityDbContext
     {
-        public DatabaseContext() : base("MohawkExecutiveDb")
+        public ExecutiveContext() : base("MohawkExecutiveDb")
         {
             
         }
@@ -21,7 +21,7 @@ namespace Mohawk.Executive.Database
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<DonationType> DonationTypes { get; set; }
-        public DbSet<OpportunityDonations> OpportunityDonations { get; set; }
+        public DbSet<OpportunityDonation> OpportunityDonations { get; set; }
         public DbSet<OpportunityPriority> OpportunityPriorities { get; set; }
         public DbSet<OpportunityStep> OpportunitySteps { get; set; }
     }
