@@ -4116,7 +4116,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   overflow-y: auto;
 }
 
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {
   .navbar-collapse {
     width: auto;
     border-top: 0;
@@ -4140,13 +4140,13 @@ textarea.input-group-sm > .input-group-btn > .btn {
   .navbar-collapse .navbar-text:last-child {
     margin-right: 0;
   }
-}
+}*/
 
-.container > .navbar-header,
+/*.container > .navbar-header,
 .container > .navbar-collapse {
   margin-right: -15px;
   margin-left: -15px;
-}
+}*/
 
 @media (min-width: 768px) {
   .container > .navbar-header,
@@ -4234,7 +4234,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 @media (min-width: 768px) {
   .navbar-toggle {
-    display: none;
+    display: block;
   }
 }
 
@@ -4273,12 +4273,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 @media (min-width: 768px) {
   .navbar-nav {
-    float: left;
+    /*float: left;*/
     margin: 0;
   }
-  .navbar-nav > li {
+  /*.navbar-nav > li {
     float: left;
-  }
+  }*/
   .navbar-nav > li > a {
     padding-top: 15px;
     padding-bottom: 15px;

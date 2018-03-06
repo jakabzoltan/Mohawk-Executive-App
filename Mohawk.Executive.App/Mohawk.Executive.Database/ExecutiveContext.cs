@@ -24,5 +24,10 @@ namespace Mohawk.Executive.Database
         public DbSet<OpportunityDonation> OpportunityDonations { get; set; }
         public DbSet<OpportunityPriority> OpportunityPriorities { get; set; }
         public DbSet<OpportunityStep> OpportunitySteps { get; set; }
+
+        public static ExecutiveContext Create()
+        {
+            return new ExecutiveContext();
+        }
     }
 }

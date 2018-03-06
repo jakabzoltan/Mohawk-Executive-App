@@ -6,9 +6,9 @@ namespace Mohawk.Executive.Services.Interfaces
 {
     public interface IOpportunityHandler
     {
-        bool AddOpportunity(Guid contactId, string value, int priority);
+        bool AddOpportunity(Guid contactId, string subject, string value, int priority);
         bool RemoveOpportunity(Guid opportunityId);
-        bool UpdateOpportunity(Guid opportunityId, string newValue, int? newPriority = null);
+        bool UpdateOpportunity(Guid opportunityId, string newSubject, string newValue, int? newPriority = null);
         bool ResolveOpportunity(Guid opportunityId, string resolutionReason);
         bool SetPriorityLevel(Guid opportunityId, int priorityLevel);
 

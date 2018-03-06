@@ -87,3 +87,4 @@ C:\Users\jakabz\Documents\Mohawk-Executive-App\Mohawk.Executive.App\Mohawk.Execu
 C:\Users\jakabz\Documents\Mohawk-Executive-App\Mohawk.Executive.App\Mohawk.Executive.Database\obj\Debug\Mohawk.Executive.Database.Migrations.NavigationPropertyForOppDonations.resources
 C:\Users\jakabz\Documents\Mohawk-Executive-App\Mohawk.Executive.App\Mohawk.Executive.Database\obj\Debug\Mohawk.Executive.Database.Migrations.ModifiedOpportunityForRemovalFunctionality.resources
 C:\Users\jakabz\Documents\Mohawk-Executive-App\Mohawk.Executive.App\Mohawk.Executive.Database\obj\Debug\Mohawk.Executive.Database.Migrations.AddedResolutionFunctionality.resources
+C:\Users\jakabz\Documents\Mohawk-Executive-App\Mohawk.Executive.App\Mohawk.Executive.Database\obj\Debug\Mohawk.Executive.Database.Migrations.fixedOpportunity.resources

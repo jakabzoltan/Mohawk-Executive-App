@@ -127,6 +127,10 @@
     <Compile Include="Migrations\201803051852523_AddedResolutionFunctionality.Designer.cs">
       <DependentUpon>201803051852523_AddedResolutionFunctionality.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803061517599_fixedOpportunity.cs" />
+    <Compile Include="Migrations\201803061517599_fixedOpportunity.Designer.cs">
+      <DependentUpon>201803061517599_fixedOpportunity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -152,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803051852523_AddedResolutionFunctionality.resx">
       <DependentUpon>201803051852523_AddedResolutionFunctionality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803061517599_fixedOpportunity.resx">
+      <DependentUpon>201803061517599_fixedOpportunity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

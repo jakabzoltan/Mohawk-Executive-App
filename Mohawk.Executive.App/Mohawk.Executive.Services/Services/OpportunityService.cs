@@ -11,18 +11,19 @@ namespace Mohawk.Executive.Services.Services
     {
         private readonly ExecutiveContext _context;
 
-        public OpportunityService(ExecutiveContext context)
+        public OpportunityService()
         {
-            _context = context;
+            _context = ExecutiveContext.Create();
         }
 
-        public bool AddOpportunity(Guid contactId, string value, int priority)
+        public bool AddOpportunity(Guid contactId,string subject ,string value, int priority)
         {
             if (!ContactExists(contactId)) return false;
             _context.Opportunities.Add(new Opportunity
             {
                 ContactId = contactId,
                 Value = value,
+                OpportunitySubject = subject,
                 OpportunityPriorityId = priority
             });
             _context.SaveChanges();
@@ -38,10 +39,11 @@ namespace Mohawk.Executive.Services.Services
             return true;
         }
 
-        public bool UpdateOpportunity(Guid opportunityId, string newValue, int? newPriority = null)
+        public bool UpdateOpportunity(Guid opportunityId, string subject, string newValue, int? newPriority = null)
         {
             var opportunity = _context.Opportunities.FirstOrDefault(x => x.Id == opportunityId);
             if (opportunity == null) return false;
+            opportunity.OpportunitySubject = subject;
             opportunity.Value = newValue;
             if (newPriority != null)
                 opportunity.OpportunityPriorityId = (int)newPriority;
@@ -71,24 +73,32 @@ namespace Mohawk.Executive.Services.Services
 
         public IEnumerable<ViewModels.Opportunity> GetOpportunities()
         {
-            var results = _context.Opportunities;
-            var returned = new List<ViewModels.Opportunity>();
-            foreach (var opportunity in results)
+            return _context.Opportunities.Select(opportunity => new ViewModels.Opportunity()
             {
-                returned.Add(new ViewModels.Opportunity()
-                {
-                    
-                });
-            }
-
-
-
-            return returned;
+                Id = opportunity.Id,
+                ContactId = opportunity.ContactId,
+                OpportunitySubject = opportunity.OpportunitySubject,
+                Value = opportunity.Value,
+                OpportunityPriorityId = opportunity.OpportunityPriorityId,
+                ResolvedOn = opportunity.ResolvedOn,
+                ResolutionReason = opportunity.ResolutionReason,
+                RemovedOn = opportunity.RemovedOn,
+            });
         }
 
         public IEnumerable<ViewModels.Opportunity> GetOpportunitiesForContact(Guid contactId)
         {
-            throw new NotImplementedException();
+            return _context.Opportunities.Where(c=>c.ContactId == contactId).Select(opportunity => new ViewModels.Opportunity()
+            {
+                Id = opportunity.Id,
+                ContactId = opportunity.ContactId,
+                OpportunitySubject = opportunity.OpportunitySubject,
+                Value = opportunity.Value,
+                OpportunityPriorityId = opportunity.OpportunityPriorityId,
+                ResolvedOn = opportunity.ResolvedOn,
+                ResolutionReason = opportunity.ResolutionReason,
+                RemovedOn = opportunity.RemovedOn,
+            });
         }
 
 

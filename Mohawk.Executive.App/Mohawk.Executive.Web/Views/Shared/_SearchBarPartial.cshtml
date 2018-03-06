@@ -1,0 +1,7 @@
+﻿@model Mohawk.Executive.Web.Models.SearchModel
+
+    @using (Html.BeginForm("Index", "Dashboard", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+        <div style="margin: 8px;">@Html.TextBoxFor(m => m.Query, new { @class = "form-control", placeholder = "Search" })</div>
+    }

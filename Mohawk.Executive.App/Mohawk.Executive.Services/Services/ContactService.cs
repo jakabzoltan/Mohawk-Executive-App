@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Mohawk.Executive.Database;
 using Mohawk.Executive.Database.Entities;
 using Mohawk.Executive.Services.Interfaces;
@@ -11,9 +12,9 @@ namespace Mohawk.Executive.Services.Services
     {
         private readonly ExecutiveContext _context;
 
-        public ContactService(ExecutiveContext context)
+        public ContactService()
         {
-            _context = context;
+            _context = ExecutiveContext.Create();
         }
 
         public bool AddContact(string name, string role, string phoneNumber, string email, string organizationName,
