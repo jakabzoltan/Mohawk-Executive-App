@@ -4,15 +4,55 @@
     ViewBag.Title = Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .information-container {
+        width: 100%;
+        height: auto;
+    }
+</style>
 
+<h3>Contact Information</h3>
+<hr/>
+<div class="information-container">
+    <div class="container">
+        <div class="row">
+            <table>
+                <tr>
+                    <td>@Html.LabelFor(m=>m.Name):</td>
+                    <td>@Html.DisplayFor(m=>m.Name)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m=>m.Email):</td>
+                    <td>@Html.DisplayFor(m=>m.Email)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m=>m.PhoneNumber):</td>
+                    <td>@Html.DisplayFor(m=>m.PhoneNumber)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m=>m.Organization):</td>
+                    <td>@Html.DisplayFor(m=>m.Organization)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m=>m.Location):</td>
+                    <td>@Html.DisplayFor(m=>m.Location)</td>
+                </tr>
+            </table>
+            
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-sm-8">
+        <h3>Opportunities</h3>
+    </div>
+    <div class="col-sm-4">
+        <h3><a class="btn btn-success" style="width:100%"><span class="glyphicon glyphicon-plus"></span> New Opportunity</a></h3>
+    </div>
+</div>
 
-
-
-
-
-
-
-
+<hr />
 @if (Model.Opportunities.Any())
 {
     <table class="table table-striped">
@@ -31,5 +71,6 @@
 }
 else
 {
+    
     <div class="col-sm-12 text-center">No opportunities for this contact!</div>
 }

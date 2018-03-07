@@ -39,16 +39,16 @@
     @if (User.Identity.IsAuthenticated)
     {
         <ul class="nav navbar-nav">
-            <li><b>@Html.ActionLink("Home", "Index", "Dashboard")</b></li>
-            <li><b>@Html.ActionLink("About", "About", "Dashboard")</b></li>
-            <li><b>@Html.ActionLink("Contact", "Contact", "Dashboard")</b></li>
+            <li>@Html.ActionLink("Home", "Index", "Dashboard")</li>
+            <li>@Html.ActionLink("About", "About", "Dashboard")</li>
+            <li>@Html.ActionLink("Contact", "Contact", "Dashboard")</li>
         </ul>
     }
 
     @Html.Partial("_LoginPartial")
 
 </div>
-    <div id="navbar-placeholder"style="height: 75px;"></div>
+    <div id="navbar-placeholder"style="height: 50px;"></div>
     <div class="container body-content">
         @RenderBody()
     </div>

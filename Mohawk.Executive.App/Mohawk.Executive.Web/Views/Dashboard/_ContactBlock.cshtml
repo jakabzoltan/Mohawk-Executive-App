@@ -14,37 +14,66 @@
         text-align: center;
         background: #777
     }
-    @@media only screen and (min-width:768px) {
-        .contact-block {
-            display: inline-block;
-            min-width: 175px;
-            width: 22%;
-            margin: 2%;
-        }
-    }
+
     .contact-block {
         display: inline-block;
         min-width: 175px;
         width: 7%;
         margin: 1%;
     }
-    
-    
+
+    .organization-lbl {
+        cursor: pointer;
+    }
+
+    @@media only screen and (max-width:767px) {
+        .contact-block {
+            display: inline-block;
+            min-width: 125px;
+            width: 22%;
+            margin: 2%;
+        }
+
+        .circle {
+            display: table-cell;
+            position: relative;
+            cursor: pointer;
+            width: 125px;
+            height: 125px;
+            border-radius: 50%;
+            font-size: 14px;
+            color: white;
+            vertical-align: middle;
+            text-align: center;
+            background: #777
+        }
+
+        .organization-lbl {
+            display: none;
+        }
+    }
 </style>
 
 @{
-    foreach (var contact in Model)
+    if (Model.Any())
     {
-        <div class="contact-block">
-            <a href="@Url.Action("ViewContact","Contact",new {id=contact.Id})">
-                <div class="circle">
-                    <p>
+        foreach (var contact in Model)
+        {
+            <a href="@Url.Action("ViewContact", "Contact", new {id = contact.Id})">
+                <div class="contact-block">
+                    <div class="circle">
                         @contact.Name
-                        @contact.Organization
-                    </p>
+                        <label class="organization-lbl">
+                            @contact.Organization
+                        </label>
+                    </div>
                 </div>
             </a>
-        </div>
+        }
+    }
+    else
+    {
+        <h4><i>There are no contacts that contain the search terms...</i></h4>
     }
 }
 
