@@ -1,10 +1,16 @@
-﻿@{
-    ViewBag.Title = "";
+﻿@model IEnumerable<Mohawk.Executive.Services.ViewModels.Contact>
+@{
+    ViewBag.Title = "Dashboard";
 }
-
-
-<div>Index</div>
-
+<div class="col-sm-12 text-center">
+    <h2>Contacts</h2>
+    <hr/>
+</div>
+<div class="col-sm-12 text-center">
+    <div style="margin: auto;">
+        @Html.Partial("_ContactBlock", Model)
+    </div>
+</div>
 
 
 

@@ -1,27 +1,47 @@
-﻿@model IEnumerable<Mohawk.Executive.Services.ViewModels.Contact>
+﻿@using WebGrease.Css.Ast.MediaQuery
+@model IEnumerable<Mohawk.Executive.Services.ViewModels.Contact>
 
 <style>
     .circle {
-        width: 15%;
-        height: 15%;
+        display: table-cell;
+        position: relative;
+        width: 150px;
+        height: 150px;
         border-radius: 50%;
-        font-size: 50px;
-        color: #fff;
-        line-height: 15%;
+        font-size: 18px;
+        color: white;
+        vertical-align: middle;
         text-align: center;
-        background: #333
+        background: #777
     }
+    @@media only screen and (min-width:768px) {
+        .contact-block {
+            display: inline-block;
+            min-width: 175px;
+            width: 22%;
+            margin: 2%;
+        }
+    }
+    .contact-block {
+        display: inline-block;
+        min-width: 175px;
+        width: 7%;
+        margin: 1%;
+    }
+    
+    
 </style>
 
 @{
     foreach (var contact in Model)
     {
-        <div class="col-sm-3">
+        <div class="contact-block">
             <a href="@Url.Action("ViewContact","Contact",new {id=contact.Id})">
                 <div class="circle">
-                    @contact.Name
-                    <br />
-                    <small>@contact.Organization</small>
+                    <p>
+                        @contact.Name
+                        @contact.Organization
+                    </p>
                 </div>
             </a>
         </div>

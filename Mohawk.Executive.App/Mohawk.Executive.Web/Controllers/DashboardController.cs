@@ -26,12 +26,14 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            var contacts = ContactHanlder.GetAllContacts();
+            return View(contacts);
         }
         [HttpPost]
         public ActionResult Index(SearchModel model)
         {
-            return View();
+            var contacts = ContactHanlder.SearchContacts(model.Query);
+            return View(contacts);
         }
         public ActionResult About()
         {

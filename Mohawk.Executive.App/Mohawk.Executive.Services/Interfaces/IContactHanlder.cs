@@ -11,5 +11,6 @@ namespace Mohawk.Executive.Services.Interfaces
         bool UpdateContact(Guid id, string name, string role, string phoneNumber, string email, string organizationName, string location);
         IEnumerable<Contact> GetAllContacts();
         IEnumerable<Contact> SearchContacts(string queryString);
+        Contact Get(Guid id);
     }
 }

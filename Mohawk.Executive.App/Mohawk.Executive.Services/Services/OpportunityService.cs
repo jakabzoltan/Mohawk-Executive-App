@@ -71,7 +71,7 @@ namespace Mohawk.Executive.Services.Services
             return true;
         }
 
-        public IEnumerable<ViewModels.Opportunity> GetOpportunities()
+        public IEnumerable<ViewModels.Opportunity> GetOpportunities(bool includePeripheral = false)
         {
             return _context.Opportunities.Select(opportunity => new ViewModels.Opportunity()
             {
@@ -86,7 +86,7 @@ namespace Mohawk.Executive.Services.Services
             });
         }
 
-        public IEnumerable<ViewModels.Opportunity> GetOpportunitiesForContact(Guid contactId)
+        public IEnumerable<ViewModels.Opportunity> GetOpportunitiesForContact(Guid contactId, bool includePeripheral = false)
         {
             return _context.Opportunities.Where(c=>c.ContactId == contactId).Select(opportunity => new ViewModels.Opportunity()
             {
@@ -99,6 +99,21 @@ namespace Mohawk.Executive.Services.Services
                 ResolutionReason = opportunity.ResolutionReason,
                 RemovedOn = opportunity.RemovedOn,
             });
+        }
+
+        public ViewModels.Opportunity Get(Guid opportunityId, bool includePeripheral = false)
+        {
+            return _context.Opportunities.Where(c => c.Id == opportunityId).Select(opportunity => new ViewModels.Opportunity()
+            {
+                Id = opportunity.Id,
+                ContactId = opportunity.ContactId,
+                OpportunitySubject = opportunity.OpportunitySubject,
+                Value = opportunity.Value,
+                OpportunityPriorityId = opportunity.OpportunityPriorityId,
+                ResolvedOn = opportunity.ResolvedOn,
+                ResolutionReason = opportunity.ResolutionReason,
+                RemovedOn = opportunity.RemovedOn,
+            }).FirstOrDefault();
         }
 
 

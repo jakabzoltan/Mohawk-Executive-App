@@ -65,23 +65,27 @@ namespace Mohawk.Executive.Services.Services
 
         public IEnumerable<ViewModels.Contact> GetAllContacts()
         {
-            return _context.Contacts.Select(c => new ViewModels.Contact()
+            return _context.Contacts.Where(c=>c.ModifiedOn==null).Select(c => new ViewModels.Contact()
             {
                 Id = c.Id,
+                Name = c.Name,
                 Email = c.Email,
                 ModifiedOn = c.ModifiedOn,
                 Location = c.Location,
-                Name = c.Location,
                 Organization = c.Organization,
                 PhoneNumber = c.PhoneNumber,
                 Role = c.Role
             })
-            .OrderBy(x=>x.Name);
+            .OrderBy(x => x.Name)
+            .ThenBy(x => x.Organization)
+            .ThenBy(x => x.Location)
+            .ThenBy(x => x.Email); 
         }
 
         public IEnumerable<ViewModels.Contact> SearchContacts(string queryString)
         {
             return _context.Contacts
+                .Where(c => c.ModifiedOn == null)
                 .Where(c => c.Name.Contains(queryString) ||
                             c.Email.Contains(queryString) ||
                             c.Location.Contains(queryString) ||
@@ -90,10 +94,10 @@ namespace Mohawk.Executive.Services.Services
                     new ViewModels.Contact
                     {
                         Id = c.Id,
+                        Name = c.Name,
                         Email = c.Email,
                         ModifiedOn = c.ModifiedOn,
                         Location = c.Location,
-                        Name = c.Location,
                         Organization = c.Organization,
                         PhoneNumber = c.PhoneNumber,
                         Role = c.Role
@@ -102,6 +106,26 @@ namespace Mohawk.Executive.Services.Services
                 .ThenBy(x => x.Organization)
                 .ThenBy(x => x.Location)
                 .ThenBy(x => x.Email);
+        }
+
+        public ViewModels.Contact Get(Guid id)
+        {
+            return _context.Contacts.Where(c => c.ModifiedOn == null && c.Id == id).Select(c => new ViewModels.Contact()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Email = c.Email,
+                    ModifiedOn = c.ModifiedOn,
+                    Location = c.Location,
+                    Organization = c.Organization,
+                    PhoneNumber = c.PhoneNumber,
+                    Role = c.Role
+                })
+                .OrderBy(x => x.Name)
+                .ThenBy(x => x.Organization)
+                .ThenBy(x => x.Location)
+                .ThenBy(x => x.Email)
+                .FirstOrDefault();
         }
     }
 }

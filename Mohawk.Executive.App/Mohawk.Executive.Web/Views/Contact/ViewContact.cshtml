@@ -1,0 +1,35 @@
+﻿@model Mohawk.Executive.Services.ViewModels.Contact
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+
+
+
+
+@if (Model.Opportunities.Any())
+{
+    <table class="table table-striped">
+        @{
+            foreach (var opp in Model.Opportunities)
+            {
+                <tr>
+                    <td width="20%">@opp.OpportunitySubject</td>
+                    <td width="60%">@opp.Value</td>
+                    <td width="20%">@opp.OpportunityPriorityId</td>
+                </tr>
+            }
+        }
+
+    </table>
+}
+else
+{
+    <div class="col-sm-12 text-center">No opportunities for this contact!</div>
+}

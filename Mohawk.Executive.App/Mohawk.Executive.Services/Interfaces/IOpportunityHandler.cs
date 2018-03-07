@@ -12,7 +12,8 @@ namespace Mohawk.Executive.Services.Interfaces
         bool ResolveOpportunity(Guid opportunityId, string resolutionReason);
         bool SetPriorityLevel(Guid opportunityId, int priorityLevel);
 
-        IEnumerable<Opportunity> GetOpportunities();
-        IEnumerable<Opportunity> GetOpportunitiesForContact(Guid contactId);
+        IEnumerable<Opportunity> GetOpportunities(bool includePeripheral = false);
+        IEnumerable<Opportunity> GetOpportunitiesForContact(Guid contactId, bool includePeripherals = false);
+        Opportunity Get(Guid opportunityId, bool includePeripheral = false);
     }
 }
