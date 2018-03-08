@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Moxecutive</title>
     @Styles.Render("~/Content/css")
@@ -12,49 +12,45 @@
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
-    <div>
-        <div class="navbar-header col-sm-12" style="padding-left:-30px">
-                
-            <button style="margin-left: 15px;" type="button" class="navbar-toggle pull-left " data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            @if (User.Identity.IsAuthenticated)
-            {
-                <div class="col-sm-4 pull-right">
-                    @Html.Partial("_SearchBarPartial", new SearchModel())
-                </div>
-            }
-  
-        </div>
-            
-           
-        
-                
+
+    <div class="navbar-header col-sm-12" style="padding-left: -30px">
+
+        <button style="margin-left: 15px;" type="button" class="navbar-toggle pull-left " data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="col-sm-4 pull-right">
+                @Html.Partial("_SearchBarPartial", new SearchModel())
+            </div>
+        }
 
     </div>
+
+
 </div>
 <div class="navbar navbar-inverse navbar-fixed-top navbar-collapse collapse" style="float: left; width: 20% !important; margin-top: 50px;">
     @if (User.Identity.IsAuthenticated)
     {
-        <ul class="nav navbar-nav">
-            <li>@Html.ActionLink("Home", "Index", "Dashboard")</li>
-            <li>@Html.ActionLink("About", "About", "Dashboard")</li>
-            <li>@Html.ActionLink("Contact", "Contact", "Dashboard")</li>
+        <ul class="nav navbar-nav" style="border-bottom: 1px solid gray;">
+            <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
+            <li>@Html.ActionLink("Add Contact", "Index", "Dashboard")</li>
+            <li>@Html.ActionLink("Create Opportunity", "About", "Dashboard")</li>
         </ul>
     }
 
     @Html.Partial("_LoginPartial")
 
 </div>
-    <div id="navbar-placeholder"style="height: 50px;"></div>
-    <div class="container body-content">
-        @RenderBody()
-    </div>
+<div id="navbar-placeholder" style="height: 50px;"></div>
+<div class="container body-content">
+    @RenderBody()
+</div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
 </body>
 </html>

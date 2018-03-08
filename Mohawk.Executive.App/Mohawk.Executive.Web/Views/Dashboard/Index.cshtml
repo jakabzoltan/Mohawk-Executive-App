@@ -2,16 +2,27 @@
 @{
     ViewBag.Title = "Dashboard";
 }
-<div class="col-sm-12 text-center">
-    <h2>Contacts</h2>
-    <hr/>
-</div>
-<div class="col-sm-12 text-center">
-    <div style="margin: auto;">
-        @Html.Partial("_ContactBlock", Model)
+
+
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <h2>
+            Contacts
+            <a class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Add Contact </a>
+        </h2>
     </div>
 </div>
-
+<hr/>
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <div style="margin: auto;">
+            @Html.Partial("_ContactBlock", Model)
+        </div>
+    </div>
+</div>
 
 
 

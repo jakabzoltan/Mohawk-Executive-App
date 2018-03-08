@@ -1,58 +1,6 @@
-﻿@using WebGrease.Css.Ast.MediaQuery
-@model IEnumerable<Mohawk.Executive.Services.ViewModels.Contact>
+﻿@model IEnumerable<Mohawk.Executive.Services.ViewModels.Contact>
 
-<style>
-    .circle {
-        display: table-cell;
-        position: relative;
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        font-size: 18px;
-        color: white;
-        vertical-align: middle;
-        text-align: center;
-        background: #777
-    }
-
-    .contact-block {
-        display: inline-block;
-        min-width: 175px;
-        width: 7%;
-        margin: 1%;
-    }
-
-    .organization-lbl {
-        cursor: pointer;
-    }
-
-    @@media only screen and (max-width:767px) {
-        .contact-block {
-            display: inline-block;
-            min-width: 125px;
-            width: 22%;
-            margin: 2%;
-        }
-
-        .circle {
-            display: table-cell;
-            position: relative;
-            cursor: pointer;
-            width: 125px;
-            height: 125px;
-            border-radius: 50%;
-            font-size: 14px;
-            color: white;
-            vertical-align: middle;
-            text-align: center;
-            background: #777
-        }
-
-        .organization-lbl {
-            display: none;
-        }
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="~/Content/ContactBlock.css" />
 
 @{
     if (Model.Any())

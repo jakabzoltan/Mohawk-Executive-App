@@ -27,8 +27,7 @@ namespace Mohawk.Executive.Database.Migrations
 
 
 
-            try
-            {
+            if (context.Contacts.FirstOrDefault(x => x.Id == guids[0]) == null)
                 context.Contacts.Add(new Contact()
                 {
                     Id = guids[0],
@@ -36,6 +35,7 @@ namespace Mohawk.Executive.Database.Migrations
                     Email = "zoltan.jakab1@Mohawkcollege.ca",
                     Organization = "Mohawk College"
                 });
+            if (context.Contacts.FirstOrDefault(x => x.Id == guids[1]) == null)
                 context.Contacts.Add(new Contact()
                 {
                     Id = guids[1],
@@ -43,6 +43,7 @@ namespace Mohawk.Executive.Database.Migrations
                     Email = "erin.bradley@Mohawkcollege.ca",
                     Organization = "Mohawk College"
                 });
+            if (context.Contacts.FirstOrDefault(x => x.Id == guids[2]) == null)
                 context.Contacts.Add(new Contact()
                 {
                     Id = guids[2],
@@ -50,13 +51,9 @@ namespace Mohawk.Executive.Database.Migrations
                     Email = "filip.zizovski@Mohawkcollege.ca",
                     Organization = "Mohawk College"
                 });
-                context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            
+            context.SaveChanges();
+
+
         }
     }
 }

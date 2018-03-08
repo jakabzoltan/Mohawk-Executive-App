@@ -1,0 +1,50 @@
+﻿.circle {
+    display: table-cell;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    font-size: 18px;
+    color: white;
+    vertical-align: middle;
+    text-align: center;
+    background: #777
+}
+
+.contact-block {
+    display: inline-block;
+    min-width: 150px;
+    min-width: 10%;
+    padding: 1%;
+
+}
+
+.organization-lbl {
+    cursor: pointer;
+}
+
+@@media only screen and (max-width:767px) {
+    .contact-block {
+        display: inline-block;
+        min-width: 20%;
+        margin: 10%;
+    }
+
+    .circle {
+        display: table-cell;
+        position: relative;
+        cursor: pointer;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        font-size: 18px;
+        color: white;
+        vertical-align: middle;
+        text-align: center;
+        background: #777
+    }
+
+    .organization-lbl {
+        display: none;
+    }
+}
