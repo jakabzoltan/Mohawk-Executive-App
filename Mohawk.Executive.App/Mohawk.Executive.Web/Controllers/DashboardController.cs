@@ -10,6 +10,7 @@ using Mohawk.Executive.Web.Models;
 
 namespace Mohawk.Executive.Web.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         public IContactHanlder ContactHanlder { get; set; }
@@ -30,6 +31,7 @@ namespace Mohawk.Executive.Web.Controllers
             var contacts = ContactHanlder.GetAllContacts();
             return View(contacts);
         }
+
         [HttpPost]
         public ActionResult Index(SearchModel model)
         {

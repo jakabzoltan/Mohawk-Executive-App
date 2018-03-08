@@ -23,11 +23,10 @@
     cursor: pointer;
 }
 
-@@media only screen and (max-width:767px) {
+@media only screen and (max-width:767px) {
     .contact-block {
         display: inline-block;
         min-width: 20%;
-        margin: 10%;
     }
 
     .circle {

@@ -217,10 +217,13 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ContactBlock.css" />
+    <Content Include="Content\InputModifiers.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Media\Images\library-logo-white.fw.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -274,6 +277,7 @@
     <Content Include="Views\Dashboard\_ContactBlock.cshtml" />
     <Content Include="Views\Shared\_SearchBarPartial.cshtml" />
     <Content Include="Views\Contact\ViewContact.cshtml" />
+    <Content Include="Views\Contact\AddContact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,7 +17,7 @@ namespace Mohawk.Executive.Services.Services
             _context = ExecutiveContext.Create();
         }
 
-        public bool AddContact(string name, string role, string phoneNumber, string email, string organizationName,
+        public ViewModels.Contact AddContact(string name, string role, string phoneNumber, string email, string organizationName,
             string location)
         {
             var contact = new Contact
@@ -33,7 +33,7 @@ namespace Mohawk.Executive.Services.Services
 
             _context.Contacts.Add(contact);
             _context.SaveChanges();
-            return true;
+            return Get(contact.Id);
         }
 
         public bool RemoveContact(Guid id)
@@ -46,12 +46,12 @@ namespace Mohawk.Executive.Services.Services
             return true;
         }
 
-        public bool UpdateContact(Guid id, string name, string role, string phoneNumber, string email,
+        public ViewModels.Contact UpdateContact(Guid id, string name, string role, string phoneNumber, string email,
             string organizationName,
             string location)
         {
             var contact = _context.Contacts.FirstOrDefault(c => c.Id == id);
-            if (contact == null) return false;
+            if (contact == null) return null;
             contact.Name = name;
             contact.Role = role;
             contact.PhoneNumber = phoneNumber;
@@ -60,7 +60,7 @@ namespace Mohawk.Executive.Services.Services
             contact.Location = location;
             contact.ModifiedOn = DateTime.Now;
             _context.SaveChanges();
-            return true;
+            return Get(contact.Id);
         }
 
         public IEnumerable<ViewModels.Contact> GetAllContacts()

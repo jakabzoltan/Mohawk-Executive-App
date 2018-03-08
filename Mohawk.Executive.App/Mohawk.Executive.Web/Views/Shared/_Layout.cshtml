@@ -3,12 +3,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Moxecutive</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link rel="stylesheet" type="text/css" href="~/Content/InputModifiers.css" />
+    <style>
+        @@media only screen and (max-width: 420px) {
+            .mohawk-logo {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -20,6 +27,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
+        <img class="mohawk-logo" src="~/Media/Images/library-logo-white.fw.png" alt="Mohawk Logo" height="45px"/>
         @if (User.Identity.IsAuthenticated)
         {
             <div class="col-sm-4 pull-right">
@@ -31,7 +39,7 @@
 
 
 </div>
-<div class="navbar navbar-inverse navbar-fixed-top navbar-collapse collapse" style="float: left; width: 20% !important; margin-top: 50px;">
+<div class="navbar navbar-inverse navbar-fixed-top navbar-collapse collapse" style="float: left; min-width: 200px; width: 20% !important; margin-top: 50px;">
     @if (User.Identity.IsAuthenticated)
     {
         <ul class="nav navbar-nav" style="border-bottom: 1px solid gray;">
