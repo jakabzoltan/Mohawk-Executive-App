@@ -16,18 +16,20 @@ namespace Mohawk.Executive.Services.Services
             _context = ExecutiveContext.Create();
         }
 
-        public bool AddOpportunity(Guid contactId,string subject ,string value, int priority)
+        public ViewModels.Opportunity AddOpportunity(Guid contactId, string subject ,string value, int priority)
         {
-            if (!ContactExists(contactId)) return false;
-            _context.Opportunities.Add(new Opportunity
+            if (!ContactExists(contactId)) return null;
+            var contact = new Opportunity
             {
+                Id = Guid.NewGuid(),
                 ContactId = contactId,
                 Value = value,
                 OpportunitySubject = subject,
                 OpportunityPriorityId = priority
-            });
+            };
+            _context.Opportunities.Add(contact);
             _context.SaveChanges();
-            return true;
+            return Get(contact.Id);
         }
 
         public bool RemoveOpportunity(Guid opportunityId)
@@ -39,36 +41,36 @@ namespace Mohawk.Executive.Services.Services
             return true;
         }
 
-        public bool UpdateOpportunity(Guid opportunityId, string subject, string newValue, int? newPriority = null)
+        public ViewModels.Opportunity UpdateOpportunity(Guid opportunityId, string subject, string newValue, int? newPriority = null)
         {
             var opportunity = _context.Opportunities.FirstOrDefault(x => x.Id == opportunityId);
-            if (opportunity == null) return false;
+            if (opportunity == null) return null;
             opportunity.OpportunitySubject = subject;
             opportunity.Value = newValue;
             if (newPriority != null)
                 opportunity.OpportunityPriorityId = (int)newPriority;
             _context.SaveChanges();
-            return true;
+            return Get(opportunityId); ;
         }
 
-        public bool ResolveOpportunity(Guid opportunityId, string resolutionReason)
+        public ViewModels.Opportunity ResolveOpportunity(Guid opportunityId, string resolutionReason)
         {
             var opportunity = _context.Opportunities.FirstOrDefault(x => x.Id == opportunityId);
-            if (opportunity == null) return false;
+            if (opportunity == null) return null;
             opportunity.ResolvedOn = DateTime.Now;
             opportunity.ResolutionReason = resolutionReason;
             _context.SaveChanges();
-            return true;
+            return Get(opportunityId);
         }
 
-        public bool SetPriorityLevel(Guid opportunityId, int priorityLevel)
+        public ViewModels.Opportunity SetPriorityLevel(Guid opportunityId, int priorityLevel)
         {
-            if (!PriorityLevelExists(priorityLevel)) return false;
+            if (!PriorityLevelExists(priorityLevel)) return null;
             var opportunity = _context.Opportunities.FirstOrDefault(x => x.Id == opportunityId);
-            if (opportunity == null) return false;
+            if (opportunity == null) return null;
             opportunity.OpportunityPriorityId = priorityLevel;
             _context.SaveChanges();
-            return true;
+            return Get(opportunityId);
         }
 
         public IEnumerable<ViewModels.Opportunity> GetOpportunities(bool includePeripheral = false)

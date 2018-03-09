@@ -135,6 +135,10 @@
     <Compile Include="Migrations\201803081731476_ModifiyContext.Designer.cs">
       <DependentUpon>201803081731476_ModifiyContext.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803091440547_FirstNameLastName.cs" />
+    <Compile Include="Migrations\201803091440547_FirstNameLastName.Designer.cs">
+      <DependentUpon>201803091440547_FirstNameLastName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -166,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803081731476_ModifiyContext.resx">
       <DependentUpon>201803081731476_ModifiyContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803091440547_FirstNameLastName.resx">
+      <DependentUpon>201803091440547_FirstNameLastName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

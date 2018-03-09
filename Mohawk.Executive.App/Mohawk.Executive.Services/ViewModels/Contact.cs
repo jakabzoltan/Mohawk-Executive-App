@@ -15,8 +15,11 @@ namespace Mohawk.Executive.Services.ViewModels
             Opportunities = new List<Opportunity>();
         }
         public Guid Id { get; set; }
-        [Required(ErrorMessage = "Please Enter a name.")]
-        public string Name { get; set; }
+        [DisplayName("Name")]
+        [Required(ErrorMessage = "Please enter a first name.")]
+        public string FirstName { get; set; }
+        [Required(ErrorMessage = "Please enter a last name.")]
+        public string LastName { get; set; }
         public string Role { get; set; }
         [DisplayName("Phone Number")]
         [Phone(ErrorMessage = "Invalid Phone Number Format.")]

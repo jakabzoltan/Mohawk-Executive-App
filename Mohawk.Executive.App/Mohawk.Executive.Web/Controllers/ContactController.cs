@@ -39,8 +39,8 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpPost]
         public ActionResult AddContact(Contact model)
         {
-            var contact = ContactHanlder.AddContact(model.Name, model.Role, model.PhoneNumber, model.Email, model.Organization, model.Location);
-            return RedirectToAction("ViewContact",new{id = contact.Id});
+            var contact = ContactHanlder.AddContact(model.FirstName, model.LastName, model.Role, model.PhoneNumber, model.Email, model.Organization, model.Location);
+            return RedirectToAction("ViewContact", new{id = contact.Id});
         }
     }
 }

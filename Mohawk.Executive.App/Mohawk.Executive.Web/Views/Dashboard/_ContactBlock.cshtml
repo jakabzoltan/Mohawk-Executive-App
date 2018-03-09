@@ -10,7 +10,7 @@
             <a href="@Url.Action("ViewContact", "Contact", new {id = contact.Id})">
                 <div class="contact-block">
                     <div class="circle">
-                        @contact.Name
+                        @contact.FirstName @contact.LastName
                         <label class="organization-lbl">
                             @contact.Organization
                         </label>

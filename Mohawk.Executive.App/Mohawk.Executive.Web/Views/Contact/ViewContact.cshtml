@@ -23,8 +23,8 @@
 
             <table>
                 <tr>
-                    <td class="key">@Html.LabelFor(m=>m.Name)</td>
-                    <td class="value">@Html.DisplayFor(m=>m.Name)</td>
+                    <td class="key">@Html.LabelFor(m=>m.FirstName)</td>
+                    <td class="value">@Html.DisplayFor(m => $"{m.FirstName} {m.LastName}")</td>
                 </tr>
                 <tr>
                     <td class="key">@Html.LabelFor(m=>m.Email)</td>
@@ -53,7 +53,7 @@
     <div class="col-sm-12">
         <h2>
             Contacts
-            <a class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> New Opportunity </a>
+            <a href="@Url.Action("CreateOpportunity","Opportunities",new { contactId = Model.Id })" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> New Opportunity </a>
         </h2>
     </div>
 </div>

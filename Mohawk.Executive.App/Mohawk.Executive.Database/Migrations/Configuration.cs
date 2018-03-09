@@ -27,27 +27,30 @@ namespace Mohawk.Executive.Database.Migrations
 
 
 
-            if (context.Contacts.FirstOrDefault(x => x.Id == guids[0]) == null)
+
                 context.Contacts.Add(new Contact()
                 {
                     Id = guids[0],
-                    Name = "Zoltan Jakab",
+                    FirstName = "Zoltan",
+                    LastName = "Jakab",
                     Email = "zoltan.jakab1@Mohawkcollege.ca",
                     Organization = "Mohawk College"
                 });
-            if (context.Contacts.FirstOrDefault(x => x.Id == guids[1]) == null)
+ 
                 context.Contacts.Add(new Contact()
                 {
                     Id = guids[1],
-                    Name = "Erin Bradley",
+                    FirstName = "Erin",
+                    LastName = "Bradley",
                     Email = "erin.bradley@Mohawkcollege.ca",
                     Organization = "Mohawk College"
                 });
-            if (context.Contacts.FirstOrDefault(x => x.Id == guids[2]) == null)
+
                 context.Contacts.Add(new Contact()
                 {
                     Id = guids[2],
-                    Name = "Filip Zizovski",
+                    FirstName = "Filip",
+                    LastName = "Zizovski",
                     Email = "filip.zizovski@Mohawkcollege.ca",
                     Organization = "Mohawk College"
                 });
