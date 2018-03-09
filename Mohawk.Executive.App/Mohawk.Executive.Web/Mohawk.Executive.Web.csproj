@@ -282,6 +282,7 @@
     <Content Include="Views\Opportunities\_OpportunityComments.cshtml" />
     <Content Include="Views\Opportunities\_OpportunitySteps.cshtml" />
     <Content Include="Views\Opportunities\CreateOpportunity.cshtml" />
+    <Content Include="Views\Opportunities\QuickCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

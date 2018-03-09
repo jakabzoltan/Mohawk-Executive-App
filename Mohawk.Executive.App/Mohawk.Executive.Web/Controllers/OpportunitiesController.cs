@@ -13,19 +13,16 @@ namespace Mohawk.Executive.Web.Controllers
     {
 
         public IOpportunityHandler OpportunityHandler { get; set; }
+        public IContactHanlder ContactHanlder { get; set; }
         public OpportunitiesController()
         {
 
         }
 
-        public OpportunitiesController(IOpportunityHandler opportunityHandler)
+        public OpportunitiesController(IOpportunityHandler opportunityHandler, IContactHanlder contactHanlder)
         {
             OpportunityHandler = opportunityHandler;
-        }
-        // GET: Opportunities
-        public ActionResult Index()
-        {
-            return View();
+            ContactHanlder = contactHanlder;
         }
 
         public ActionResult ViewOpportunity(Guid id)
@@ -57,7 +54,12 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpPost]
         public ActionResult QuickCreate(Opportunity model)
         {
-            return View();
+            var generalContact = ContactHanlder.SearchContacts("General").FirstOrDefault(x=>x.FirstName=="General");
+
+            if (generalContact == null) return RedirectToAction("Index", "Dashboard");
+
+            var opportunity = OpportunityHandler.AddOpportunity(generalContact.Id, model.OpportunitySubject, model.Value, model.OpportunityPriorityId);
+            return RedirectToAction("ViewOpportunity", new { id = opportunity.Id });
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model Mohawk.Executive.Services.ViewModels.Contact
 
 @{
-    ViewBag.Title = Model.Name;
+    ViewBag.Title = $"{Model.FirstName} {Model.LastName}";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
