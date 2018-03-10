@@ -203,6 +203,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OpportunitiesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -251,8 +252,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Dashboard\About.cshtml" />
-    <Content Include="Views\Dashboard\Contact.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -278,9 +277,16 @@
     <Content Include="Views\Shared\_SearchBarPartial.cshtml" />
     <Content Include="Views\Contact\ViewContact.cshtml" />
     <Content Include="Views\Contact\AddContact.cshtml" />
+    <Content Include="Views\Opportunities\ViewOpportunity.cshtml" />
+    <Content Include="Views\Opportunities\_OpportunityDonations.cshtml" />
+    <Content Include="Views\Opportunities\_OpportunityComments.cshtml" />
+    <Content Include="Views\Opportunities\_OpportunitySteps.cshtml" />
+    <Content Include="Views\Opportunities\CreateOpportunity.cshtml" />
+    <Content Include="Views\Opportunities\QuickCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Opportunity\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -29,5 +29,9 @@ namespace Mohawk.Executive.Web.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Mohawk.Executive.Services.ViewModels.Opportunity> Opportunities { get; set; }
+
+        public System.Data.Entity.DbSet<Mohawk.Executive.Services.ViewModels.OpportunityPriority> OpportunityPriorities { get; set; }
     }
 }

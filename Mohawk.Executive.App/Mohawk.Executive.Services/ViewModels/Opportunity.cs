@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace Mohawk.Executive.Services.ViewModels
@@ -13,10 +15,13 @@ namespace Mohawk.Executive.Services.ViewModels
             Comments = new List<Comment>();
         }
         public Guid Id { get; set; }
+        [DisplayName("Priority Level")]
         public int OpportunityPriorityId { get; set; }
         public Guid ContactId { get; set; }
-
+        [DisplayName("Subject")]
+        [Required(ErrorMessage = "You must have a subject or goal for your opportunity.")]
         public string OpportunitySubject { get; set; }
+        [Required(ErrorMessage = "You must explain the value of the opportunity.")]
         public string Value { get; set; }
         public DateTime? RemovedOn { get; set; }
         public DateTime? ResolvedOn { get; set; }
