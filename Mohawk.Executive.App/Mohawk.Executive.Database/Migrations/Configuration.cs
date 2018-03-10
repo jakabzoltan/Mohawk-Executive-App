@@ -26,9 +26,6 @@ namespace Mohawk.Executive.Database.Migrations
                 Guid.Parse("999a99a9-7ac4-4ea2-9908-c51d91b2d47c")
             };
 
-            var guid0 = guids[0];
-            var guid1 = guids[1];
-            var guid2 = guids[2];
             context.Contacts.Add(new Contact()
             {
                 Id = guids[3],
