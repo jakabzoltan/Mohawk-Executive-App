@@ -22,14 +22,20 @@
         </div>
         
         <div class="form-group">
-            <div class="col-sm-12">@Html.LabelFor(m => m.Name)*</div>
+            <div class="col-sm-12">@Html.LabelFor(m => m.FirstName)*</div>
             <div class="col-sm-12">
-                @Html.TextBoxFor(m => m.Name, new { @class = "form-control modified-input" })
-                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control modified-input" })
+                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
             </div>
 
         </div>
-
+        <div class="form-group">
+            <div class="col-sm-12">@Html.LabelFor(m => m.LastName)*</div>
+            <div class="col-sm-12">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control modified-input" })
+                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-sm-12">@Html.LabelFor(m => m.Email)</div>
             <div class="col-sm-12">

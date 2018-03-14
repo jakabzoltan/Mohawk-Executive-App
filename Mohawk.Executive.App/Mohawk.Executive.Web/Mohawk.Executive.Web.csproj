@@ -200,6 +200,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AppSettingsController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -211,6 +212,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SearchModel.cs" />
+    <Compile Include="Models\SearchResultModel.cs" />
+    <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -283,6 +286,16 @@
     <Content Include="Views\Opportunities\_OpportunitySteps.cshtml" />
     <Content Include="Views\Opportunities\CreateOpportunity.cshtml" />
     <Content Include="Views\Opportunities\QuickCreate.cshtml" />
+    <Content Include="Views\Dashboard\_OpportunityBlock.cshtml" />
+    <Content Include="Views\AppSettings\Index.cshtml" />
+    <Content Include="Views\AppSettings\_AddDonationType.cshtml" />
+    <Content Include="Views\AppSettings\_EditDonationType.cshtml" />
+    <Content Include="Views\AppSettings\_AddPriority.cshtml" />
+    <Content Include="Views\AppSettings\_EditPriority.cshtml" />
+    <Content Include="Views\AppSettings\_DonationTypes.cshtml" />
+    <Content Include="Views\AppSettings\_Priorities.cshtml" />
+    <Content Include="Views\AppSettings\_ViewDonationType.cshtml" />
+    <Content Include="Views\AppSettings\_ViewPriority.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

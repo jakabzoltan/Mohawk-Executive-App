@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Mohawk.Executive.Services.ViewModels.Opportunity>
+<link rel="stylesheet" type="text/css" href="~/Content/ContactBlock.css" />
+
+@{
+    if (Model.Any())
+    {
+        foreach (var opportunity in Model)
+        {
+            <a href="@Url.Action("ViewContact", "Contact", new {id = opportunity.Id})">
+                <div class="contact-block">
+                    <div class="circle">
+                        opportunity.OpportunitySubject
+                    </div>
+                </div>
+            </a>
+        }
+    }
+    else
+    {
+        <h4><i>No opportunities were found!</i></h4>
+    }
+}

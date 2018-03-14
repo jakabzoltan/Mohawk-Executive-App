@@ -103,6 +103,27 @@ namespace Mohawk.Executive.Services.Services
             });
         }
 
+        public IEnumerable<ViewModels.Opportunity> SearchOpportunities(string query, bool includePeripherals = false)
+        {
+            return _context.Opportunities.Where(c =>
+                    c.Contact.FirstName.Contains(query) ||
+                    c.Contact.LastName.Contains(query) ||
+                    c.OpportunitySubject.Contains(query) ||
+                    c.Value.Contains(query) ||
+                    c.ResolutionReason.Contains(query))
+                .Select(opportunity => new ViewModels.Opportunity()
+                {
+                    Id = opportunity.Id,
+                    ContactId = opportunity.ContactId,
+                    OpportunitySubject = opportunity.OpportunitySubject,
+                    Value = opportunity.Value,
+                    OpportunityPriorityId = opportunity.OpportunityPriorityId,
+                    ResolvedOn = opportunity.ResolvedOn,
+                    ResolutionReason = opportunity.ResolutionReason,
+                    RemovedOn = opportunity.RemovedOn,
+                });
+        }
+
         public ViewModels.Opportunity Get(Guid opportunityId, bool includePeripheral = false)
         {
             return _context.Opportunities.Where(c => c.Id == opportunityId).Select(opportunity => new ViewModels.Opportunity()
