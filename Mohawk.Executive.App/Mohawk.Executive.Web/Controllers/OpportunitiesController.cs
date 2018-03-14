@@ -28,6 +28,12 @@ namespace Mohawk.Executive.Web.Controllers
         public ActionResult ViewOpportunity(Guid id)
         {
             var opportunity = OpportunityHandler.Get(id);
+            //debug
+            if (opportunity == null)
+            {
+                return View(new Opportunity(){OpportunitySubject = "Get Rich", Value = "This is valuable because I like being rich", ResolvedOn = DateTime.Now, ResolutionReason = "I'm still not rich :("});
+            }
+            //end debug
             return View(opportunity);
         }
         [HttpGet]
@@ -54,9 +60,8 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpPost]
         public ActionResult QuickCreate(Opportunity model)
         {
-            var generalContact = ContactHanlder.SearchContacts("General").FirstOrDefault(x=>x.FirstName=="General");
-
-            if (generalContact == null) return RedirectToAction("Index", "Dashboard");
+            var generalContact = ContactHanlder.SearchContacts("General").FirstOrDefault(x=>x.FirstName=="General") ??
+                                 ContactHanlder.AddContact("General", null, null, null, null, "Mohawk College", null);
 
             var opportunity = OpportunityHandler.AddOpportunity(generalContact.Id, model.OpportunitySubject, model.Value, model.OpportunityPriorityId);
             return RedirectToAction("ViewOpportunity", new { id = opportunity.Id });

@@ -294,14 +294,12 @@
     <Content Include="Views\Opportunities\QuickCreate.cshtml" />
     <Content Include="Views\Dashboard\_OpportunityBlock.cshtml" />
     <Content Include="Views\AppSettings\Index.cshtml" />
-    <Content Include="Views\AppSettings\_AddDonationType.cshtml" />
-    <Content Include="Views\AppSettings\_EditDonationType.cshtml" />
-    <Content Include="Views\AppSettings\_AddPriority.cshtml" />
-    <Content Include="Views\AppSettings\_EditPriority.cshtml" />
+    <Content Include="Views\AppSettings\AddDonationType.cshtml" />
+    <Content Include="Views\AppSettings\EditDonationType.cshtml" />
+    <Content Include="Views\AppSettings\AddPriority.cshtml" />
+    <Content Include="Views\AppSettings\EditPriority.cshtml" />
     <Content Include="Views\AppSettings\_DonationTypes.cshtml" />
     <Content Include="Views\AppSettings\_Priorities.cshtml" />
-    <Content Include="Views\AppSettings\_ViewDonationType.cshtml" />
-    <Content Include="Views\AppSettings\_ViewPriority.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
