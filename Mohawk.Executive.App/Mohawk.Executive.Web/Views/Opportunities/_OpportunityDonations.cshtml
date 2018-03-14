@@ -1,1 +1,33 @@
-﻿
+﻿@model IEnumerable<Mohawk.Executive.Services.ViewModels.OpportunityDonation>
+<style>
+    .block-card {
+        min-height: 50px;
+        width: 100%;
+        border: 1px solid gray;
+        margin-top: 1em;
+    }
+</style>
+@if (Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <div class="block-card">
+            @Html.LabelFor(i=>item.DonationText): @item.DonationText
+            <hr/>
+            @Html.LabelFor(i=>item.DonationTypes):
+            @foreach (var type in item.DonationTypes)
+            {
+                @type.DonationTypeString
+            }
+        </div>
+    }
+    
+}
+else
+{
+    <div>This opportunity has no donations at the moment. Add one!</div>
+}
+
+
+
+
