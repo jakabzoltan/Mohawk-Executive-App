@@ -15,9 +15,10 @@ namespace Mohawk.Executive.Services.ViewModels
             Opportunities = new List<Opportunity>();
         }
         public Guid Id { get; set; }
-        [DisplayName("Name")]
+        [DisplayName("First Name")]
         [Required(ErrorMessage = "Please enter a first name.")]
         public string FirstName { get; set; }
+        [DisplayName("Last Name")]
         [Required(ErrorMessage = "Please enter a last name.")]
         public string LastName { get; set; }
         public string Role { get; set; }

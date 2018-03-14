@@ -1,11 +1,24 @@
-﻿@model IEnumerable<Mohawk.Executive.Services.ViewModels.Contact>
+﻿@model Mohawk.Executive.Web.Models.SearchResultModel
 @{
     ViewBag.Title = "Dashboard";
 }
 
-
-
-
+<div class="row">
+    <div class="col-sm-12">
+        <h2>
+            Opportunities
+            <a href="@Url.Action("QuickCreate","Opportunities")" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Add Opportunity </a>
+        </h2>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <div style="margin: auto;">
+            @Html.Partial("_OpportunityBlock", Model.Opportunities)
+        </div>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-sm-12">
@@ -19,7 +32,7 @@
 <div class="row">
     <div class="col-sm-12 text-center">
         <div style="margin: auto;">
-            @Html.Partial("_ContactBlock", Model)
+            @Html.Partial("_ContactBlock", Model.Contacts)
         </div>
     </div>
 </div>

@@ -14,6 +14,7 @@ namespace Mohawk.Executive.Services.Interfaces
 
         IEnumerable<Opportunity> GetOpportunities(bool includePeripheral = false);
         IEnumerable<Opportunity> GetOpportunitiesForContact(Guid contactId, bool includePeripherals = false);
+        IEnumerable<Opportunity> SearchOpportunities(string query, bool includePeripherals = false);
         Opportunity Get(Guid opportunityId, bool includePeripheral = false);
     }
 }
