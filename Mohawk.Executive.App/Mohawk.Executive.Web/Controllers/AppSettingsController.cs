@@ -19,23 +19,23 @@ namespace Mohawk.Executive.Web.Controllers
 
         #region DonationTypes
 
+        [HttpGet]
         public ActionResult GetDonationTypes()
         {
             return PartialView("_DonationTypes");
         }
 
-
         public ActionResult AddDonationType()
         {
-            return View();
+            return PartialView("_AddDonationType");
         }
 
         public ActionResult EditDonationType(int donationTypeId)
         {
-            return View();
+            return PartialView("_EditDonationType");
         }
 
-
+        [HttpPost]
         public ActionResult AddDonationType(DonationType donationType)
         {
             return null;
@@ -56,20 +56,23 @@ namespace Mohawk.Executive.Web.Controllers
 
         #region Priorities
 
+        [HttpGet]
         public ActionResult GetPriorities()
         {
             return PartialView("_Priorities");
         }
-
+       
         public ActionResult AddPriority()
         {
-            return View();
+            return PartialView("_AddPriority");
         }
 
         public ActionResult EditPriority(int priorityId)
         {
-            return View();
+            return PartialView("_EditPriority");
         }
+
+        [HttpPost]
         public ActionResult AddPriority(OpportunityPriority priority)
         {
             return View();

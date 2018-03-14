@@ -23,8 +23,8 @@
 
             <table>
                 <tr>
-                    <td class="key">@Html.LabelFor(m=>m.FirstName)</td>
-                    <td class="value">@Html.DisplayFor(m => $"{m.FirstName} {m.LastName}")</td>
+                    <td class="key"><label>Name</label></td>
+                    <td class="value">@Model.FirstName @Model.LastName</td>
                 </tr>
                 <tr>
                     <td class="key">@Html.LabelFor(m=>m.Email)</td>
