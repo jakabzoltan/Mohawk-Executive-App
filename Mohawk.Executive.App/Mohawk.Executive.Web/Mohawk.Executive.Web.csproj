@@ -225,6 +225,12 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Media\Images\library-logo-white.fw.png" />
+    <Content Include="Media\Images\mohawkCollegeBanner1.png" />
+    <Content Include="Media\Images\mohawkCollegeBanner2.png" />
+    <Content Include="Media\Images\mohawkCollegeBanner3.png" />
+    <Content Include="Media\Images\mohawkCollegeBanner4.png" />
+    <Content Include="Media\Images\mohawkCollegeBanner5.png" />
+    <Content Include="Media\Images\mohawkCollegeBanner6.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
