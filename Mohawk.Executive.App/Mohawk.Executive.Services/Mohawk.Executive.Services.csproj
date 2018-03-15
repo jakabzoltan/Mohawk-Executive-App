@@ -110,6 +110,7 @@
     <Compile Include="Interfaces\IStepHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ContactService.cs" />
+    <Compile Include="Services\DonationService.cs" />
     <Compile Include="Services\OpportunityService.cs" />
     <Compile Include="ViewModels\Comment.cs" />
     <Compile Include="ViewModels\Contact.cs" />

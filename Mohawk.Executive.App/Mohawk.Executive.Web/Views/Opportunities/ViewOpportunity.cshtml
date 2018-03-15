@@ -1,4 +1,5 @@
-﻿@model Mohawk.Executive.Services.ViewModels.Opportunity
+﻿@using Mohawk.Executive.Web.Models
+@model Mohawk.Executive.Services.ViewModels.Opportunity
 @{
     ViewBag.Title = Model.OpportunitySubject;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,12 +9,33 @@
         font-weight: bold;
         color: white;
     }
+
+    .nav-justified > li {
+        display: table-cell !important;
+        width: 1% !important;
+    }
+    @@media only screen and (max-width:768px) {
+        .low-remove-padding {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+    
 </style>
-<div class="row" style="min-height: 100px; padding-bottom: 20px;" >
+<script src="~/Scripts/bootstrap.js"></script>
+<div class="row" style="min-height: 100px; padding-bottom: 20px;">
+
     <div class="col-sm-12">
         <h3>
             @Model.OpportunitySubject
+            <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#resolution-modal">
+                Resolve Opportunity
+            </button>
         </h3>
+    </div>
+
+
+    <div class="col-sm-12">
         <p>@Model.Value</p>
         @if (Model.ResolutionReason != null && Model.ResolvedOn != null)
         {
@@ -23,44 +45,61 @@
     </div>
 </div>
 <div class="row">
-    <ul class="nav nav-tabs nav-justified">
-        <li role="presentation" class="active"><a data-toggle="tab" href="#donations">Donations</a></li>
-        <li role="presentation"><a data-toggle="tab" href="#steps">Steps</a></li>
-        <li role="presentation"><a data-toggle="tab" href="#comments">Comments</a></li>
-    </ul>
-
+    <div class="col-sm-12 low-remove-padding">
+        <ul class="nav nav-tabs nav-justified">
+            <li role="presentation" class="active"><a data-toggle="tab" href="#donations">Donations</a></li>
+            <li role="presentation"><a data-toggle="tab" href="#steps">Steps</a></li>
+            <li role="presentation"><a data-toggle="tab" href="#comments">Comments</a></li>
+        </ul>
+    </div>
     <div class="tab-content">
         <div id="donations" class="tab-pane fade in active">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2>
-                        Donations
-                        <a href="@Url.Action("QuickCreate","Opportunities")" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Add Donation </a>
-                    </h2>
-                </div>
+
+            <div class="col-sm-12">
+                <h2>
+                    Donations
+                    <a class="btn btn-success pull-right" data-toggle="modal" data-target="#add-donation-modal" ><span class="glyphicon glyphicon-plus"></span> Add Donation </a>
+                </h2>
             </div>
-            @Html.Partial("_OpportunityDonations", Model.Donations)
+            <div class="col-sm-12">@Html.Partial("_OpportunityDonations", Model.Donations)</div>
+
         </div>
         <div id="steps" class="tab-pane fade">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2>
-                        Steps
-                        <a href="@Url.Action("QuickCreate","Opportunities")" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Add Step </a>
-                    </h2>
-                </div>
+
+            <div class="col-sm-12">
+                <h2>
+                    Steps
+                    <a href="@Url.Action("QuickCreate", "Opportunities")" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Add Step </a>
+                </h2>
             </div>
-            @Html.Partial("_OpportunitySteps", Model.Steps)
+            <div class="col-sm-12">@Html.Partial("_OpportunitySteps", Model.Steps)</div>
+
         </div>
         <div id="comments" class="tab-pane fade">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2>
-                        Comments
-                    </h2>
-                </div>
+
+            <div class="col-sm-12">
+                <h2>
+                    Comments
+                </h2>
             </div>
-            @Html.Partial("_OpportunityComments", Model.Comments)
+            <div class="col-sm-12">@Html.Partial("_OpportunityComments", Model.Comments)</div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="resolution-modal" tabindex="-1" role="dialog" aria-labelledby="resolution-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @Html.Partial("_OpportunityResolution", new OpportunityResolutionViewModel(Model.Id))
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add-donation-modal" tabindex="-1" role="dialog" aria-labelledby="add-donation-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @Html.Action("AddDonation", Model.Id)
         </div>
     </div>
 </div>

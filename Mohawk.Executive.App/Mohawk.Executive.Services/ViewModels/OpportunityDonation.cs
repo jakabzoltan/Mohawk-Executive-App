@@ -14,6 +14,8 @@ namespace Mohawk.Executive.Services.ViewModels
         }
         public int Id { get; set; }
         public string DonationText { get; set; }
+        public Guid OpportunityId { get; set; }
         public IEnumerable<DonationType> DonationTypes { get; set; }
+
     }
 }

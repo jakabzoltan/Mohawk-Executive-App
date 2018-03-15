@@ -25,6 +25,7 @@ namespace Mohawk.Executive.Services.ViewModels
         public string Value { get; set; }
         public DateTime? RemovedOn { get; set; }
         public DateTime? ResolvedOn { get; set; }
+        [DisplayName("Outcome")]
         public string ResolutionReason { get; set; }
 
         public OpportunityPriority Priority { get; set; }
