@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,6 +20,7 @@ namespace Mohawk.Executive.Web.Models
             OpportunityId = opportunityId;
         }
         public int[] Selected { get; set; }
+        
         public List<SelectListItem> DonationList { get; set; }
     }
 }

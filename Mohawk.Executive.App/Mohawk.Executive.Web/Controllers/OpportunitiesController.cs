@@ -102,6 +102,7 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpPost]
         public ActionResult AddDonation(AddDonationViewModel model)
         {
+            DonationHandler.AddDonation(model.OpportunityId, model.DonationText, model.Selected);
             return RedirectToAction("ViewOpportunity", new {id = model.OpportunityId});
         }
 

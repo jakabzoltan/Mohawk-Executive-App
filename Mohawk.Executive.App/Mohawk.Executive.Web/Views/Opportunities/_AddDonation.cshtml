@@ -1,33 +1,31 @@
-﻿
-@model Mohawk.Executive.Web.Models.AddDonationViewModel
-
-
-
+﻿@model Mohawk.Executive.Web.Models.AddDonationViewModel
 
 <div class="modal-header">
     <h5 class="modal-title" id="exampleModalLabel">Resolve Opportunity?</h5>
 </div>
-@using (Html.BeginForm("ResolveOpportunity", "Opportunities", FormMethod.Post))
+@using (Html.BeginForm("AddDonation", "Opportunities", FormMethod.Post))
 {
     <div class="modal-body">
-
-        @Html.HiddenFor(m => m.OpportunityId)
-        <div class="col-sm-12">
-            @Html.LabelFor(m => m.DonationText)
-            <br />
-            <small>Mark the outcome of the opportunity; i.e. "Opportunity was completed successfully; Donation paid in full."</small>
+        <div class="form-group">
+            @Html.HiddenFor(m => m.OpportunityId)
+            <div class="col-sm-12">
+                @Html.LabelFor(m => m.DonationText)
+                <br />
+                <small>Mark the outcome of the opportunity; i.e. "Opportunity was completed successfully; Donation paid in full."</small>
+            </div>
+            <div class="col-md-12">
+                @Html.TextBoxFor(m => m.DonationText, new { @class = "form-control " })
+            </div>
         </div>
-        <div class="col-md-12">
-            @Html.TextBoxFor(m => m.DonationText, new { @class = "form-control " })
-        </div>
-
+        <div class="form-group">
         <div class="col-sm-12">
             @Html.LabelFor(m => m.DonationTypes)
             <br />
             <small>The type of donation. These can be custom created in the settings of the application</small>
         </div>
-        <div class="col-md-12">
-            @Html.ListBoxFor(m => m.Selected, Model.DonationList, new { @class = "form-control", id="donation-types"})
+            <div class="col-md-12">
+                @Html.ListBoxFor(m => m.Selected, Model.DonationList, new { @class = "selectpicker form-control", id="donation-types"})
+            </div>
         </div>
     </div>
     <div class="modal-footer">
@@ -39,7 +37,7 @@
 <script>
      $(document).ready(function() {
          $('.selectpicker').selectpicker({
-             size:5,
+             size:5
          });
      })
  </script>
