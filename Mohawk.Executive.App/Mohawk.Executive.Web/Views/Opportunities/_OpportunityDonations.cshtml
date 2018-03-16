@@ -2,7 +2,7 @@
 
 @if (Model.Any())
 {
-    foreach (var item in Model)
+    foreach (var item in Model.ToList())
     {
         <div class="row block-card">
             @Html.LabelFor(i=>item.DonationText): @item.DonationText

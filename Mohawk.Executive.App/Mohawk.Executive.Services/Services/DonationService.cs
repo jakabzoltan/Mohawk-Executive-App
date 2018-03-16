@@ -22,14 +22,25 @@ namespace Mohawk.Executive.Services.Services
         {
 
             var donationsTypesList = _context.DonationTypes.Where(x => donationTypes.Any(y => y == x.Id)).ToList();
-
-            _context.OpportunityDonations.Add(new OpportunityDonation()
+            var opportunity = _context.Opportunities.FirstOrDefault(x => x.Id == opportunityId);
+            var donation = new OpportunityDonation()
             {
-                Opportunity = _context.Opportunities.FirstOrDefault(x=>x.Id == opportunityId),
                 OpportunityId = opportunityId,
                 DonationText = donationText,
                 DonationTypes = donationsTypesList
-            });
+            };
+
+            //_context.OpportunityDonations.Add(donation);
+            if (opportunity != null && opportunity.Donations == null)
+            {
+                opportunity.Donations = new List<OpportunityDonation>();
+                ((List<OpportunityDonation>) opportunity.Donations).Add(donation);
+            }
+            else
+            {
+                ((List<OpportunityDonation>) opportunity?.Donations)?.Add(donation);
+            }
+
             _context.SaveChanges();
             return true;
         }
@@ -44,7 +55,7 @@ namespace Mohawk.Executive.Services.Services
 
         public bool UpdateDonation(int donationId, string donationText, params int[] donationTypes)
         {
-            var donationsTypesList = _context.DonationTypes.Where(x => donationTypes.Any(y => y == x.Id));
+            var donationsTypesList = _context.DonationTypes.Where(x => donationTypes.Any(y => y == x.Id)).ToList();
             var toUpdate = _context.OpportunityDonations.FirstOrDefault(x => x.Id == donationId);
             if (toUpdate == null) return false;
             toUpdate.DonationText = donationText;

@@ -50,7 +50,7 @@ namespace Mohawk.Executive.Services.Services
             opportunity.OpportunitySubject = subject;
             opportunity.Value = newValue;
             if (newPriority != null)
-                opportunity.OpportunityPriorityId = (int) newPriority;
+                opportunity.OpportunityPriorityId = (int)newPriority;
             _context.SaveChanges();
             return Get(opportunityId);
             ;
@@ -131,7 +131,6 @@ namespace Mohawk.Executive.Services.Services
 
         public ViewModels.Opportunity Get(Guid opportunityId, bool includePeripheral = false)
         {
-            var entityOp = _context.Opportunities.FirstOrDefault(c => c.Id == opportunityId);
             var op = _context.Opportunities.Where(c => c.Id == opportunityId).Select(opportunity =>
                 new ViewModels.Opportunity()
                 {
@@ -148,21 +147,23 @@ namespace Mohawk.Executive.Services.Services
                         PriorityString = opportunity.Priority.PriorityString,
                         Id = opportunity.Priority.Id
                     },
-                    
+
                 }).FirstOrDefault();
 
-            op.Donations = includePeripheral
-                ? entityOp.Donations.Select(d => new OpportunityDonation()
-                {
-                    Id = d.Id,
-                    DonationText = d.DonationText,
-                    OpportunityId = d.OpportunityId,
-                    DonationTypes = d.DonationTypes.Select(dt =>
-                        new DonationType() {DonationTypeString = dt.DonationTypeString, Id = dt.Id})
-                })
-                : null;
-            op.Comments = includePeripheral
-                ? entityOp.Comments.Where(c => c.ReplyId == null).Select(c => new Comment()
+            if (op == null) return null;
+            {
+                if (!includePeripheral) return op;
+                op.Donations = _context.OpportunityDonations.Where(i => i.OpportunityId == opportunityId).Select(d =>
+                    new OpportunityDonation()
+                    {
+                        Id = d.Id,
+                        DonationText = d.DonationText,
+                        OpportunityId = d.OpportunityId,
+                        DonationTypes = d.DonationTypes.Select(dt =>
+                            new DonationType() {DonationTypeString = dt.DonationTypeString, Id = dt.Id}).ToList()
+                    }).ToList();
+
+                op.Comments = _context.Comments.Where(i => i.OpportunityId == opportunityId).Select(c => new Comment()
                 {
                     Id = c.Id,
                     OpportunityId = c.OpportunityId,
@@ -176,31 +177,32 @@ namespace Mohawk.Executive.Services.Services
                             GuidUserId = c.User.Id,
                             Email = c.User.Email
                         },
-                    Replies = entityOp.Comments.Where(cr => cr.ReplyId == c.Id).Select(x => new Comment()
-                    {
-                        Id = x.Id,
-                        OpportunityId = x.OpportunityId,
-                        CommentDate = x.CommentDate,
-                        CommentString = x.CommentString,
-                        ArchivedOn = x.ArchivedOn,
-                        PostedBy = new IdentityUserModel()
+                    Replies = _context.Comments.Where(i => i.OpportunityId == opportunityId)
+                        .Where(cr => cr.ReplyId == c.Id).Select(x => new Comment()
                         {
-                            Name = x.User.UserName,
-                            GuidUserId = x.User.Id,
-                            Email = x.User.Email
-                        }
-                    })
-                }): null;
-            op.Steps = includePeripheral
-                ? entityOp.Steps.Select(s => new OpportunityStep()
-                {
-                    OpportunityId = s.OpportuntityId,
-                    Step = s.Step,
-                    StepOrder = s.StepOrder
-                })
-                : null;
+                            Id = x.Id,
+                            OpportunityId = x.OpportunityId,
+                            CommentDate = x.CommentDate,
+                            CommentString = x.CommentString,
+                            ArchivedOn = x.ArchivedOn,
+                            PostedBy = new IdentityUserModel()
+                            {
+                                Name = x.User.UserName,
+                                GuidUserId = x.User.Id,
+                                Email = x.User.Email
+                            }
+                        }).ToList()
+                }).ToList();
 
-            return op;
+                op.Steps = _context.OpportunitySteps.Where(i => i.OpportunityId == opportunityId).Select(s =>
+                    new OpportunityStep()
+                    {
+                        OpportunityId = s.OpportunityId,
+                        Step = s.Step,
+                        StepOrder = s.StepOrder
+                    }).ToList();
+                return op;
+            }
         }
 
 

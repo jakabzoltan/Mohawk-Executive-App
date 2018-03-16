@@ -10,9 +10,10 @@ namespace Mohawk.Executive.Database.Entities.UDT
 {
     public class OpportunityStep
     {
-        [Key, Column(Order = 0)]
-        public Guid OpportuntityId { get; set; }
-        [Key, Column(Order = 1)]
+        [Key]
+        public int Id { get; set; }
+        public Guid OpportunityId { get; set; }
+
         public int StepOrder { get; set; }
         public string Step { get; set; }
 

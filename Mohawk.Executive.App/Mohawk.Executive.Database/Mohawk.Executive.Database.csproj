@@ -107,6 +107,62 @@
     <Compile Include="Entities\UDT\DonationType.cs" />
     <Compile Include="Entities\UDT\OpportunityStep.cs" />
     <Compile Include="Entities\UDT\OpportunityPriority.cs" />
+    <Compile Include="Migrations\201802212035567_Initial.cs" />
+    <Compile Include="Migrations\201802212035567_Initial.Designer.cs">
+      <DependentUpon>201802212035567_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803051606163_Removed_Subject_From_Comments.cs" />
+    <Compile Include="Migrations\201803051606163_Removed_Subject_From_Comments.Designer.cs">
+      <DependentUpon>201803051606163_Removed_Subject_From_Comments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803051640409_NavigationPropertyForOppDonations.cs" />
+    <Compile Include="Migrations\201803051640409_NavigationPropertyForOppDonations.Designer.cs">
+      <DependentUpon>201803051640409_NavigationPropertyForOppDonations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803051851108_ModifiedOpportunityForRemovalFunctionality.cs" />
+    <Compile Include="Migrations\201803051851108_ModifiedOpportunityForRemovalFunctionality.Designer.cs">
+      <DependentUpon>201803051851108_ModifiedOpportunityForRemovalFunctionality.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803051852523_AddedResolutionFunctionality.cs" />
+    <Compile Include="Migrations\201803051852523_AddedResolutionFunctionality.Designer.cs">
+      <DependentUpon>201803051852523_AddedResolutionFunctionality.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803061517599_fixedOpportunity.cs" />
+    <Compile Include="Migrations\201803061517599_fixedOpportunity.Designer.cs">
+      <DependentUpon>201803061517599_fixedOpportunity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803081731476_ModifiyContext.cs" />
+    <Compile Include="Migrations\201803081731476_ModifiyContext.Designer.cs">
+      <DependentUpon>201803081731476_ModifiyContext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803091440547_FirstNameLastName.cs" />
+    <Compile Include="Migrations\201803091440547_FirstNameLastName.Designer.cs">
+      <DependentUpon>201803091440547_FirstNameLastName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803151638575_updateContext.cs" />
+    <Compile Include="Migrations\201803151638575_updateContext.Designer.cs">
+      <DependentUpon>201803151638575_updateContext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803151755564_ResolvedManyToManyDonations.cs" />
+    <Compile Include="Migrations\201803151755564_ResolvedManyToManyDonations.Designer.cs">
+      <DependentUpon>201803151755564_ResolvedManyToManyDonations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803162014251_opportunityUpdate.cs" />
+    <Compile Include="Migrations\201803162014251_opportunityUpdate.Designer.cs">
+      <DependentUpon>201803162014251_opportunityUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803162041552_fixedNavigationTypes.cs" />
+    <Compile Include="Migrations\201803162041552_fixedNavigationTypes.Designer.cs">
+      <DependentUpon>201803162041552_fixedNavigationTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803162046167_opportunityStepRemoveConcatKey.cs" />
+    <Compile Include="Migrations\201803162046167_opportunityStepRemoveConcatKey.Designer.cs">
+      <DependentUpon>201803162046167_opportunityStepRemoveConcatKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803162054464_opportunityStepRemoveConcatKey2.cs" />
+    <Compile Include="Migrations\201803162054464_opportunityStepRemoveConcatKey2.Designer.cs">
+      <DependentUpon>201803162054464_opportunityStepRemoveConcatKey2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -116,6 +172,50 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abstraction\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201802212035567_Initial.resx">
+      <DependentUpon>201802212035567_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803051606163_Removed_Subject_From_Comments.resx">
+      <DependentUpon>201803051606163_Removed_Subject_From_Comments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803051640409_NavigationPropertyForOppDonations.resx">
+      <DependentUpon>201803051640409_NavigationPropertyForOppDonations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803051851108_ModifiedOpportunityForRemovalFunctionality.resx">
+      <DependentUpon>201803051851108_ModifiedOpportunityForRemovalFunctionality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803051852523_AddedResolutionFunctionality.resx">
+      <DependentUpon>201803051852523_AddedResolutionFunctionality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803061517599_fixedOpportunity.resx">
+      <DependentUpon>201803061517599_fixedOpportunity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803081731476_ModifiyContext.resx">
+      <DependentUpon>201803081731476_ModifiyContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803091440547_FirstNameLastName.resx">
+      <DependentUpon>201803091440547_FirstNameLastName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803151638575_updateContext.resx">
+      <DependentUpon>201803151638575_updateContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803151755564_ResolvedManyToManyDonations.resx">
+      <DependentUpon>201803151755564_ResolvedManyToManyDonations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803162014251_opportunityUpdate.resx">
+      <DependentUpon>201803162014251_opportunityUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803162041552_fixedNavigationTypes.resx">
+      <DependentUpon>201803162041552_fixedNavigationTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803162046167_opportunityStepRemoveConcatKey.resx">
+      <DependentUpon>201803162046167_opportunityStepRemoveConcatKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803162054464_opportunityStepRemoveConcatKey2.resx">
+      <DependentUpon>201803162054464_opportunityStepRemoveConcatKey2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

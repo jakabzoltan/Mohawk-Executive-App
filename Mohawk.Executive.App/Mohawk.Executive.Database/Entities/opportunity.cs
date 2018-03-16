@@ -23,9 +23,9 @@ namespace Mohawk.Executive.Database.Entities
         //navigation properties
         public virtual Contact Contact { get; set; }
         public virtual OpportunityPriority Priority { get; set; }
-        public virtual IEnumerable<OpportunityStep> Steps { get; set; }
-        public virtual IEnumerable<OpportunityDonation> Donations { get; set; }
-        public virtual IEnumerable<Comment> Comments { get; set; }
+        public virtual ICollection<OpportunityStep> Steps { get; set; }
+        public virtual ICollection<OpportunityDonation> Donations { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
         public virtual IdentityUser UserPoster { get; set; }
     }
 }

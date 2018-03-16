@@ -21,6 +21,6 @@ namespace Mohawk.Executive.Database.Entities
 
 
         //navigation properties
-        public virtual IEnumerable<Opportunity> Opportunities {get;set;}
+        public virtual ICollection<Opportunity> Opportunities {get;set;}
     }
 }

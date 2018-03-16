@@ -11,7 +11,7 @@ namespace Mohawk.Executive.Database.Entities.UDT
         public int Id { get; set; }
         public string DonationText { get; set; }
         public Guid OpportunityId { get; set; }
-        public virtual IEnumerable<DonationType> DonationTypes { get; set; }
+        public virtual ICollection<DonationType> DonationTypes { get; set; }
         public virtual Opportunity Opportunity { get; set; }
     }
 }

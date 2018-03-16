@@ -16,6 +16,6 @@ namespace Mohawk.Executive.Services.ViewModels
         public string CommentString { get; set; }
         public IdentityUserModel PostedBy { get; set; }
 
-        public IEnumerable<Comment> Replies { get; set; }
+        public List<Comment> Replies { get; set; }
     }
 }

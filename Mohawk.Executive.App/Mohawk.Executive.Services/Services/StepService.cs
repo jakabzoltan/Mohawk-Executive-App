@@ -21,7 +21,7 @@ namespace Mohawk.Executive.Services.Services
 
         public bool AddStep(Guid opportunityId, string step)
         {
-            _context.OpportunitySteps.Add(new OpportunityStep() { Opportunity = _context.Opportunities.FirstOrDefault(x => x.Id == opportunityId), OpportuntityId = opportunityId, Step = step });
+            _context.OpportunitySteps.Add(new OpportunityStep() { Opportunity = _context.Opportunities.FirstOrDefault(x => x.Id == opportunityId), OpportunityId = opportunityId, Step = step });
             _context.SaveChanges();
             return true;
         }
