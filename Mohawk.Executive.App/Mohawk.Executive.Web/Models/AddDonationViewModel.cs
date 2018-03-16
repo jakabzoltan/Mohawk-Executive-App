@@ -21,6 +21,6 @@ namespace Mohawk.Executive.Web.Models
         }
         public int[] Selected { get; set; }
         
-        public List<SelectListItem> DonationList { get; set; }
+        public IEnumerable<SelectListItem> DonationList { get; set; }
     }
 }

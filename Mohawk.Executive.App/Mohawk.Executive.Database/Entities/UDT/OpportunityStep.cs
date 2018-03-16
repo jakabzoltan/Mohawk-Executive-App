@@ -15,5 +15,7 @@ namespace Mohawk.Executive.Database.Entities.UDT
         [Key, Column(Order = 1)]
         public int StepOrder { get; set; }
         public string Step { get; set; }
+
+        public virtual Opportunity Opportunity { get; set; }    
     }
 }

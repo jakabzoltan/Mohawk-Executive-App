@@ -1,0 +1,31 @@
+﻿@model Mohawk.Executive.Web.Models.CommentViewModel
+
+@using (Html.BeginForm("PostComment", "Opportunities", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.OpportunityId)
+    @Html.HiddenFor(m => m.ReplyToId)
+    @Html.HiddenFor(m => m.PostedBy.GuidUserId)
+    <div class="container">
+        @if(Model.ReplyToId != null){
+            if (Model.ReplyToId != Guid.Empty)
+             {
+                 <a href="#" id="remove-reply">Cancel Reply</a>
+             }
+        }
+        <div class="input-group">
+            @Html.TextBoxFor(m => m.CommentString, new { @class = "form-control", placeholder = "Enter a note or a comment" })
+            <span class="input-group-btn">
+                <input type="submit" value="Send" class="btn btn-default"/>
+            </span>
+        </div>
+
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#remove-reply").click(function() {
+                $("#@Html.IdFor(m=>m.ReplyToId)").prop("value", "");
+                $("#remove-reply").remove();
+            })
+        })
+    </script>
+}

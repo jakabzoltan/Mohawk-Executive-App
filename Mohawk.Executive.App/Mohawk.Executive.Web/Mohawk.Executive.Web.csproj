@@ -210,8 +210,10 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddDonationViewModel.cs" />
+    <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\OpportunityCreateViewModel.cs" />
     <Compile Include="Models\OpportunityResolutionViewModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\SearchResultModel.cs" />
@@ -220,6 +222,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Blocks.css" />
     <Content Include="Content\bootstrap-select.css" />
     <Content Include="Content\bootstrap-select.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -254,6 +257,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Compile Include="Models\CommentListModel.cs" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -315,8 +319,10 @@
     <Content Include="Views\AppSettings\EditPriority.cshtml" />
     <Content Include="Views\AppSettings\_DonationTypes.cshtml" />
     <Content Include="Views\AppSettings\_Priorities.cshtml" />
-    <Content Include="Views\Opportunities\_OpportunityResolution.cshtml" />
+    <Content Include="Views\Opportunities\_AddResolution.cshtml" />
     <Content Include="Views\Opportunities\_AddDonation.cshtml" />
+    <Content Include="Views\Opportunities\_AddStep.cshtml" />
+    <Content Include="Views\Opportunities\_PostComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

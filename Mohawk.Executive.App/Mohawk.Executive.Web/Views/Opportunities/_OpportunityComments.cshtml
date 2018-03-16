@@ -1,1 +1,67 @@
-﻿
+﻿@using Mohawk.Executive.Services.ViewModels
+@using Mohawk.Executive.Web.Models
+@model Mohawk.Executive.Web.Models.CommentListModel
+<style>
+</style>
+@if (Model.Comments.Any())
+{
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-sm-12">
+            @foreach (var item in Model.Comments)
+            {
+                <div class="row block-card">
+                    <div class="col-sm-12">
+                        @item.PostedBy.Name - @item.CommentDate
+                    </div>
+                    <div class="col-sm-12">
+                        @item.CommentString
+                    </div>
+                    <div class="col-sm-12">
+                        <a id="@item.Id" class="reply-button">Reply</a>
+                    </div>
+                </div>
+                foreach (var reply in item.Replies)
+                {
+                    <div class="row block-reply">
+                        <div class="col-sm-12">
+                            @reply.PostedBy.Name - @reply.CommentDate
+                        </div>
+                        <div class="col-sm-12">
+                            @reply.CommentString
+                        </div>
+                        <div class="col-sm-12">
+                            <a id="@item.Id" class="reply-button">Reply</a>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div>This opportunity has no donations at the moment. Add one!</div>
+}
+<div class="row comment-box-buffer"></div>
+<div id="comments-posting" class="comment-box">
+    @Html.Action("PostComment", new CommentViewModel(Model.OpportunityId))
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        $(".reply-button").on("click", function() {
+            var id = $(this).prop("id");
+            $.ajax({
+                url: "@Url.Action("PostComment")",
+                data: {
+                    opportunityId: "@Model.OpportunityId",
+                        replyToId: id
+                }
+            }).done(function(data) {
+                $("#comments-posting").html(data);
+            });
+
+        })
+    })
+</script>

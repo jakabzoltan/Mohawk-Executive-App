@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Mohawk.Executive.Database;
-using Mohawk.Executive.Database.Entities;
 using Mohawk.Executive.Services.Interfaces;
+using Mohawk.Executive.Services.ViewModels;
+using Opportunity = Mohawk.Executive.Database.Entities.Opportunity;
 
 namespace Mohawk.Executive.Services.Services
 {
@@ -16,7 +17,7 @@ namespace Mohawk.Executive.Services.Services
             _context = ExecutiveContext.Create();
         }
 
-        public ViewModels.Opportunity AddOpportunity(Guid contactId, string subject ,string value, int priority)
+        public ViewModels.Opportunity AddOpportunity(Guid contactId, string subject, string value, int priority)
         {
             if (!ContactExists(contactId)) return null;
             var contact = new Opportunity
@@ -41,16 +42,18 @@ namespace Mohawk.Executive.Services.Services
             return true;
         }
 
-        public ViewModels.Opportunity UpdateOpportunity(Guid opportunityId, string subject, string newValue, int? newPriority = null)
+        public ViewModels.Opportunity UpdateOpportunity(Guid opportunityId, string subject, string newValue,
+            int? newPriority = null)
         {
             var opportunity = _context.Opportunities.FirstOrDefault(x => x.Id == opportunityId);
             if (opportunity == null) return null;
             opportunity.OpportunitySubject = subject;
             opportunity.Value = newValue;
             if (newPriority != null)
-                opportunity.OpportunityPriorityId = (int)newPriority;
+                opportunity.OpportunityPriorityId = (int) newPriority;
             _context.SaveChanges();
-            return Get(opportunityId); ;
+            return Get(opportunityId);
+            ;
         }
 
         public ViewModels.Opportunity ResolveOpportunity(Guid opportunityId, string resolutionReason)
@@ -88,19 +91,21 @@ namespace Mohawk.Executive.Services.Services
             });
         }
 
-        public IEnumerable<ViewModels.Opportunity> GetOpportunitiesForContact(Guid contactId, bool includePeripheral = false)
+        public IEnumerable<ViewModels.Opportunity> GetOpportunitiesForContact(Guid contactId,
+            bool includePeripheral = false)
         {
-            return _context.Opportunities.Where(c=>c.ContactId == contactId).Select(opportunity => new ViewModels.Opportunity()
-            {
-                Id = opportunity.Id,
-                ContactId = opportunity.ContactId,
-                OpportunitySubject = opportunity.OpportunitySubject,
-                Value = opportunity.Value,
-                OpportunityPriorityId = opportunity.OpportunityPriorityId,
-                ResolvedOn = opportunity.ResolvedOn,
-                ResolutionReason = opportunity.ResolutionReason,
-                RemovedOn = opportunity.RemovedOn,
-            });
+            return _context.Opportunities.Where(c => c.ContactId == contactId).Select(opportunity =>
+                new ViewModels.Opportunity()
+                {
+                    Id = opportunity.Id,
+                    ContactId = opportunity.ContactId,
+                    OpportunitySubject = opportunity.OpportunitySubject,
+                    Value = opportunity.Value,
+                    OpportunityPriorityId = opportunity.OpportunityPriorityId,
+                    ResolvedOn = opportunity.ResolvedOn,
+                    ResolutionReason = opportunity.ResolutionReason,
+                    RemovedOn = opportunity.RemovedOn,
+                });
         }
 
         public IEnumerable<ViewModels.Opportunity> SearchOpportunities(string query, bool includePeripherals = false)
@@ -126,17 +131,76 @@ namespace Mohawk.Executive.Services.Services
 
         public ViewModels.Opportunity Get(Guid opportunityId, bool includePeripheral = false)
         {
-            return _context.Opportunities.Where(c => c.Id == opportunityId).Select(opportunity => new ViewModels.Opportunity()
-            {
-                Id = opportunity.Id,
-                ContactId = opportunity.ContactId,
-                OpportunitySubject = opportunity.OpportunitySubject,
-                Value = opportunity.Value,
-                OpportunityPriorityId = opportunity.OpportunityPriorityId,
-                ResolvedOn = opportunity.ResolvedOn,
-                ResolutionReason = opportunity.ResolutionReason,
-                RemovedOn = opportunity.RemovedOn,
-            }).FirstOrDefault();
+            var entityOp = _context.Opportunities.FirstOrDefault(c => c.Id == opportunityId);
+            var op = _context.Opportunities.Where(c => c.Id == opportunityId).Select(opportunity =>
+                new ViewModels.Opportunity()
+                {
+                    Id = opportunity.Id,
+                    ContactId = opportunity.ContactId,
+                    OpportunitySubject = opportunity.OpportunitySubject,
+                    Value = opportunity.Value,
+                    OpportunityPriorityId = opportunity.OpportunityPriorityId,
+                    ResolvedOn = opportunity.ResolvedOn,
+                    ResolutionReason = opportunity.ResolutionReason,
+                    RemovedOn = opportunity.RemovedOn,
+                    Priority = new OpportunityPriority()
+                    {
+                        PriorityString = opportunity.Priority.PriorityString,
+                        Id = opportunity.Priority.Id
+                    },
+                    
+                }).FirstOrDefault();
+
+            op.Donations = includePeripheral
+                ? entityOp.Donations.Select(d => new OpportunityDonation()
+                {
+                    Id = d.Id,
+                    DonationText = d.DonationText,
+                    OpportunityId = d.OpportunityId,
+                    DonationTypes = d.DonationTypes.Select(dt =>
+                        new DonationType() {DonationTypeString = dt.DonationTypeString, Id = dt.Id})
+                })
+                : null;
+            op.Comments = includePeripheral
+                ? entityOp.Comments.Where(c => c.ReplyId == null).Select(c => new Comment()
+                {
+                    Id = c.Id,
+                    OpportunityId = c.OpportunityId,
+                    CommentDate = c.CommentDate,
+                    CommentString = c.CommentString,
+                    ArchivedOn = c.ArchivedOn,
+                    PostedBy =
+                        new IdentityUserModel()
+                        {
+                            Name = c.User.UserName,
+                            GuidUserId = c.User.Id,
+                            Email = c.User.Email
+                        },
+                    Replies = entityOp.Comments.Where(cr => cr.ReplyId == c.Id).Select(x => new Comment()
+                    {
+                        Id = x.Id,
+                        OpportunityId = x.OpportunityId,
+                        CommentDate = x.CommentDate,
+                        CommentString = x.CommentString,
+                        ArchivedOn = x.ArchivedOn,
+                        PostedBy = new IdentityUserModel()
+                        {
+                            Name = x.User.UserName,
+                            GuidUserId = x.User.Id,
+                            Email = x.User.Email
+                        }
+                    })
+                }): null;
+            op.Steps = includePeripheral
+                ? entityOp.Steps.Select(s => new OpportunityStep()
+                {
+                    OpportunityId = s.OpportuntityId,
+                    Step = s.Step,
+                    StepOrder = s.StepOrder
+                })
+                : null;
+
+            return op;
         }
 
 

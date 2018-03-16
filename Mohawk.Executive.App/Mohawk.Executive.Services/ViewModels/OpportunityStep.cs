@@ -6,7 +6,7 @@ namespace Mohawk.Executive.Services.ViewModels
 {
     public class OpportunityStep
     {
-        public Guid OpportuntityId { get; set; }
+        public Guid OpportunityId { get; set; }
         public int StepOrder { get; set; }
         public string Step { get; set; }
     }

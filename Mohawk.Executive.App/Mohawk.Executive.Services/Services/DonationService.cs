@@ -21,11 +21,12 @@ namespace Mohawk.Executive.Services.Services
         public bool AddDonation(Guid opportunityId, string donationText, params int[] donationTypes)
         {
 
-            var donationsTypesList = _context.DonationTypes.Where(x => donationTypes.Any(y => y == x.Id));
+            var donationsTypesList = _context.DonationTypes.Where(x => donationTypes.Any(y => y == x.Id)).ToList();
 
             _context.OpportunityDonations.Add(new OpportunityDonation()
             {
-
+                Opportunity = _context.Opportunities.FirstOrDefault(x=>x.Id == opportunityId),
+                OpportunityId = opportunityId,
                 DonationText = donationText,
                 DonationTypes = donationsTypesList
             });

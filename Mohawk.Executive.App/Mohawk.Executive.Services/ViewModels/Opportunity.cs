@@ -30,6 +30,7 @@ namespace Mohawk.Executive.Services.ViewModels
 
         public OpportunityPriority Priority { get; set; }
         public IEnumerable<OpportunityStep> Steps { get; set; }
+        [DisplayName("Importance")]
         public IEnumerable<OpportunityDonation> Donations { get; set; }
         public IEnumerable<Comment> Comments { get; set; }
     }

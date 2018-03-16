@@ -1,0 +1,28 @@
+﻿
+@model Mohawk.Executive.Services.ViewModels.OpportunityStep
+    
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Resolve Opportunity?</h5>
+</div>
+@using (Html.BeginForm("AddStep", "Opportunities", FormMethod.Post))
+{
+    <div class="modal-body">
+    
+        @Html.HiddenFor(m=>m.OpportunityId)
+        <div class="col-sm-12">
+            @Html.LabelFor(m=>m.Step)
+            <br/>
+            <small>Specify what the step is. The step will be appended to the list. Steps can be reordered manually.</small>
+        </div>
+        <div class="col-md-12">
+            @Html.TextBoxFor(m => m.Step, new {@class = "form-control"})
+        </div>
+
+    
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-success" value="Add Step"/>
+    </div>
+    
+}

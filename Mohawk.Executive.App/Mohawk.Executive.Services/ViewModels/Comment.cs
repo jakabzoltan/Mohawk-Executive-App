@@ -14,7 +14,7 @@ namespace Mohawk.Executive.Services.ViewModels
         public DateTime CommentDate { get; set; }
         public DateTime? ArchivedOn { get; set; }
         public string CommentString { get; set; }
-
+        public IdentityUserModel PostedBy { get; set; }
 
         public IEnumerable<Comment> Replies { get; set; }
     }

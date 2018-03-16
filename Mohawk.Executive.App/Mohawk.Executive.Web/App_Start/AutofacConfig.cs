@@ -20,6 +20,8 @@ namespace Mohawk.Executive.Web.App_Start
             builder.RegisterType<ContactService>().As<IContactHanlder>();
             builder.RegisterType<OpportunityService>().As<IOpportunityHandler>();
             builder.RegisterType<DonationService>().As<IDonationHandler>();
+            builder.RegisterType<StepService>().As<IStepHandler>();
+            builder.RegisterType<SettingsService>().As<ISettingsHandler>();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();

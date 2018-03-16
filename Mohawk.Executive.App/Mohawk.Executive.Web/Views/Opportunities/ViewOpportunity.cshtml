@@ -1,9 +1,11 @@
-﻿@using Mohawk.Executive.Web.Models
+﻿@using Mohawk.Executive.Services.ViewModels
+@using Mohawk.Executive.Web.Models
 @model Mohawk.Executive.Services.ViewModels.Opportunity
 @{
     ViewBag.Title = Model.OpportunitySubject;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" type="text/css" href="~/Content/Blocks.css"/>
 <style>
     li.active {
         font-weight: bold;
@@ -81,7 +83,7 @@
                     Comments
                 </h2>
             </div>
-            <div class="col-sm-12">@Html.Partial("_OpportunityComments", Model.Comments)</div>
+            <div class="col-sm-12">@Html.Partial("_OpportunityComments", new CommentListModel(Model.Id, Model.Comments))</div>
 
         </div>
     </div>
@@ -90,7 +92,7 @@
 <div class="modal fade" id="resolution-modal" tabindex="-1" role="dialog" aria-labelledby="resolution-modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            @Html.Partial("_OpportunityResolution", new OpportunityResolutionViewModel(Model.Id))
+            @Html.Partial("_AddResolution", new OpportunityResolutionViewModel(Model.Id))
         </div>
     </div>
 </div>
@@ -99,6 +101,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             @Html.Action("AddDonation", Model.Id)
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add-step-modal" tabindex="-1" role="dialog" aria-labelledby="add-donation-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @Html.Partial("_AddStep",  new OpportunityStep(){OpportunityId = Model.Id})
         </div>
     </div>
 </div>

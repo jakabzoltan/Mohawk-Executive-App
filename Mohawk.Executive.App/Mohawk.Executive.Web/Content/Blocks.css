@@ -1,0 +1,38 @@
+﻿.block-card {
+    padding: 1em;
+    width: 100%;
+    border: 1px solid gray;
+    margin-top: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+}
+
+.block-reply {
+    padding: 1em;
+    width: 92%;
+    border: 1px solid gray;
+    margin-top: 1em;
+    margin-left: 8%;
+    margin-right: 0;
+    margin-bottom: 0;
+    float: right;
+}
+.comment-box-buffer {
+    min-height: 80px;
+    height: 80px;
+    width: 100%;
+}
+.comment-box {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: white;
+}
+.reply-button {
+    text-decoration: none;
+    cursor: pointer
+}
