@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Mohawk.Executive.Database;
 using Mohawk.Executive.Services.Interfaces;
@@ -95,8 +96,9 @@ namespace Mohawk.Executive.Services.Services
         public IEnumerable<ViewModels.OpportunityModel> GetOpportunitiesForContact(Guid contactId,
             bool includePeripheral = false)
         {
-            return _context.Opportunities.Where(c => c.ContactId == contactId).Select(opportunity =>
-                new ViewModels.OpportunityModel()
+            var op1 = _context.Opportunities.Where(c => c.ContactId == contactId);
+            var op = op1.Select(opportunity =>
+                new OpportunityModel()
                 {
                     Id = opportunity.Id,
                     ContactId = opportunity.ContactId,
@@ -106,7 +108,10 @@ namespace Mohawk.Executive.Services.Services
                     ResolvedOn = opportunity.ResolvedOn,
                     ResolutionReason = opportunity.ResolutionReason,
                     RemovedOn = opportunity.RemovedOn,
+
                 });
+
+            return op;
         }
 
         public IEnumerable<ViewModels.OpportunityModel> SearchOpportunities(string query, bool includePeripherals = false)
@@ -171,7 +176,7 @@ namespace Mohawk.Executive.Services.Services
                             new DonationTypeModel() { DonationTypeString = dt.DonationTypeString, Id = dt.Id }).ToList()
                     }).ToList();
 
-                op.Comments = _context.Comments.Where(i => i.OpportunityId == opportunityId).Select(c => new CommentModel()
+                op.Comments = _context.Comments.Where(i => i.OpportunityId == opportunityId && i.ReplyId == null).Select(c => new CommentModel()
                 {
                     Id = c.Id,
                     OpportunityId = c.OpportunityId,
@@ -186,9 +191,9 @@ namespace Mohawk.Executive.Services.Services
                             Email = c.User.Email
                         },
                 }).ToList();
-                
 
-                op.Comments.ForEach(c=>c.Replies = _context.Comments.Where(i => i.OpportunityId == opportunityId)
+
+                op.Comments.ForEach(c => c.Replies = _context.Comments.Where(i => i.OpportunityId == opportunityId)
                     .Where(cr => cr.ReplyId == c.Id).Select(x => new CommentModel()
                     {
                         Id = x.Id,

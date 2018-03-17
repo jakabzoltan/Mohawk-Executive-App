@@ -5,21 +5,22 @@
     @Html.HiddenFor(m => m.OpportunityId)
     @Html.HiddenFor(m => m.ReplyToId)
     @Html.HiddenFor(m => m.PostedBy.GuidUserId)
-    <div class="container">
-        @if(Model.ReplyToId != null){
+    <div class="col-sm-12">
+        @if (Model.ReplyToId != null)
+        {
             if (Model.ReplyToId != Guid.Empty)
-             {
-                 <a href="#" id="remove-reply">Cancel Reply</a>
-             }
+            {
+                <a href="#" id="remove-reply">Cancel Reply</a>
+            }
         }
         <div class="input-group">
-            @Html.TextBoxFor(m => m.CommentString, new { @class = "form-control", placeholder = "Enter a note or a comment" })
+            @Html.TextBoxFor(m => m.CommentString, new { @class = "form-control", placeholder = "Enter a note or a comment", autocomplete = "off" })
             <span class="input-group-btn">
-                <input type="submit" value="Send" class="btn btn-default"/>
+                <input type="submit" value="Send" class="btn btn-default" />
             </span>
         </div>
-
     </div>
+
     <script>
         $(document).ready(function() {
             $("#remove-reply").click(function() {

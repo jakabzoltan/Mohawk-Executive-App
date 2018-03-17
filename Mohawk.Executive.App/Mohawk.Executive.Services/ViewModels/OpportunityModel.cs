@@ -27,6 +27,7 @@ namespace Mohawk.Executive.Services.ViewModels
         public DateTime? ResolvedOn { get; set; }
         [DisplayName("Outcome")]
         public string ResolutionReason { get; set; }
+        public string ActiveTab { get; set; }
 
         public PriorityTypeModel Priority { get; set; }
         public List<OpportunityStepModel> Steps { get; set; }

@@ -21,7 +21,7 @@
     <div class="form-group">
         <div class="col-sm-12">@Html.LabelFor(m => m.Subject)*</div>
         <div class="col-sm-12">
-            @Html.TextBoxFor(m => m.Subject, new { @class = "form-control modified-input" })
+            @Html.TextBoxFor(m => m.Subject, new { @class = "form-control modified-input", autocomplete = "off" })
             @Html.ValidationMessageFor(m => m.Subject, "", new { @class = "text-danger" })
         </div>
 
@@ -30,7 +30,7 @@
     <div class="form-group">
         <div class="col-sm-12">@Html.LabelFor(m => m.Value)*</div>
         <div class="col-sm-12">
-            @Html.TextBoxFor(m => m.Value, new { @class = "form-control modified-input" })
+            @Html.TextBoxFor(m => m.Value, new { @class = "form-control modified-input", autocomplete = "off" })
             @Html.ValidationMessageFor(m => m.Value, "", new { @class = "text-danger" })
         </div>
     </div>

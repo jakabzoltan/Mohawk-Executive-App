@@ -3,12 +3,25 @@
 
 @if (Model.Any())
 {
-    foreach (var item in Model.OrderBy(x=>x.StepOrder))
+    foreach (var item in Model.OrderBy(x => x.StepOrder))
     {
         <div class="row block-card">
-            <div class="col-xs-1"><h4>@item.StepOrder</h4></div>
-            <div class="col-xs-8">@item.Step</div>
-            <div class="col-xs-3">3buttons</div>
+            <div class="col-md-12">
+                <div style="display: inline-block;">
+                    <h4>@item.StepOrder</h4>
+                </div>
+                <div style="display: inline-block; padding-left: 1em;">
+                    @item.Step
+                </div>
+                <div class="pull-right" style="display: inline-block;">
+                    <button class="btn btn-default"><span class="glyphicon glyphicon-arrow-up"></span></button>
+                    <button class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span></button>
+                    <button class="btn btn-success"><span class="glyphicon glyphicon-check"></span></button>
+                    <button class="btn btn-danger">&times;</button>
+                </div>
+            </div>
+
+
         </div>
     }
 

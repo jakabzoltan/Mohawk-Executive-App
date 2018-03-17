@@ -39,7 +39,7 @@ namespace Mohawk.Executive.Services.Services
             }
             else
             {
-                ((List<OpportunityDonation>) opportunity?.Donations)?.Add(donation);
+                opportunity?.Donations?.Add(donation);
             }
 
             _context.SaveChanges();

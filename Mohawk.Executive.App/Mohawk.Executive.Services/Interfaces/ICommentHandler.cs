@@ -8,7 +8,7 @@ namespace Mohawk.Executive.Services.Interfaces
 {
     public interface ICommentHandler
     {
-        bool AddComment(Guid opportunityId, string commentString, Guid? replyToId = null);
+        bool AddComment(Guid opportunityId, string commentString, string userId, Guid? replyToId = null);
         bool RemoveComment(Guid commentId);
         bool EditComment(Guid commentId, string comment);
     }

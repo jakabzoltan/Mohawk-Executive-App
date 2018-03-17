@@ -5,7 +5,7 @@
     ViewBag.Title = Model.Subject;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" type="text/css" href="~/Content/Blocks.css"/>
+<link rel="stylesheet" type="text/css" href="~/Content/Blocks.css" />
 <style>
     li.active {
         font-weight: bold;
@@ -16,28 +16,34 @@
         display: table-cell !important;
         width: 1% !important;
     }
+
     @@media only screen and (max-width:768px) {
         .low-remove-padding {
             padding-left: 0;
             padding-right: 0;
         }
     }
-    
 </style>
 <div class="row" style="min-height: 100px; padding-bottom: 20px;">
 
     <div class="col-sm-12">
         <h3>
             @Model.Subject
-            <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#resolution-modal">
-                Resolve Opportunity
-            </button>
+            @if (Model.ResolutionReason != null && Model.ResolvedOn != null)
+            {
+                <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#resolution-modal">
+                    Resolve Opportunity
+                </button>
+            }
         </h3>
     </div>
 
 
     <div class="col-sm-12">
+        
+        <p><b>@Model.Priority.PriorityString</b></p>
         <p>@Model.Value</p>
+
         @if (Model.ResolutionReason != null && Model.ResolvedOn != null)
         {
             <p><b>Resolved On:</b> @Model.ResolvedOn</p>
@@ -47,19 +53,33 @@
 </div>
 <div class="row">
     <div class="col-sm-12 low-remove-padding">
+        <script>
+            $(document).ready(function() {
+                var activeTab = "@Model.ActiveTab";
+                if (activeTab.length !== 0) {
+                    $("#" + activeTab).addClass("active");
+                    $("#" + activeTab.replace("-tab", "")).addClass("in");
+                    $("#" + activeTab.replace("-tab", "")).addClass("active");
+                }
+                else {
+                    $("#donations-tab").addClass("active");
+
+                    }
+            })
+        </script>
         <ul class="nav nav-tabs nav-justified">
-            <li role="presentation" class="active"><a data-toggle="tab" href="#donations">Donations</a></li>
-            <li role="presentation"><a data-toggle="tab" href="#steps">Steps</a></li>
-            <li role="presentation"><a data-toggle="tab" href="#comments">Comments</a></li>
+            <li id="donations-tab" role="presentation" ><a data-toggle="tab" href="#donations">Donations</a></li>
+            <li id="steps-tab" role="presentation"><a data-toggle="tab" href="#steps">Steps</a></li>
+            <li id="comments-tab" role="presentation"><a data-toggle="tab" href="#comments">Comments</a></li>
         </ul>
     </div>
     <div class="tab-content">
-        <div id="donations" class="tab-pane fade in active">
+        <div id="donations" class="tab-pane fade">
 
             <div class="col-sm-12">
                 <h2>
                     Donations
-                    <a class="btn btn-success pull-right" data-toggle="modal" data-target="#add-donation-modal" ><span class="glyphicon glyphicon-plus"></span> Add Donation </a>
+                    <a class="btn btn-success pull-right" data-toggle="modal" data-target="#add-donation-modal"><span class="glyphicon glyphicon-plus"></span> Add Donation </a>
                 </h2>
             </div>
             <div class="col-sm-12">@Html.Partial("_OpportunityDonations", Model.Donations)</div>
@@ -70,7 +90,7 @@
             <div class="col-sm-12">
                 <h2>
                     Steps
-                    <a href="@Url.Action("QuickCreate", "Opportunities")" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Add Step </a>
+                    <a class="btn btn-success pull-right" data-toggle="modal" data-target="#add-step-modal"><span class="glyphicon glyphicon-plus"></span> Add Step </a>
                 </h2>
             </div>
             <div class="col-sm-12">@Html.Partial("_OpportunitySteps", Model.Steps)</div>
@@ -88,15 +108,16 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="resolution-modal" tabindex="-1" role="dialog" aria-labelledby="resolution-modal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            @Html.Partial("_AddResolution", new OpportunityResolutionViewModel(Model.Id))
+@if (Model.ResolutionReason != null && Model.ResolvedOn != null)
+{
+    <div class="modal fade" id="resolution-modal" tabindex="-1" role="dialog" aria-labelledby="resolution-modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @Html.Partial("_AddResolution", new OpportunityResolutionViewModel(Model.Id))
+            </div>
         </div>
     </div>
-</div>
-
+}
 <div class="modal fade" id="add-donation-modal" tabindex="-1" role="dialog" aria-labelledby="add-donation-modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -108,7 +129,7 @@
 <div class="modal fade" id="add-step-modal" tabindex="-1" role="dialog" aria-labelledby="add-donation-modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            @Html.Partial("_AddStep",  new OpportunityStepModel(){OpportunityId = Model.Id})
+            @Html.Partial("_AddStep", new OpportunityStepModel() { OpportunityId = Model.Id })
         </div>
     </div>
 </div>

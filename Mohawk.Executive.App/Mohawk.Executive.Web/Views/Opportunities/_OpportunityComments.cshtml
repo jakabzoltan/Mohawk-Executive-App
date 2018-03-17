@@ -1,8 +1,12 @@
 ﻿@using Mohawk.Executive.Services.ViewModels
 @using Mohawk.Executive.Web.Models
 @model Mohawk.Executive.Web.Models.CommentListModel
-<style>
-</style>
+
+<div class="row">
+    <div id="comments-posting" class="comment-box">
+        @Html.Action("PostComment", new CommentViewModel(Model.OpportunityId))
+    </div>
+</div>
 @if (Model.Comments.Any())
 {
     <div class="row" style="margin-bottom: 20px;">
@@ -42,10 +46,7 @@ else
 {
     <div>This opportunity has no donations at the moment. Add one!</div>
 }
-<div class="row comment-box-buffer"></div>
-<div id="comments-posting" class="comment-box">
-    @Html.Action("PostComment", new CommentViewModel(Model.OpportunityId))
-</div>
+
 
 
 <script>

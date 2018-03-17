@@ -27,7 +27,7 @@ namespace Mohawk.Executive.Web.Controllers
         public ActionResult ViewContact(Guid id)
         {
             var contact = ContactHanlder.Get(id);
-            contact.Opportunities = OpportunityHandler.GetOpportunitiesForContact(id);
+            contact.Opportunities = OpportunityHandler.GetOpportunitiesForContact(id,true);
             return View(contact);
         }
 

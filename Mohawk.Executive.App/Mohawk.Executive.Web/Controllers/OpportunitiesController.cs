@@ -34,6 +34,8 @@ namespace Mohawk.Executive.Web.Controllers
                 SettingsHandler = new SettingsService();
             if (StepHandler == null)
                 StepHandler = new StepService();
+            if (CommentHandler == null)
+                CommentHandler = new CommentService();
         }
 
         public OpportunitiesController(IOpportunityHandler opportunityHandler, IContactHanlder contactHanlder, IDonationHandler donationHandler, ISettingsHandler settingsHandler, IStepHandler stepHandler, ICommentHandler commentHandler) : this()
@@ -45,15 +47,14 @@ namespace Mohawk.Executive.Web.Controllers
             StepHandler = stepHandler;
             CommentHandler = commentHandler;
         }
-        public ActionResult ViewOpportunity(Guid id)
+        public ActionResult ViewOpportunity(Guid id, string activeTab = null)
         {
             if (id == Guid.Empty)
             {
                 return RedirectToAction("Index", "Dashboard");
             }
-            var opportunity = OpportunityHandler.Get(id,true);
-
-
+            var opportunity = OpportunityHandler.Get(id, true);
+            opportunity.ActiveTab = activeTab;
             return View(opportunity);
         }
 
@@ -100,7 +101,7 @@ namespace Mohawk.Executive.Web.Controllers
                     Text = "Important"
                 });
             }
-            
+
 
             #endregion
 
@@ -131,22 +132,18 @@ namespace Mohawk.Executive.Web.Controllers
         public ActionResult AddDonation(Guid id)
         {
             //pass through method
-            var model = new AddDonationViewModel(id);
-            //debug
-            if (SettingsHandler != null)
+            var model = new AddDonationViewModel(id)
             {
-                model.DonationList = SettingsHandler.GetDonationTypes().Select(x => new SelectListItem()
+                DonationList = SettingsHandler.GetDonationTypes().Select(x => new SelectListItem()
                 {
                     Value = x.Id.ToString(),
                     Text = x.DonationTypeString
-                }).ToList();
-            }
-            //debug
-            //if (!model.DonationList.Any())
-            //{
-            //    model.DonationList.Add(new SelectListItem() { Text = "Oh boy", Value = "1" });
-            //    model.DonationList.Add(new SelectListItem() { Text = "2 Oh boy", Value = "2" });
-            //}
+                }).ToList()
+            };
+
+
+
+
             return PartialView("_AddDonation", model);
         }
 
@@ -154,18 +151,17 @@ namespace Mohawk.Executive.Web.Controllers
         public ActionResult AddDonation(AddDonationViewModel model)
         {
             DonationHandler.AddDonation(model.OpportunityId, model.DonationText, model.Selected);
-            return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId });
+            return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId, activeTab = "donations-tab" });
         }
 
         #endregion
-
 
         #region Steps
 
         public ActionResult AddStep(OpportunityStepModel model)
         {
             StepHandler.AddStep(model.OpportunityId, model.Step);
-            return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId });
+            return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId, activeTab = "steps-tab" });
         }
 
         #endregion
@@ -191,8 +187,8 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpPost]
         public ActionResult PostComment(CommentViewModel model)
         {
-            CommentHandler.AddComment(model.OpportunityId, model.CommentString, model.ReplyToId);
-            return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId });
+            CommentHandler.AddComment(model.OpportunityId, model.CommentString, User.Identity.GetUserId(), model.ReplyToId);
+            return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId, activeTab = "comments-tab" });
         }
 
         #endregion

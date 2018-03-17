@@ -12,7 +12,6 @@ namespace Mohawk.Executive.Services.Services
 {
     public class StepService : IStepHandler
     {
-
         private readonly ExecutiveContext _context;
 
         public StepService()
@@ -22,7 +21,14 @@ namespace Mohawk.Executive.Services.Services
 
         public bool AddStep(Guid opportunityId, string step)
         {
-            _context.OpportunitySteps.Add(new OpportunityStep() { Opportunity = _context.Opportunities.FirstOrDefault(x => x.Id == opportunityId), OpportunityId = opportunityId, Step = step });
+            var currentStep = _context.OpportunitySteps.Count(x => x.OpportunityId == opportunityId) + 1;
+            _context.OpportunitySteps.Add(new OpportunityStep()
+            {
+                Opportunity = _context.Opportunities.FirstOrDefault(x => x.Id == opportunityId),
+                OpportunityId = opportunityId,
+                Step = step,
+                StepOrder = currentStep
+            });
             _context.SaveChanges();
             return true;
         }
