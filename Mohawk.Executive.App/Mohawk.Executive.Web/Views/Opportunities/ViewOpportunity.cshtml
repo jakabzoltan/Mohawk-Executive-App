@@ -1,8 +1,8 @@
 ﻿@using Mohawk.Executive.Services.ViewModels
 @using Mohawk.Executive.Web.Models
-@model Mohawk.Executive.Services.ViewModels.Opportunity
+@model OpportunityModel
 @{
-    ViewBag.Title = Model.OpportunitySubject;
+    ViewBag.Title = Model.Subject;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" type="text/css" href="~/Content/Blocks.css"/>
@@ -28,7 +28,7 @@
 
     <div class="col-sm-12">
         <h3>
-            @Model.OpportunitySubject
+            @Model.Subject
             <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#resolution-modal">
                 Resolve Opportunity
             </button>
@@ -108,7 +108,7 @@
 <div class="modal fade" id="add-step-modal" tabindex="-1" role="dialog" aria-labelledby="add-donation-modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            @Html.Partial("_AddStep",  new OpportunityStep(){OpportunityId = Model.Id})
+            @Html.Partial("_AddStep",  new OpportunityStepModel(){OpportunityId = Model.Id})
         </div>
     </div>
 </div>

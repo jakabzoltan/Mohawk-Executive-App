@@ -17,7 +17,7 @@ namespace Mohawk.Executive.Services.Services
             _context = ExecutiveContext.Create();
         }
 
-        public ViewModels.Contact AddContact(string firstName, string lastName, string role, string phoneNumber, string email, string organizationName,
+        public ViewModels.ContactModel AddContact(string firstName, string lastName, string role, string phoneNumber, string email, string organizationName,
             string location)
         {
             var contact = new Contact
@@ -47,7 +47,7 @@ namespace Mohawk.Executive.Services.Services
             return true;
         }
 
-        public ViewModels.Contact UpdateContact(Guid id, string firstName, string lastName, string role, string phoneNumber, string email,
+        public ViewModels.ContactModel UpdateContact(Guid id, string firstName, string lastName, string role, string phoneNumber, string email,
             string organizationName,
             string location)
         {
@@ -65,9 +65,9 @@ namespace Mohawk.Executive.Services.Services
             return Get(contact.Id);
         }
 
-        public IEnumerable<ViewModels.Contact> GetAllContacts()
+        public IEnumerable<ViewModels.ContactModel> GetAllContacts()
         {
-            return _context.Contacts.Where(c => c.ModifiedOn == null).Select(c => new ViewModels.Contact()
+            return _context.Contacts.Where(c => c.ModifiedOn == null).Select(c => new ViewModels.ContactModel()
             {
                 Id = c.Id,
                 FirstName = c.FirstName,
@@ -86,7 +86,7 @@ namespace Mohawk.Executive.Services.Services
             .ThenBy(x => x.Email);
         }
 
-        public IEnumerable<ViewModels.Contact> SearchContacts(string queryString)
+        public IEnumerable<ViewModels.ContactModel> SearchContacts(string queryString)
         {
             return _context.Contacts
                 .Where(c => c.ModifiedOn == null)
@@ -96,7 +96,7 @@ namespace Mohawk.Executive.Services.Services
                             c.Location.Contains(queryString) ||
                             c.Organization.Contains(queryString))
                 .Select(c =>
-                    new ViewModels.Contact
+                    new ViewModels.ContactModel
                     {
                         Id = c.Id,
                         FirstName = c.FirstName,
@@ -115,9 +115,9 @@ namespace Mohawk.Executive.Services.Services
                 .ThenBy(x => x.Email);
         }
 
-        public ViewModels.Contact Get(Guid id)
+        public ViewModels.ContactModel Get(Guid id)
         {
-            return _context.Contacts.Where(c => c.ModifiedOn == null && c.Id == id).Select(c => new ViewModels.Contact()
+            return _context.Contacts.Where(c => c.ModifiedOn == null && c.Id == id).Select(c => new ViewModels.ContactModel()
             {
                 Id = c.Id,
                 FirstName = c.FirstName,

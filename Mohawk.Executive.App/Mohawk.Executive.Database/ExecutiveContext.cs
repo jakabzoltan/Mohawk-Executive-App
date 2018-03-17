@@ -21,8 +21,8 @@ namespace Mohawk.Executive.Database
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<DonationType> DonationTypes { get; set; }
+        public DbSet<PriorityType> PriorityTypes { get; set; }
         public DbSet<OpportunityDonation> OpportunityDonations { get; set; }
-        public DbSet<OpportunityPriority> OpportunityPriorities { get; set; }
         public DbSet<OpportunityStep> OpportunitySteps { get; set; }
 
         public static ExecutiveContext Create()

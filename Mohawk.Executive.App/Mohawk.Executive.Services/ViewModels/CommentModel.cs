@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Mohawk.Executive.Services.ViewModels
 {
-    public class Comment
+    public class CommentModel
     {
-        public Comment()
+        public CommentModel()
         {
-            Replies = new List<Comment>();
+            Replies = new List<CommentModel>();
         }
         public Guid Id { get; set; }
         public Guid OpportunityId { get; set; }
@@ -16,6 +16,6 @@ namespace Mohawk.Executive.Services.ViewModels
         public string CommentString { get; set; }
         public IdentityUserModel PostedBy { get; set; }
 
-        public List<Comment> Replies { get; set; }
+        public List<CommentModel> Replies { get; set; }
     }
 }

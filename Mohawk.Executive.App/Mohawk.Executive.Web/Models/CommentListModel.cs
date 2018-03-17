@@ -9,13 +9,13 @@ namespace Mohawk.Executive.Web.Models
 	public class CommentListModel
 	{
 	    public Guid OpportunityId { get; set; }
-	    public IEnumerable<Comment> Comments { get; set; }
+	    public IEnumerable<CommentModel> Comments { get; set; }
         public CommentListModel()
         {
             Comments = new List<CommentViewModel>();
         }
 
-	    public CommentListModel(Guid opportunityId, IEnumerable<Comment> comments) : this()
+	    public CommentListModel(Guid opportunityId, IEnumerable<CommentModel> comments) : this()
 	    {
 	        OpportunityId = opportunityId;
 	        Comments = comments;

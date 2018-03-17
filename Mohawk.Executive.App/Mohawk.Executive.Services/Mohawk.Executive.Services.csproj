@@ -114,13 +114,13 @@
     <Compile Include="Services\OpportunityService.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\StepService.cs" />
-    <Compile Include="ViewModels\Comment.cs" />
-    <Compile Include="ViewModels\Contact.cs" />
-    <Compile Include="ViewModels\DonationType.cs" />
-    <Compile Include="ViewModels\Opportunity.cs" />
-    <Compile Include="ViewModels\OpportunityDonation.cs" />
-    <Compile Include="ViewModels\OpportunityPriority.cs" />
-    <Compile Include="ViewModels\OpportunityStep.cs" />
+    <Compile Include="ViewModels\CommentModel.cs" />
+    <Compile Include="ViewModels\ContactModel.cs" />
+    <Compile Include="ViewModels\DonationTypeModel.cs" />
+    <Compile Include="ViewModels\OpportunityModel.cs" />
+    <Compile Include="ViewModels\OpportunityDonationModel.cs" />
+    <Compile Include="ViewModels\PriorityTypeModel.cs" />
+    <Compile Include="ViewModels\OpportunityStepModel.cs" />
     <Compile Include="ViewModels\IdentityUserModel.cs" />
   </ItemGroup>
   <ItemGroup>

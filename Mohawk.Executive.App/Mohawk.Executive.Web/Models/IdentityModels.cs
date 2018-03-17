@@ -21,7 +21,7 @@ namespace Mohawk.Executive.Web.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("MohawkExecutiveDb", throwIfV1Schema: false)
         {
         }
 
@@ -30,8 +30,5 @@ namespace Mohawk.Executive.Web.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<Mohawk.Executive.Services.ViewModels.Opportunity> Opportunities { get; set; }
-
-        public System.Data.Entity.DbSet<Mohawk.Executive.Services.ViewModels.OpportunityPriority> OpportunityPriorities { get; set; }
     }
 }

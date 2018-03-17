@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Mohawk.Executive.Database.Entities;
+using Mohawk.Executive.Database.Entities.UDT;
 
 namespace Mohawk.Executive.Database.Migrations
 {
@@ -17,52 +18,31 @@ namespace Mohawk.Executive.Database.Migrations
 
         protected override void Seed(Mohawk.Executive.Database.ExecutiveContext context)
         {
-            //var guids = new List<Guid>()
-            //{
+            context.PriorityTypes.AddOrUpdate(
+                new PriorityType()
+                {
+                    PriorityString = "Very Low Importance"
+                },
+                new PriorityType()
+                {
+                    PriorityString = "Low Importance"
+                },
+                new PriorityType()
+                {
+                    PriorityString = "Average Importance"
+                },
+                new PriorityType()
+                {
+                    PriorityString = "High Importance"
+                },
+                new PriorityType()
+                {
+                    PriorityString = "Critically Important"
+                });
 
-            //    Guid.Parse("127a82a5-7ac4-4ea2-9908-c51d91b2d47c"),
-            //    Guid.Parse("3403f1f8-ee68-489e-9edb-a7a070ef7b3a"),
-            //    Guid.Parse("5603f1f8-ee68-489e-9edb-a7a070ef7b3a"),
-            //    Guid.Parse("999a99a9-7ac4-4ea2-9908-c51d91b2d47c")
-            //};
-            
-            //context.Contacts.Add(new Contact()
-            //{
-            //    Id = guids[3],
-            //    FirstName = "General Opportunities",
-            //    LastName = "",
-            //    Organization = "Mohawk College"
-            //});
-
-            //context.Contacts.Add(new Contact()
-            //{
-            //    Id = guids[0],
-            //    FirstName = "Zoltan",
-            //    LastName = "Jakab",
-            //    Email = "zoltan.jakab1@Mohawkcollege.ca",
-            //    Organization = "Mohawk College"
-            //});
-
-            //context.Contacts.Add(new Contact()
-            //{
-            //    Id = guids[1],
-            //    FirstName = "Erin",
-            //    LastName = "Bradley",
-            //    Email = "erin.bradley@Mohawkcollege.ca",
-            //    Organization = "Mohawk College"
-            //});
-
-            //context.Contacts.Add(new Contact()
-            //{
-            //    Id = guids[2],
-            //    FirstName = "Filip",
-            //    LastName = "Zizovski",
-            //    Email = "filip.zizovski@Mohawkcollege.ca",
-            //    Organization = "Mohawk College"
-            //});
-            //context.SaveChanges();
-
-
+            context.DonationTypes.AddOrUpdate(
+                new DonationType() { DonationTypeString = "In Kind Donation" },
+                new DonationType() { DonationTypeString = "Monetary Donation" });
         }
     }
 }

@@ -8,7 +8,7 @@ using Mohawk.Executive.Services.ViewModels;
 
 namespace Mohawk.Executive.Web.Models
 {
-    public class OpportunityCreateViewModel : Opportunity
+    public class OpportunityCreateViewModel : OpportunityModel
     {
         public OpportunityCreateViewModel()
         {

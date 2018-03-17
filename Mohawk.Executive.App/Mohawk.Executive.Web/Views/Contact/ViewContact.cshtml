@@ -1,4 +1,4 @@
-﻿@model Mohawk.Executive.Services.ViewModels.Contact
+﻿@model Mohawk.Executive.Services.ViewModels.ContactModel
 
 @{
     ViewBag.Title = $"{Model.FirstName} {Model.LastName}";
@@ -65,9 +65,9 @@
             foreach (var opp in Model.Opportunities)
             {
                 <tr>
-                    <td width="20%">@opp.OpportunitySubject</td>
+                    <td width="20%">@opp.Subject</td>
                     <td width="60%">@opp.Value</td>
-                    <td width="20%">@opp.OpportunityPriorityId</td>
+                    <td width="20%">@opp.PriorityId</td>
                 </tr>
             }
         }

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Mohawk.Executive.Database.Entities.UDT;
 
-namespace Mohawk.Executive.Database.Entities.UDT
+namespace Mohawk.Executive.Database.Entities
 {
     public class OpportunityDonation
     {

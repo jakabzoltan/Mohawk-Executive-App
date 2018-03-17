@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Mohawk.Executive.Services.ViewModels.Opportunity>
+﻿@model IEnumerable<Mohawk.Executive.Services.ViewModels.OpportunityModel>
 <link rel="stylesheet" type="text/css" href="~/Content/ContactBlock.css" />
 
 @{
@@ -6,10 +6,10 @@
     {
         foreach (var opportunity in Model)
         {
-            <a href="@Url.Action("ViewContact", "Contact", new {id = opportunity.Id})">
+            <a href="@Url.Action("ViewOpportunity", "Opportunities", new {id = opportunity.Id})">
                 <div class="contact-block">
                     <div class="circle">
-                        opportunity.OpportunitySubject
+                        @opportunity.Subject
                     </div>
                 </div>
             </a>

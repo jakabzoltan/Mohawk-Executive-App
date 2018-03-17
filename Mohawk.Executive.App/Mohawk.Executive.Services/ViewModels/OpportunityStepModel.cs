@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mohawk.Executive.Services.ViewModels
 {
-    public class OpportunityStep
+    public class OpportunityStepModel
     {
         public int Id { get; set; }
         public Guid OpportunityId { get; set; }

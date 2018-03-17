@@ -10,16 +10,16 @@ namespace Mohawk.Executive.Services.Interfaces
     public interface ISettingsHandler
     {
         #region DonationTypes
-        IEnumerable<DonationType> GetDonationTypes();
-        DonationType AddDonationType(string donationType);
-        DonationType UpdateDonationType(int id, string donationType);
+        IEnumerable<DonationTypeModel> GetDonationTypes();
+        DonationTypeModel AddDonationType(string donationType);
+        DonationTypeModel UpdateDonationType(int id, string donationType);
         bool RemoveDonationType(int id);
         #endregion
 
         #region OpportunityPriority
-        IEnumerable<OpportunityPriority> GetPriorities();
-        OpportunityPriority AddOpportunityPriority(string priorityText);
-        OpportunityPriority UpdateOpportunityPriority(int id, string priorityText);
+        IEnumerable<PriorityTypeModel> GetPriorities();
+        PriorityTypeModel AddOpportunityPriority(string priorityText);
+        PriorityTypeModel UpdateOpportunityPriority(int id, string priorityText);
         bool RemoveOpportunity(int id);
         #endregion
 

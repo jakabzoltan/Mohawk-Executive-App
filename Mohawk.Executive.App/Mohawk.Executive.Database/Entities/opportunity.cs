@@ -11,21 +11,21 @@ namespace Mohawk.Executive.Database.Entities
     public class Opportunity
     {
         public Guid Id { get; set; }
-        public int OpportunityPriorityId { get; set; }
+        public int PriorityId { get; set; }
         public Guid ContactId { get; set; }
         public string OpportunitySubject { get; set; }
         public string Value { get; set; }
         public DateTime? RemovedOn { get; set; }
         public DateTime? ResolvedOn { get; set; }
         public string ResolutionReason { get; set; }
-        public string PosterId { get; set; }
+        public string IdentityUserId { get; set; }
 
         //navigation properties
         public virtual Contact Contact { get; set; }
-        public virtual OpportunityPriority Priority { get; set; }
+        public virtual PriorityType PriorityType { get; set; }
         public virtual ICollection<OpportunityStep> Steps { get; set; }
         public virtual ICollection<OpportunityDonation> Donations { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
-        public virtual IdentityUser UserPoster { get; set; }
+        public virtual IdentityUser IdentityUser { get; set; }
     }
 }

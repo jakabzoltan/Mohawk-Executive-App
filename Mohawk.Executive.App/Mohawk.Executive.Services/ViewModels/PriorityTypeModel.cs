@@ -1,8 +1,8 @@
 ﻿namespace Mohawk.Executive.Services.ViewModels
 {
-    public class DonationType
+    public class PriorityTypeModel
     {
         public int Id { get; set; }
-        public string DonationTypeString { get; set; }
+        public string PriorityString { get; set; }
     }
 }

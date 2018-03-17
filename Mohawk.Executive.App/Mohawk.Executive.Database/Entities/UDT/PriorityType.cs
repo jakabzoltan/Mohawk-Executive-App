@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Mohawk.Executive.Database.Entities.UDT
 {
-    public class OpportunityPriority
+    public class PriorityType
     {
         public int Id { get; set; }
-        public string PriorityString { get; set; } 
+        public string PriorityString { get; set; }
+
+        public virtual ICollection<Opportunity> Opportunities { get; set; }
     }
 }

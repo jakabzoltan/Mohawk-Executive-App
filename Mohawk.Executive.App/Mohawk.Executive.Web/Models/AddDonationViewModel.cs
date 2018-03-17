@@ -8,7 +8,7 @@ using Mohawk.Executive.Services.ViewModels;
 
 namespace Mohawk.Executive.Web.Models
 {
-    public class AddDonationViewModel : OpportunityDonation
+    public class AddDonationViewModel : OpportunityDonationModel
     {
         public AddDonationViewModel()
         {

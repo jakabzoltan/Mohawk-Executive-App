@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Mohawk.Executive.Services.ViewModels
 {
-    public class Contact
+    public class ContactModel
     {
-        public Contact()
+        public ContactModel()
         {
-            Opportunities = new List<Opportunity>();
+            Opportunities = new List<OpportunityModel>();
         }
         public Guid Id { get; set; }
         [DisplayName("First Name")]
@@ -33,6 +33,6 @@ namespace Mohawk.Executive.Services.ViewModels
 
 
         //navigation properties
-        public IEnumerable<Opportunity> Opportunities { get; set; }
+        public IEnumerable<OpportunityModel> Opportunities { get; set; }
     }
 }

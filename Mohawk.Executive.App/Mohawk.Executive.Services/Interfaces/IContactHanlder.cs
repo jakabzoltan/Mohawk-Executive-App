@@ -6,11 +6,11 @@ namespace Mohawk.Executive.Services.Interfaces
 {
     public interface IContactHanlder
     {
-        Contact AddContact(string firstName, string lastName, string role, string phoneNumber, string email, string organizationName, string location);
+        ContactModel AddContact(string firstName, string lastName, string role, string phoneNumber, string email, string organizationName, string location);
         bool RemoveContact(Guid id);
-        Contact UpdateContact(Guid id, string firstName, string lastName, string role, string phoneNumber, string email, string organizationName, string location);
-        IEnumerable<Contact> GetAllContacts();
-        IEnumerable<Contact> SearchContacts(string queryString);
-        Contact Get(Guid id);
+        ContactModel UpdateContact(Guid id, string firstName, string lastName, string role, string phoneNumber, string email, string organizationName, string location);
+        IEnumerable<ContactModel> GetAllContacts();
+        IEnumerable<ContactModel> SearchContacts(string queryString);
+        ContactModel Get(Guid id);
     }
 }

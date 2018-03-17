@@ -34,10 +34,10 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpGet]
         public ActionResult AddContact()
         {
-            return View(new Contact());
+            return View(new ContactModel());
         }
         [HttpPost]
-        public ActionResult AddContact(Contact model)
+        public ActionResult AddContact(ContactModel model)
         {
             var contact = ContactHanlder.AddContact(model.FirstName, model.LastName, model.Role, model.PhoneNumber, model.Email, model.Organization, model.Location);
             return RedirectToAction("ViewContact", new{id = contact.Id});

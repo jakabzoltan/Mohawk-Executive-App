@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Mohawk.Executive.Services.Services;
 using Mohawk.Executive.Web.Models;
-using DonationType = Mohawk.Executive.Services.ViewModels.DonationType;
+using DonationType = Mohawk.Executive.Services.ViewModels.DonationTypeModel;
 
 namespace Mohawk.Executive.Web.Controllers
 {
@@ -69,8 +69,8 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpPost]
         public ActionResult CreateOpportunity(OpportunityCreateViewModel model)
         {
-            var opportunity = OpportunityHandler.AddOpportunity(model.ContactId, model.OpportunitySubject, model.Value,
-                model.Selected.FirstOrDefault());
+            var opportunity = OpportunityHandler.AddOpportunity(model.ContactId, model.Subject, model.Value,
+                model.Selected.FirstOrDefault(), User.Identity.GetUserId());
             return RedirectToAction("ViewOpportunity", new { id = opportunity.Id });
         }
 
@@ -114,8 +114,8 @@ namespace Mohawk.Executive.Web.Controllers
                 ContactHanlder.SearchContacts("General").FirstOrDefault(x => x.FirstName == "General") ??
                 ContactHanlder.AddContact("General", null, null, null, null, "Mohawk College", null);
 
-            var opportunity = OpportunityHandler.AddOpportunity(generalContact.Id, model.OpportunitySubject,
-                model.Value, model.Selected.FirstOrDefault());
+            var opportunity = OpportunityHandler.AddOpportunity(generalContact.Id, model.Subject,
+                model.Value, model.Selected.FirstOrDefault(), User.Identity.GetUserId());
             return RedirectToAction("ViewOpportunity", new { id = opportunity.Id });
         }
 
@@ -162,7 +162,7 @@ namespace Mohawk.Executive.Web.Controllers
 
         #region Steps
 
-        public ActionResult AddStep(OpportunityStep model)
+        public ActionResult AddStep(OpportunityStepModel model)
         {
             StepHandler.AddStep(model.OpportunityId, model.Step);
             return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId });

@@ -17,21 +17,21 @@ namespace Mohawk.Executive.Services.Services
         {
             _context = ExecutiveContext.Create();
         }
-        public IEnumerable<DonationType> GetDonationTypes()
+        public IEnumerable<DonationTypeModel> GetDonationTypes()
         {
-            return _context.DonationTypes.Select(x => new DonationType()
+            return _context.DonationTypes.Select(x => new DonationTypeModel()
             {
                 Id = x.Id,
                 DonationTypeString = x.DonationTypeString
             });
         }
 
-        public DonationType AddDonationType(string donationType)
+        public DonationTypeModel AddDonationType(string donationType)
         {
             throw new NotImplementedException();
         }
 
-        public DonationType UpdateDonationType(int id, string donationType)
+        public DonationTypeModel UpdateDonationType(int id, string donationType)
         {
             throw new NotImplementedException();
         }
@@ -41,21 +41,21 @@ namespace Mohawk.Executive.Services.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<OpportunityPriority> GetPriorities()
+        public IEnumerable<PriorityTypeModel> GetPriorities()
         {
-            return _context.OpportunityPriorities.Select(x => new OpportunityPriority()
+            return _context.PriorityTypes.Select(x => new PriorityTypeModel()
             {
                 Id = x.Id,
                 PriorityString = x.PriorityString
             });
         }
 
-        public OpportunityPriority AddOpportunityPriority(string priorityText)
+        public PriorityTypeModel AddOpportunityPriority(string priorityText)
         {
             throw new NotImplementedException();
         }
 
-        public OpportunityPriority UpdateOpportunityPriority(int id, string priorityText)
+        public PriorityTypeModel UpdateOpportunityPriority(int id, string priorityText)
         {
             throw new NotImplementedException();
         }

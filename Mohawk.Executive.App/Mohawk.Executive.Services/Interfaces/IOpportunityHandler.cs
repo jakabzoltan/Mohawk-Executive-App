@@ -6,15 +6,15 @@ namespace Mohawk.Executive.Services.Interfaces
 {
     public interface IOpportunityHandler
     {
-        Opportunity AddOpportunity(Guid contactId, string subject, string value, int priority);
+        OpportunityModel AddOpportunity(Guid contactId, string subject, string value, int priority, string userId);
         bool RemoveOpportunity(Guid opportunityId);
-        Opportunity UpdateOpportunity(Guid opportunityId, string newSubject, string newValue, int? newPriority = null);
-        Opportunity ResolveOpportunity(Guid opportunityId, string resolutionReason);
-        Opportunity SetPriorityLevel(Guid opportunityId, int priorityLevel);
+        OpportunityModel UpdateOpportunity(Guid opportunityId, string newSubject, string newValue, int? newPriority = null);
+        OpportunityModel ResolveOpportunity(Guid opportunityId, string resolutionReason);
+        OpportunityModel SetPriorityLevel(Guid opportunityId, int priorityLevel);
 
-        IEnumerable<Opportunity> GetOpportunities(bool includePeripheral = false);
-        IEnumerable<Opportunity> GetOpportunitiesForContact(Guid contactId, bool includePeripherals = false);
-        IEnumerable<Opportunity> SearchOpportunities(string query, bool includePeripherals = false);
-        Opportunity Get(Guid opportunityId, bool includePeripheral = false);
+        IEnumerable<OpportunityModel> GetOpportunities(bool includePeripheral = false);
+        IEnumerable<OpportunityModel> GetOpportunitiesForContact(Guid contactId, bool includePeripherals = false);
+        IEnumerable<OpportunityModel> SearchOpportunities(string query, bool includePeripherals = false);
+        OpportunityModel Get(Guid opportunityId, bool includePeripheral = false);
     }
 }

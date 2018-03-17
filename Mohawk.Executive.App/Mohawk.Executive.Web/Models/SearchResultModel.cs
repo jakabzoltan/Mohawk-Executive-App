@@ -8,15 +8,15 @@ namespace Mohawk.Executive.Web.Models
 {
     public class SearchResultModel
     {
-        public IEnumerable<Opportunity> Opportunities { get; set; }
-        public IEnumerable<Contact> Contacts { get; set; }
+        public IEnumerable<OpportunityModel> Opportunities { get; set; }
+        public IEnumerable<ContactModel> Contacts { get; set; }
 
         public SearchResultModel()
         {
-            Opportunities = new List<Opportunity>();
-            Contacts = new List<Contact>();
+            Opportunities = new List<OpportunityModel>();
+            Contacts = new List<ContactModel>();
         }
-        public SearchResultModel(IEnumerable<Opportunity> opportunities, IEnumerable<Contact> contacts) : this()
+        public SearchResultModel(IEnumerable<OpportunityModel> opportunities, IEnumerable<ContactModel> contacts) : this()
         {
             Opportunities = opportunities;
             Contacts = contacts;

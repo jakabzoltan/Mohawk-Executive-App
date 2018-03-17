@@ -6,7 +6,7 @@ using Mohawk.Executive.Services.ViewModels;
 
 namespace Mohawk.Executive.Web.Models
 {
-    public class CommentViewModel : Comment
+    public class CommentViewModel : CommentModel
     {
         public CommentViewModel()
         {

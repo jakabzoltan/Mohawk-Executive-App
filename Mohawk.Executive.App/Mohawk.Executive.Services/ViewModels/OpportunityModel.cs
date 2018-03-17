@@ -6,21 +6,21 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Mohawk.Executive.Services.ViewModels
 {
-    public class Opportunity
+    public class OpportunityModel
     {
-        public Opportunity()
+        public OpportunityModel()
         {
-            Steps = new List<OpportunityStep>();
-            Donations = new List<OpportunityDonation>();
-            Comments = new List<Comment>();
+            Steps = new List<OpportunityStepModel>();
+            Donations = new List<OpportunityDonationModel>();
+            Comments = new List<CommentModel>();
         }
         public Guid Id { get; set; }
         [DisplayName("Priority Level")]
-        public int OpportunityPriorityId { get; set; }
+        public int PriorityId { get; set; }
         public Guid ContactId { get; set; }
-        [DisplayName("Subject")]
+        [DisplayName("OpportunitySubject")]
         [Required(ErrorMessage = "You must have a subject or goal for your opportunity.")]
-        public string OpportunitySubject { get; set; }
+        public string Subject { get; set; }
         [Required(ErrorMessage = "You must explain the value of the opportunity.")]
         public string Value { get; set; }
         public DateTime? RemovedOn { get; set; }
@@ -28,10 +28,10 @@ namespace Mohawk.Executive.Services.ViewModels
         [DisplayName("Outcome")]
         public string ResolutionReason { get; set; }
 
-        public OpportunityPriority Priority { get; set; }
-        public List<OpportunityStep> Steps { get; set; }
+        public PriorityTypeModel Priority { get; set; }
+        public List<OpportunityStepModel> Steps { get; set; }
         [DisplayName("Importance")]
-        public List<OpportunityDonation> Donations { get; set; }
-        public List<Comment> Comments { get; set; }
+        public List<OpportunityDonationModel> Donations { get; set; }
+        public List<CommentModel> Comments { get; set; }
     }
 }

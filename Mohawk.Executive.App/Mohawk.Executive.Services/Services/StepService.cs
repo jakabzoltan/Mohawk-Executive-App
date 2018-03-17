@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Mohawk.Executive.Database;
+using Mohawk.Executive.Database.Entities;
 using Mohawk.Executive.Database.Entities.UDT;
 using Mohawk.Executive.Services.Interfaces;
 

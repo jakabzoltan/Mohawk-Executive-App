@@ -8,16 +8,16 @@ namespace Mohawk.Executive.Web.Models
 {
     public class SettingsModel
     {
-        public IEnumerable<DonationType> DonationTypes { get; set; }
-        public IEnumerable<OpportunityPriority> OpportunityPriorities { get; set; }
+        public IEnumerable<DonationTypeModel> DonationTypes { get; set; }
+        public IEnumerable<PriorityTypeModel> OpportunityPriorities { get; set; }
 
         public SettingsModel()
         {
-            DonationTypes = new List<DonationType>();
-            OpportunityPriorities = new List<OpportunityPriority>();
+            DonationTypes = new List<DonationTypeModel>();
+            OpportunityPriorities = new List<PriorityTypeModel>();
         }
 
-        public SettingsModel(IEnumerable<DonationType> donationTypes, IEnumerable<OpportunityPriority> opportunityPriorities) : this()
+        public SettingsModel(IEnumerable<DonationTypeModel> donationTypes, IEnumerable<PriorityTypeModel> opportunityPriorities) : this()
         {
             DonationTypes = donationTypes;
             OpportunityPriorities = opportunityPriorities;

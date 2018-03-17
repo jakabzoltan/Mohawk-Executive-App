@@ -36,11 +36,11 @@ namespace Mohawk.Executive.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddDonationType(DonationType donationType)
+        public ActionResult AddDonationType(DonationTypeModel donationType)
         {
             return null;
         }
-        public ActionResult EditDonationType(DonationType donationType)
+        public ActionResult EditDonationType(DonationTypeModel donationType)
         {
             return null;
         }
@@ -73,11 +73,11 @@ namespace Mohawk.Executive.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddPriority(OpportunityPriority priority)
+        public ActionResult AddPriority(PriorityTypeModel priority)
         {
             return View();
         }
-        public ActionResult EditPriority(OpportunityPriority priority)
+        public ActionResult EditPriority(PriorityTypeModel priority)
         {
             return View();
 
