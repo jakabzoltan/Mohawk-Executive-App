@@ -107,13 +107,9 @@
     <Compile Include="Entities\UDT\DonationType.cs" />
     <Compile Include="Entities\OpportunityStep.cs" />
     <Compile Include="Entities\UDT\PriorityType.cs" />
-    <Compile Include="Migrations\201803171514432_initial.cs" />
-    <Compile Include="Migrations\201803171514432_initial.Designer.cs">
-      <DependentUpon>201803171514432_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803171520224_Seed.cs" />
-    <Compile Include="Migrations\201803171520224_Seed.Designer.cs">
-      <DependentUpon>201803171520224_Seed.cs</DependentUpon>
+    <Compile Include="Migrations\201803211338452_initial3.cs" />
+    <Compile Include="Migrations\201803211338452_initial3.Designer.cs">
+      <DependentUpon>201803211338452_initial3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,11 +122,8 @@
     <Folder Include="Abstraction\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803171514432_initial.resx">
-      <DependentUpon>201803171514432_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803171520224_Seed.resx">
-      <DependentUpon>201803171520224_Seed.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803211338452_initial3.resx">
+      <DependentUpon>201803211338452_initial3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

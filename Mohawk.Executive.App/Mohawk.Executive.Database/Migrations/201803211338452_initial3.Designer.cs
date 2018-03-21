@@ -7,13 +7,13 @@ namespace Mohawk.Executive.Database.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class initial : IMigrationMetadata
+    public sealed partial class initial3 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initial3));
         
         string IMigrationMetadata.Id
         {
-            get { return "201803171514432_initial"; }
+            get { return "201803211338452_initial3"; }
         }
         
         string IMigrationMetadata.Source

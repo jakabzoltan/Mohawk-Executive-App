@@ -10,7 +10,7 @@
             @Html.LabelFor(i=>item.DonationTypes):
             @foreach (var type in item.DonationTypes)
             {
-                @type.DonationTypeString
+                <span>@type.DonationTypeString </span>
             }
         </div>
     }

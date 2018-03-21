@@ -11,40 +11,42 @@
 {
     <div class="row" style="margin-bottom: 20px;">
         <div class="col-sm-12">
-            @foreach (var item in Model.Comments)
+            @foreach (var item in Model.Comments.OrderByDescending(x=>x.CommentDate))
             {
                 <div class="row block-card">
                     <div class="col-sm-12">
-                        @item.PostedBy.Name - @item.CommentDate
+                        <i>@item.PostedBy.Name - @item.CommentDate</i>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12" style="padding-top: 15px; padding-bottom: 15px">
                         @item.CommentString
                     </div>
                     <div class="col-sm-12">
                         <a id="@item.Id" class="reply-button">Reply</a>
                     </div>
+                    @foreach (var reply in item.Replies)
+                    {
+                        <div class="row block-reply">
+                            <div class="col-sm-12">
+                                <i>@reply.PostedBy.Name - @reply.CommentDate</i>
+                                
+                            </div>
+                            <div class="col-sm-12">
+                                @reply.CommentString
+                            </div>
+                            <div class="col-sm-12">
+                                <a id="@item.Id" class="reply-button">Reply</a>
+                            </div>
+                        </div>
+                    }
                 </div>
-                foreach (var reply in item.Replies)
-                {
-                    <div class="row block-reply">
-                        <div class="col-sm-12">
-                            @reply.PostedBy.Name - @reply.CommentDate
-                        </div>
-                        <div class="col-sm-12">
-                            @reply.CommentString
-                        </div>
-                        <div class="col-sm-12">
-                            <a id="@item.Id" class="reply-button">Reply</a>
-                        </div>
-                    </div>
-                }
+
             }
         </div>
     </div>
 }
 else
 {
-    <div>This opportunity has no donations at the moment. Add one!</div>
+    <div class="text-center col-sm-12">This opportunity has no comments at the moment. Add one!</div>
 }
 
 

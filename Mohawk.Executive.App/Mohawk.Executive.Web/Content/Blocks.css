@@ -1,7 +1,7 @@
 ﻿.block-card {
     padding: 1em;
     width: 100%;
-    border: 1px solid gray;
+    border-left: 2px solid gray;
     margin-top: 1em;
     margin-left: 0;
     margin-right: 0;
@@ -10,10 +10,9 @@
 
 .block-reply {
     padding: 1em;
-    width: 92%;
-    border: 1px solid gray;
+    width: 95%;
     margin-top: 1em;
-    margin-left: 8%;
+    margin-left: 5%;
     margin-right: 0;
     margin-bottom: 0;
     float: right;
