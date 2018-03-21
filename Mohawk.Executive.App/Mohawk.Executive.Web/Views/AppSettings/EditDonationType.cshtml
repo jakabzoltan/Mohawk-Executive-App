@@ -1,1 +1,14 @@
-﻿
+﻿@using Mohawk.Executive.Services.ViewModels
+@using Mohawk.Executive.Web.Models
+@model OpportunityModel
+@{
+    ViewBag.Title = Model.Subject;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-12">
+    <h2>
+        <a class="btn btn-success pull-right" data-toggle="modal" data-target="#remove-donation-modal"><span class="glyphicon glyphicon-plus"></span> Remove Donation Type </a>
+    </h2>
+</div>
+<div class="col-sm-12">@Html.Partial("_OpportunityDonations", Model.Donations)</div>

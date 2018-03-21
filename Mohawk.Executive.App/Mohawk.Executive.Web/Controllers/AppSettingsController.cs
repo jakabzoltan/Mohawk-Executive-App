@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Mohawk.Executive.Services.ViewModels;
 using Mohawk.Executive.Web.Models;
+using Mohawk.Executive.Services.Interfaces;
 
 namespace Mohawk.Executive.Web.Controllers
 {
@@ -12,10 +13,22 @@ namespace Mohawk.Executive.Web.Controllers
     public class AppSettingsController : Controller
     {
         // GET: AppSettings
+        public ISettingsHandler SettingsHandler { get; set; }
+
+        public AppSettingsController()
+        {
+
+        }
+
+        public AppSettingsController(ISettingsHandler settings)
+        {
+            SettingsHandler = settings;
+        }
         public ActionResult Index()
         {
             return View();
         }
+
 
         #region DonationTypes
 

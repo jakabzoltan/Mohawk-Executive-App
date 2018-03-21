@@ -1,1 +1,14 @@
-﻿
+﻿@using Mohawk.Executive.Services.ViewModels
+@using Mohawk.Executive.Web.Models
+@model OpportunityModel
+@{
+    ViewBag.Title = Model.Subject;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-12">
+    <h2>
+        <a class="btn btn-success pull-right" data-toggle="modal" data-target="#add-priority-modal"><span class="glyphicon glyphicon-plus"></span> Add Priority </a>
+    </h2>
+</div>
+<div class="col-sm-12">@Html.Partial("_OpportunityDonations", Model.Priority)</div>
