@@ -1,1 +1,30 @@
-﻿
+﻿@model IEnumerable<Mohawk.Executive.Services.ViewModels.DonationTypeModel>
+<div class="col-sm-12">
+    <div class="col-sm-8"></div>
+    @if (Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td width="20%"><b>Id</b></td>
+                <td><b>Priority Type Name</b></td>
+                <td width="20%" class="text-center"><b>Actions</b></td>
+            </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="20%">@item.Id</td>
+                    <td width="60%">@item.DonationTypeString</td>
+                    <td width="20%" class="text-center">
+                        <a href="@Url.Action("RemoveDonationType", new {id = item.Id})">Remove</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>There are no donation types at the moment. Add one.</p>
+    }
+</div>

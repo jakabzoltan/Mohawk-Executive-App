@@ -1,1 +1,31 @@
-﻿
+﻿@model IEnumerable<Mohawk.Executive.Services.ViewModels.PriorityTypeModel>
+
+<div class="col-sm-12">
+    @if (Model.Any())
+    {
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td><b>Id</b></td>
+                    <td><b>Priority Type Name</b></td>
+                    <td><b>Actions</b></td>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="20%">@item.Id</td>
+                    <td width="60%">@item.PriorityString</td>
+                    <td width="20%" class="text-center">
+                        <a href="@Url.Action("RemoveDonationType", new {id = item.Id})">Remove</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>There are no priority types at the moment. Add one.</p>
+    }
+</div>

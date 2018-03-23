@@ -1,0 +1,28 @@
+﻿@using Mohawk.Executive.Services.ViewModels
+@using Mohawk.Executive.Web.Models
+@model DonationTypeModel
+
+
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Add Donation Type</h5>
+</div>
+@using (Html.BeginForm("AddDonationType", "AppSettings", FormMethod.Post))
+{
+    <div class="modal-body row">
+        <div class="form-group">
+            <div class="col-sm-12">
+                @Html.LabelFor(m => m.DonationTypeString)
+                <br />
+                <small>Add a donation type such as "In Kind" or "Monetary"</small>
+            </div>
+            <div class="col-md-12">
+                @Html.TextBoxFor(m => m.DonationTypeString, new { @class = "form-control", autocomplete = "off" })
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-success" value="Add" />
+    </div>
+
+}
