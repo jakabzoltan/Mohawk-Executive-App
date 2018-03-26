@@ -43,6 +43,7 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpPost]
         public ActionResult AddDonationType(DonationTypeModel donationType)
         {
+            SettingsHandler.AddDonationType(donationType.DonationTypeString);
             return RedirectToAction("Index"); ;
         }
 
@@ -69,6 +70,7 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpPost]
         public ActionResult AddPriority(PriorityTypeModel priority)
         {
+            SettingsHandler.AddOpportunityPriority(priority.PriorityString);
             return RedirectToAction("Index");
         }
         public ActionResult RemovePriority(int id)
