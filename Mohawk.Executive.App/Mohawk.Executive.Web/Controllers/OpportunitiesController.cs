@@ -38,7 +38,9 @@ namespace Mohawk.Executive.Web.Controllers
                 CommentHandler = new CommentService();
         }
 
-        public OpportunitiesController(IOpportunityHandler opportunityHandler, IContactHanlder contactHanlder, IDonationHandler donationHandler, ISettingsHandler settingsHandler, IStepHandler stepHandler, ICommentHandler commentHandler) : this()
+        public OpportunitiesController(IOpportunityHandler opportunityHandler, IContactHanlder contactHanlder,
+            IDonationHandler donationHandler, ISettingsHandler settingsHandler, IStepHandler stepHandler,
+            ICommentHandler commentHandler) : this()
         {
             OpportunityHandler = opportunityHandler;
             ContactHanlder = contactHanlder;
@@ -47,6 +49,7 @@ namespace Mohawk.Executive.Web.Controllers
             StepHandler = stepHandler;
             CommentHandler = commentHandler;
         }
+
         public ActionResult ViewOpportunity(Guid id, string activeTab = null)
         {
             if (id == Guid.Empty)
@@ -72,36 +75,37 @@ namespace Mohawk.Executive.Web.Controllers
         {
             var opportunity = OpportunityHandler.AddOpportunity(model.ContactId, model.Subject, model.Value,
                 model.Selected.FirstOrDefault(), User.Identity.GetUserId());
-            return RedirectToAction("ViewOpportunity", new { id = opportunity.Id });
+            return RedirectToAction("ViewOpportunity", new {id = opportunity.Id});
         }
 
         [HttpGet]
         public ActionResult QuickCreate()
         {
-            var model = new OpportunityCreateViewModel();
-
-            model.PrioritiesList = SettingsHandler.GetPriorities().Select(x => new SelectListItem()
+            var model = new OpportunityCreateViewModel
             {
-                Value = x.Id.ToString(),
-                Text = x.PriorityString
-            }).ToList();
+                PrioritiesList = SettingsHandler.GetPriorities().Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.PriorityString
+                }).ToList()
+            };
+
 
             #region debug
 
             if (!model.PrioritiesList.Any())
             {
-                ((List<SelectListItem>)model.PrioritiesList).Add(new SelectListItem()
+                ((List<SelectListItem>) model.PrioritiesList).Add(new SelectListItem()
                 {
                     Value = "0",
                     Text = "Unimportant"
                 });
-                ((List<SelectListItem>)model.PrioritiesList).Add(new SelectListItem()
+                ((List<SelectListItem>) model.PrioritiesList).Add(new SelectListItem()
                 {
                     Value = "1",
                     Text = "Important"
                 });
             }
-
 
             #endregion
 
@@ -117,13 +121,13 @@ namespace Mohawk.Executive.Web.Controllers
 
             var opportunity = OpportunityHandler.AddOpportunity(generalContact.Id, model.Subject,
                 model.Value, model.Selected.FirstOrDefault(), User.Identity.GetUserId());
-            return RedirectToAction("ViewOpportunity", new { id = opportunity.Id });
+            return RedirectToAction("ViewOpportunity", new {id = opportunity.Id});
         }
 
         public ActionResult ResolveOpportunity(OpportunityResolutionViewModel model)
         {
             OpportunityHandler.ResolveOpportunity(model.OpportunityId, model.ResolutionReason);
-            return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId });
+            return RedirectToAction("ViewOpportunity", new {id = model.OpportunityId});
         }
 
         #region Donations
@@ -142,8 +146,6 @@ namespace Mohawk.Executive.Web.Controllers
             };
 
 
-
-
             return PartialView("_AddDonation", model);
         }
 
@@ -151,7 +153,7 @@ namespace Mohawk.Executive.Web.Controllers
         public ActionResult AddDonation(AddDonationViewModel model)
         {
             DonationHandler.AddDonation(model.OpportunityId, model.DonationText, model.Selected);
-            return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId, activeTab = "donations-tab" });
+            return RedirectToAction("ViewOpportunity", new {id = model.OpportunityId, activeTab = "donations-tab"});
         }
 
         #endregion
@@ -161,7 +163,7 @@ namespace Mohawk.Executive.Web.Controllers
         public ActionResult AddStep(OpportunityStepModel model)
         {
             StepHandler.AddStep(model.OpportunityId, model.Step);
-            return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId, activeTab = "steps-tab" });
+            return RedirectToAction("ViewOpportunity", new {id = model.OpportunityId, activeTab = "steps-tab"});
         }
 
         #endregion
@@ -187,8 +189,33 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpPost]
         public ActionResult PostComment(CommentViewModel model)
         {
-            CommentHandler.AddComment(model.OpportunityId, model.CommentString, User.Identity.GetUserId(), model.ReplyToId);
-            return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId, activeTab = "comments-tab" });
+            CommentHandler.AddComment(model.OpportunityId, model.CommentString, User.Identity.GetUserId(),
+                model.ReplyToId);
+            return RedirectToAction("ViewOpportunity", new {id = model.OpportunityId, activeTab = "comments-tab"});
+        }
+
+        #endregion
+
+        #region AttachContact
+
+        public ActionResult RenderAttachContact(Guid id)
+        {
+            var model = new AttachContact(id)
+            {
+                Contacts = ContactHanlder.GetAllContacts().Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = $"{x.FirstName} {x.LastName} -- {x.Organization}"
+                }).ToList()
+            };
+
+            return PartialView("_AttachContact", model);
+        }
+
+        public ActionResult AttachContact(AttachContact model)
+        {
+            OpportunityHandler.AttachContactToOpportunity(model.OpportunityId, model.Selected.FirstOrDefault());
+            return RedirectToAction("ViewOpportunity", new {id = model.OpportunityId});
         }
 
         #endregion

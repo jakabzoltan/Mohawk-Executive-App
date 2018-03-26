@@ -34,5 +34,6 @@ namespace Mohawk.Executive.Services.ViewModels
         [DisplayName("Importance")]
         public List<OpportunityDonationModel> Donations { get; set; }
         public List<CommentModel> Comments { get; set; }
+        public ContactModel Contact { get; set; }
     }
 }

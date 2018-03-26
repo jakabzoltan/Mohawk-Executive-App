@@ -18,7 +18,8 @@ namespace Mohawk.Executive.Services.Services
             _context = ExecutiveContext.Create();
         }
 
-        public ViewModels.OpportunityModel AddOpportunity(Guid contactId, string subject, string value, int priority, string userId)
+        public ViewModels.OpportunityModel AddOpportunity(Guid contactId, string subject, string value, int priority,
+            string userId)
         {
             if (!ContactExists(contactId)) return null;
             var opp = new Opportunity
@@ -52,7 +53,7 @@ namespace Mohawk.Executive.Services.Services
             opportunity.OpportunitySubject = subject;
             opportunity.Value = newValue;
             if (newPriority != null)
-                opportunity.PriorityId = (int)newPriority;
+                opportunity.PriorityId = (int) newPriority;
             _context.SaveChanges();
             return Get(opportunityId);
             ;
@@ -96,6 +97,7 @@ namespace Mohawk.Executive.Services.Services
         public IEnumerable<ViewModels.OpportunityModel> GetOpportunitiesForContact(Guid contactId,
             bool includePeripheral = false)
         {
+            var returnList = new List<OpportunityModel>();
             var op1 = _context.Opportunities.Where(c => c.ContactId == contactId);
             var op = op1.Select(opportunity =>
                 new OpportunityModel()
@@ -108,13 +110,27 @@ namespace Mohawk.Executive.Services.Services
                     ResolvedOn = opportunity.ResolvedOn,
                     ResolutionReason = opportunity.ResolutionReason,
                     RemovedOn = opportunity.RemovedOn,
-
                 });
+            foreach (var item in op)
+            {
+                item.Priority = _context.PriorityTypes.Where(x => x.Id == item.PriorityId).Select(p =>
+                    new PriorityTypeModel()
+                    {
+                        Id = p.Id,
+                        PriorityString = p.PriorityString
+                    }).FirstOrDefault();
+                returnList.Add(item);
+            }
 
-            return op;
+
+
+
+
+            return returnList;
         }
 
-        public IEnumerable<ViewModels.OpportunityModel> SearchOpportunities(string query, bool includePeripherals = false)
+        public IEnumerable<ViewModels.OpportunityModel> SearchOpportunities(string query,
+            bool includePeripherals = false)
         {
             return _context.Opportunities.Where(c =>
                     c.Contact.FirstName.Contains(query) ||
@@ -149,22 +165,30 @@ namespace Mohawk.Executive.Services.Services
                     ResolvedOn = opportunity.ResolvedOn,
                     ResolutionReason = opportunity.ResolutionReason,
                     RemovedOn = opportunity.RemovedOn,
-
-
                 }).FirstOrDefault();
-
-
 
 
             if (op == null) return null;
             {
                 op.Priority = _context.PriorityTypes.Where(x => x.Id == op.PriorityId).Select(
-                        pt => new PriorityTypeModel()
-                        {
-                            PriorityString = pt.PriorityString,
-                            Id = pt.Id
-                        }).FirstOrDefault();
+                    pt => new PriorityTypeModel()
+                    {
+                        PriorityString = pt.PriorityString,
+                        Id = pt.Id
+                    }).FirstOrDefault();
 
+                op.Contact = _context.Contacts.Where(x => x.Id == op.ContactId).Select(c => new ContactModel()
+                {
+                    Id = c.Id,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    Email = c.Email,
+                    ModifiedOn = c.ModifiedOn,
+                    Location = c.Location,
+                    Organization = c.Organization,
+                    PhoneNumber = c.PhoneNumber,
+                    Role = c.Role
+                }).FirstOrDefault();
                 if (!includePeripheral) return op;
                 op.Donations = _context.OpportunityDonations.Where(i => i.OpportunityId == opportunityId).Select(d =>
                     new OpportunityDonationModel()
@@ -173,24 +197,25 @@ namespace Mohawk.Executive.Services.Services
                         DonationText = d.DonationText,
                         OpportunityId = d.OpportunityId,
                         DonationTypes = d.DonationTypes.Select(dt =>
-                            new DonationTypeModel() { DonationTypeString = dt.DonationTypeString, Id = dt.Id }).ToList()
+                            new DonationTypeModel() {DonationTypeString = dt.DonationTypeString, Id = dt.Id}).ToList()
                     }).ToList();
 
-                op.Comments = _context.Comments.Where(i => i.OpportunityId == opportunityId && i.ReplyId == null).Select(c => new CommentModel()
-                {
-                    Id = c.Id,
-                    OpportunityId = c.OpportunityId,
-                    CommentDate = c.CommentDate,
-                    CommentString = c.CommentString,
-                    ArchivedOn = c.ArchivedOn,
-                    PostedBy =
-                        new IdentityUserModel()
-                        {
-                            Name = c.User.UserName,
-                            GuidUserId = c.User.Id,
-                            Email = c.User.Email
-                        },
-                }).ToList();
+                op.Comments = _context.Comments.Where(i => i.OpportunityId == opportunityId && i.ReplyId == null)
+                    .Select(c => new CommentModel()
+                    {
+                        Id = c.Id,
+                        OpportunityId = c.OpportunityId,
+                        CommentDate = c.CommentDate,
+                        CommentString = c.CommentString,
+                        ArchivedOn = c.ArchivedOn,
+                        PostedBy =
+                            new IdentityUserModel()
+                            {
+                                Name = c.User.UserName,
+                                GuidUserId = c.User.Id,
+                                Email = c.User.Email
+                            },
+                    }).ToList();
 
 
                 op.Comments.ForEach(c => c.Replies = _context.Comments.Where(i => i.OpportunityId == opportunityId)
@@ -219,6 +244,15 @@ namespace Mohawk.Executive.Services.Services
                     }).ToList();
                 return op;
             }
+        }
+
+        public OpportunityModel AttachContactToOpportunity(Guid opportunityId, Guid contactId)
+        {
+            var opportunity = _context.Opportunities.FirstOrDefault(x => x.Id == opportunityId);
+            if (opportunity == null) return Get(opportunityId);
+            opportunity.ContactId = contactId;
+            _context.SaveChanges();
+            return Get(opportunityId);
         }
 
 

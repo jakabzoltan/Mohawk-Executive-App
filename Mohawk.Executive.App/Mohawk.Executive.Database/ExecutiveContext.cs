@@ -15,7 +15,7 @@ namespace Mohawk.Executive.Database
     {
         public ExecutiveContext() : base("MohawkExecutiveDb")
         {
-            
+
         }
         public DbSet<Opportunity> Opportunities { get; set; }
         public DbSet<Comment> Comments { get; set; }

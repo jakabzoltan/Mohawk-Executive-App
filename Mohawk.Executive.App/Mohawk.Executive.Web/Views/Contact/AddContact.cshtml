@@ -4,26 +4,29 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div class="col-sm-12">
-        <h2>
-            Create Contact
-        </h2>
+@using (Html.BeginForm("AddContact", "Contact", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <div class="row">
+        <div class="form-group">
+            <div class="col-sm-12">
+                <h2>
+                    Create Contact
+                </h2>
+            </div>
+        </div>
     </div>
-</div>
-<hr/>
+    <hr />
 
-<div class="row">
-    @using (Html.BeginForm("AddContact", "Contact", FormMethod.Post))
-    {
+    <div class="row">
+
         @Html.AntiForgeryToken()
         <div class="form-group">
             <div class="col-sm-12">@Html.ValidationSummary(true, "", new { @class = "text-danger" })</div>
         </div>
-        
+
         <div class="form-group">
             <div class="col-sm-12">@Html.LabelFor(m => m.FirstName)*</div>
-            <div class="col-sm-12">
+            <div class="col-sm-12 margin-bottom-10">
                 @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control modified-input" })
                 @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
             </div>
@@ -31,14 +34,14 @@
         </div>
         <div class="form-group">
             <div class="col-sm-12">@Html.LabelFor(m => m.LastName)*</div>
-            <div class="col-sm-12">
+            <div class="col-sm-12 margin-bottom-10">
                 @Html.TextBoxFor(m => m.LastName, new { @class = "form-control modified-input" })
                 @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-12">@Html.LabelFor(m => m.Email)</div>
-            <div class="col-sm-12">
+            <div class="col-sm-12 margin-bottom-10">
                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control modified-input" })
                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
             </div>
@@ -46,7 +49,7 @@
 
         <div class="form-group">
             <div class="col-sm-12">@Html.LabelFor(m => m.PhoneNumber)</div>
-            <div class="col-sm-12">
+            <div class="col-sm-12 margin-bottom-10">
                 @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control modified-input" })
                 @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
             </div>
@@ -54,7 +57,7 @@
 
         <div class="form-group">
             <div class="col-sm-12">@Html.LabelFor(m => m.Organization)</div>
-            <div class="col-sm-12">
+            <div class="col-sm-12 margin-bottom-10">
                 @Html.TextBoxFor(m => m.Organization, new { @class = "form-control modified-input" })
                 @Html.ValidationMessageFor(m => m.Organization, "", new { @class = "text-danger" })
             </div>
@@ -62,7 +65,7 @@
 
         <div class="form-group">
             <div class="col-sm-12">@Html.LabelFor(m => m.Location)</div>
-            <div class="col-sm-12">
+            <div class="col-sm-12 margin-bottom-10">
                 @Html.TextBoxFor(m => m.Location, new { @class = "form-control modified-input" })
                 @Html.ValidationMessageFor(m => m.Location, "", new { @class = "text-danger" })
             </div>
@@ -70,18 +73,19 @@
 
         <div class="form-group">
             <div class="col-sm-12">@Html.LabelFor(m => m.Role)</div>
-            <div class="col-sm-12">
+            <div class="col-sm-12 margin-bottom-10">
                 @Html.TextBoxFor(m => m.Role, new { @class = "form-control modified-input" })
                 @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group text-center" style="margin-top: 100px;">
+        <div class="form-group text-center">
             <div class="col-xs-12">
-                <input type="submit" value="Submit" class="btn btn-success" style="width: 100%;" />
+                <input type="submit" value="Submit" class="btn btn-success" style="width: 100%;margin-top: 100px;" />
             </div>
         </div>
-    }
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
-</div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+    </div>
+}
