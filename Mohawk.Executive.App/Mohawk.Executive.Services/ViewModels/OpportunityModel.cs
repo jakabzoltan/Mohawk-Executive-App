@@ -18,9 +18,10 @@ namespace Mohawk.Executive.Services.ViewModels
         [DisplayName("Priority Level")]
         public int PriorityId { get; set; }
         public Guid ContactId { get; set; }
-        [DisplayName("OpportunitySubject")]
+        [DisplayName("Subject")]
         [Required(ErrorMessage = "You must have a subject or goal for your opportunity.")]
         public string Subject { get; set; }
+        [DisplayName("Description")]
         [Required(ErrorMessage = "You must explain the value of the opportunity.")]
         public string Value { get; set; }
         public DateTime? RemovedOn { get; set; }
