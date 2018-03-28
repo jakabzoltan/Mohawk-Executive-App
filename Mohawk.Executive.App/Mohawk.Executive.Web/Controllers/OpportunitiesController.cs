@@ -64,10 +64,15 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpGet]
         public ActionResult CreateOpportunity(Guid contactId)
         {
-            return View(new OpportunityCreateViewModel()
+            var model = new OpportunityCreateViewModel
             {
-                ContactId = contactId
-            });
+                PrioritiesList = SettingsHandler.GetPriorities().Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.PriorityString
+                }).ToList()
+            };
+            return View(model);
         }
 
         [HttpPost]
