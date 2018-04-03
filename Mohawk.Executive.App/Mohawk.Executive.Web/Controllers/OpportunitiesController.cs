@@ -186,6 +186,32 @@ namespace Mohawk.Executive.Web.Controllers
             return RedirectToAction("ViewOpportunity", new {id = model.OpportunityId, activeTab = "donations-tab"});
         }
 
+        public ActionResult RenderEditDonation(AddDonationViewModel model)
+        {
+            //pass through method
+
+            model.DonationList = SettingsHandler.GetDonationTypes().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.DonationTypeString,
+                Selected = model.Selected.Contains(x.Id)
+            }).ToList();
+
+
+            return PartialView("_EditDonation", model);
+        }
+
+        public ActionResult EditDonation(AddDonationViewModel model)
+        {
+            DonationHandler.UpdateDonation(model.Id, model.DonationText, model.Selected);
+            return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId, activeTab = "donations-tab" });
+        }
+
+        public ActionResult RemoveDonation(int id, Guid opportunityId)
+        {
+            DonationHandler.RemoveDonation(id);
+            return RedirectToAction("ViewOpportunity", new { id = opportunityId, activeTab = "donations-tab" });
+        }
         #endregion
 
         #region Steps

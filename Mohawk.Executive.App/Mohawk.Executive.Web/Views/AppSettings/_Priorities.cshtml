@@ -30,7 +30,8 @@
                         <td width="10%">@item.Id</td>
                         <td width="70%">@item.PriorityString</td>
                         <td>
-                            <a href="#" data-toggle="modal" data-target="#edit-priority-type-modal">Edit </a><div class="modal fade" id="edit-priority-type-modal" tabindex="-1" role="dialog" aria-labelledby="add-donation-modal" aria-hidden="true">
+                            <a href="#" data-toggle="modal" data-target="#edit-priority-type-modal-@item.Id">Edit </a>
+                            <div class="modal fade" id="edit-priority-type-modal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="add-donation-modal-@item.Id" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         @Html.Partial("_EditPriorityType", new PriorityTypeModel() { Id = item.Id, PriorityString = item.PriorityString })

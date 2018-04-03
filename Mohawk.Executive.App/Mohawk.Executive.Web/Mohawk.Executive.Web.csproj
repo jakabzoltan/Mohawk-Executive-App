@@ -327,6 +327,7 @@
     <Content Include="Views\Opportunities\_EditOpportunity.cshtml" />
     <Content Include="Views\AppSettings\_EditDonationType.cshtml" />
     <Content Include="Views\AppSettings\_EditPriorityType.cshtml" />
+    <Content Include="Views\Opportunities\_EditDonation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
