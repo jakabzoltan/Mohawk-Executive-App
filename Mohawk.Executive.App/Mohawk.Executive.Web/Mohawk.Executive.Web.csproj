@@ -324,6 +324,9 @@
     <Content Include="Views\Opportunities\_PostComment.cshtml" />
     <Content Include="Views\Contact\ContactBook.cshtml" />
     <Content Include="Views\Opportunities\_AttachContact.cshtml" />
+    <Content Include="Views\Opportunities\_EditOpportunity.cshtml" />
+    <Content Include="Views\AppSettings\_EditDonationType.cshtml" />
+    <Content Include="Views\AppSettings\_EditPriorityType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -21,9 +21,15 @@ namespace Mohawk.Executive.Services.ViewModels
         [DisplayName("Subject")]
         [Required(ErrorMessage = "You must have a subject or goal for your opportunity.")]
         public string Subject { get; set; }
+
+
         [DisplayName("Description")]
+        [Required(ErrorMessage = "You must describe the opportunity")]
+        public string Description { get; set; }
+
+        [DisplayName("Estimated Value")]
         [Required(ErrorMessage = "You must explain the value of the opportunity.")]
-        public string Value { get; set; }
+        public string EstimatedValue { get; set; }
         public DateTime? RemovedOn { get; set; }
         public DateTime? ResolvedOn { get; set; }
         [DisplayName("Outcome")]

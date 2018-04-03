@@ -18,7 +18,7 @@ namespace Mohawk.Executive.Services.Services
             _context = ExecutiveContext.Create();
         }
 
-        public ViewModels.OpportunityModel AddOpportunity(Guid contactId, string subject, string value, int priority,
+        public OpportunityModel AddOpportunity(Guid contactId, string subject, string description, string estimatedValue, int priority,
             string userId)
         {
             if (!ContactExists(contactId)) return null;
@@ -26,7 +26,8 @@ namespace Mohawk.Executive.Services.Services
             {
                 Id = Guid.NewGuid(),
                 ContactId = contactId,
-                Value = value,
+                Description = description,
+                EstimatedValue = estimatedValue,
                 OpportunitySubject = subject,
                 PriorityId = priority,
                 IdentityUserId = userId
@@ -45,18 +46,19 @@ namespace Mohawk.Executive.Services.Services
             return true;
         }
 
-        public ViewModels.OpportunityModel UpdateOpportunity(Guid opportunityId, string subject, string newValue,
+        public OpportunityModel UpdateOpportunity(Guid opportunityId, string subject, string description, string newValue,
             int? newPriority = null)
         {
             var opportunity = _context.Opportunities.FirstOrDefault(x => x.Id == opportunityId);
             if (opportunity == null) return null;
             opportunity.OpportunitySubject = subject;
-            opportunity.Value = newValue;
+            opportunity.EstimatedValue = newValue;
+            opportunity.Description = description;
             if (newPriority != null)
                 opportunity.PriorityId = (int) newPriority;
             _context.SaveChanges();
             return Get(opportunityId);
-            ;
+            
         }
 
         public ViewModels.OpportunityModel ResolveOpportunity(Guid opportunityId, string resolutionReason)
@@ -86,7 +88,7 @@ namespace Mohawk.Executive.Services.Services
                 Id = opportunity.Id,
                 ContactId = opportunity.ContactId,
                 Subject = opportunity.OpportunitySubject,
-                Value = opportunity.Value,
+                EstimatedValue = opportunity.EstimatedValue,
                 PriorityId = opportunity.PriorityId,
                 ResolvedOn = opportunity.ResolvedOn,
                 ResolutionReason = opportunity.ResolutionReason,
@@ -105,7 +107,7 @@ namespace Mohawk.Executive.Services.Services
                     Id = opportunity.Id,
                     ContactId = opportunity.ContactId,
                     Subject = opportunity.OpportunitySubject,
-                    Value = opportunity.Value,
+                    EstimatedValue = opportunity.EstimatedValue,
                     PriorityId = opportunity.PriorityId,
                     ResolvedOn = opportunity.ResolvedOn,
                     ResolutionReason = opportunity.ResolutionReason,
@@ -136,14 +138,14 @@ namespace Mohawk.Executive.Services.Services
                     c.Contact.FirstName.Contains(query) ||
                     c.Contact.LastName.Contains(query) ||
                     c.OpportunitySubject.Contains(query) ||
-                    c.Value.Contains(query) ||
+                    c.EstimatedValue.Contains(query) ||
                     c.ResolutionReason.Contains(query))
-                .Select(opportunity => new ViewModels.OpportunityModel()
+                .Select(opportunity => new OpportunityModel()
                 {
                     Id = opportunity.Id,
                     ContactId = opportunity.ContactId,
                     Subject = opportunity.OpportunitySubject,
-                    Value = opportunity.Value,
+                    EstimatedValue = opportunity.EstimatedValue,
                     PriorityId = opportunity.PriorityId,
                     ResolvedOn = opportunity.ResolvedOn,
                     ResolutionReason = opportunity.ResolutionReason,
@@ -160,7 +162,7 @@ namespace Mohawk.Executive.Services.Services
                     Id = opportunity.Id,
                     ContactId = opportunity.ContactId,
                     Subject = opportunity.OpportunitySubject,
-                    Value = opportunity.Value,
+                    EstimatedValue = opportunity.EstimatedValue,
                     PriorityId = opportunity.PriorityId,
                     ResolvedOn = opportunity.ResolvedOn,
                     ResolutionReason = opportunity.ResolutionReason,

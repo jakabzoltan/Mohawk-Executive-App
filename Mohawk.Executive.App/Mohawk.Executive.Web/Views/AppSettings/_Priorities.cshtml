@@ -1,31 +1,63 @@
-﻿@model IEnumerable<Mohawk.Executive.Services.ViewModels.PriorityTypeModel>
+﻿@using Mohawk.Executive.Services.ViewModels
+@model IEnumerable<Mohawk.Executive.Services.ViewModels.PriorityTypeModel>
+<div class="row">
+    <div class="col-sm-12">
+        <h3>
+            Opportunity Priorities
+            <a class="btn btn-success pull-right" data-toggle="modal" data-target="#add-priority-type-modal"><span class="glyphicon glyphicon-plus"></span> Add Priority Type </a>
+        </h3>
+        <small>An Opportunity Priority specifies how important an opportunity is. Example: "High Priority", "Low Priority", "Prioritize Later", etc</small>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-sm-12">
+        @if (Model.Any())
+        {
 
-<div class="col-sm-12">
-    @if (Model.Any())
-    {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td><b>Id</b></td>
+                        <td><b>Priority Type Name</b></td>
+                        <td class="text-left"><b>Actions</b></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td width="10%">@item.Id</td>
+                        <td width="70%">@item.PriorityString</td>
+                        <td>
+                            <a href="#" data-toggle="modal" data-target="#edit-priority-type-modal">Edit </a><div class="modal fade" id="edit-priority-type-modal" tabindex="-1" role="dialog" aria-labelledby="add-donation-modal" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        @Html.Partial("_EditPriorityType", new PriorityTypeModel() { Id = item.Id, PriorityString = item.PriorityString })
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <td><b>Id</b></td>
-                    <td><b>Priority Type Name</b></td>
-                    <td class="text-center"><b>Actions</b></td>
-                </tr>
-            </thead>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td width="10%">@item.Id</td>
-                    <td width="70%">@item.PriorityString</td>
-                    <td width="20%" class="text-center">
-                        <a href="@Url.Action("RemoveDonationType", new {id = item.Id})">Remove</a>
-                    </td>
-                </tr>
-            }
-        </table>
-    }
-    else
-    {
-        <p>There are no priority types at the moment. Add one.</p>
-    }
+                            <a href="@Url.Action("RemoveDonationType", new {id = item.Id})">Remove</a>
+
+
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p>There are no priority types at the moment. Add one.</p>
+        }
+    </div>
+</div>
+<div class="modal fade" id="add-priority-type-modal" tabindex="-1" role="dialog" aria-labelledby="add-donation-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @Html.Partial("_AddPriorityType", new PriorityTypeModel())
+        </div>
+    </div>
 </div>

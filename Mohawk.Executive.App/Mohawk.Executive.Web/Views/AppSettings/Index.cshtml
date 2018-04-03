@@ -1,34 +1,16 @@
 ﻿@using Mohawk.Executive.Services.ViewModels
-@{ 
+@{
     ViewBag.Title = "Settings";
 }
 
-<div class="row">
-    <div class="col-sm-12">
-        <h3>
-            Donation Types
-            <a class="btn btn-success pull-right" data-toggle="modal" data-target="#add-donation-type-modal"><span class="glyphicon glyphicon-plus"></span> Add Donation Type</a>
-        </h3>
-        <small>Donation types are the types you assign to donations in an opportunity. Example: "In-Kind Donation", "Monetary Donation", etc</small>
-    </div>
-</div>
-<hr />
-<div id="donation-type-section" class="row">
+
+<div id="donation-type-section">
 
 </div>
 
 
-<div class="row">
-    <div class="col-sm-12">
-        <h3>
-            Opportunity Priorities
-            <a class="btn btn-success pull-right" data-toggle="modal" data-target="#add-priority-type-modal"><span class="glyphicon glyphicon-plus"></span> Add Priority Type </a>
-        </h3>
-        <small>An Opportunity Priority specifies how important an opportunity is. Example: "High Priority", "Low Priority", "Prioritize Later", etc</small>
-    </div>
-</div>
-<hr />
-<div id="priority-section" class="row">
+
+<div id="priority-section">
 
 </div>
 
@@ -54,17 +36,4 @@
 
 </script>
 
-<div class="modal fade" id="add-donation-type-modal" tabindex="-1" role="dialog" aria-labelledby="add-donation-modal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            @Html.Partial("_AddDonationType", new DonationTypeModel())
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="add-priority-type-modal" tabindex="-1" role="dialog" aria-labelledby="add-donation-modal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            @Html.Partial("_AddPriorityType", new PriorityTypeModel())
-        </div>
-    </div>
-</div>
+

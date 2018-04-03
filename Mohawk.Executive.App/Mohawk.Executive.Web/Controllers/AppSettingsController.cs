@@ -53,6 +53,11 @@ namespace Mohawk.Executive.Web.Controllers
             SettingsHandler.RemoveDonationType(id);
             return RedirectToAction("Index");
         }
+        public ActionResult EditDonationType(DonationTypeModel model)
+        {
+            SettingsHandler.EditDonationType(model.Id, model.DonationTypeString);
+            return RedirectToAction("Index");
+        }
         #endregion
 
 
@@ -70,15 +75,20 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpPost]
         public ActionResult AddPriority(PriorityTypeModel priority)
         {
-            SettingsHandler.AddOpportunityPriority(priority.PriorityString);
+            SettingsHandler.AddPriorityType(priority.PriorityString);
             return RedirectToAction("Index");
         }
         public ActionResult RemovePriority(int id)
         {
-            SettingsHandler.RemoveOpportunityPriority(id);
+            SettingsHandler.RemovePriorityType(id);
             return RedirectToAction("Index");
         }
 
+        public ActionResult EditPriorityType(PriorityTypeModel model)
+        {
+            SettingsHandler.EditPriorityType(model.Id, model.PriorityString);
+            return RedirectToAction("Index");
+        }
         #endregion
 
 

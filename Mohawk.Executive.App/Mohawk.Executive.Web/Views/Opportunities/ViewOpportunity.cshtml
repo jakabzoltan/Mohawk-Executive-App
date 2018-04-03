@@ -5,7 +5,7 @@
     ViewBag.Title = Model.Subject;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" type="text/css" href="~/Content/Blocks.css"/>
+<link rel="stylesheet" type="text/css" href="~/Content/Blocks.css" />
 <style>
     li.active {
         font-weight: bold;
@@ -29,15 +29,20 @@
     <div class="col-sm-12">
         <h3>
             @Model.Subject
-            @if (Model.ResolutionReason == null && Model.ResolvedOn == null)
-            {
-                <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#resolution-modal">
-                    Resolve Opportunity
+            <div class="btn-group pull-right">
+                @if (Model.ResolutionReason == null && Model.ResolvedOn == null)
+                {
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#resolution-modal">
+                        Resolve Opportunity
+                    </button>
+                }
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modify-contact-modal">
+                    Modify Contact
                 </button>
-            }
-            <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modify-contact-modal">
-                Modify Contact
-            </button>
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit-modal">
+                    Edit
+                </button>
+            </div>
         </h3>
     </div>
 
@@ -50,16 +55,21 @@
         <p>
             <b>Primary Contact: </b><a href="@Url.Action("ViewContact", "Contact", new {id = Model.ContactId})">@Model.Contact.FirstName @Model.Contact.LastName</a>
         </p>
-        <p>@Model.Value</p>
+        <p>
+            <b>Description: </b> @Model.Description
+        </p>
+        <p>
+            <b>Estimated Value: </b>@Model.EstimatedValue
+        </p>
         @if (Model.ResolutionReason != null && Model.ResolvedOn != null)
-    {
-        <p>
-            <b>Resolved On:</b> @Model.ResolvedOn
-        </p>
-        <p>
-            <b>Reason:</b> @Model.ResolutionReason
-        </p>
-}
+        {
+            <p>
+                <b>Resolved On:</b> @Model.ResolvedOn
+            </p>
+            <p>
+                <b>Reason:</b> @Model.ResolutionReason
+            </p>
+        }
     </div>
 </div>
 <div class="row">
@@ -146,7 +156,7 @@
 <div class="modal fade" id="add-step-modal" tabindex="-1" role="dialog" aria-labelledby="add-donation-modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            @Html.Partial("_AddStep", new OpportunityStepModel() {OpportunityId = Model.Id})
+            @Html.Partial("_AddStep", new OpportunityStepModel() { OpportunityId = Model.Id })
         </div>
     </div>
 </div>
@@ -154,7 +164,15 @@
 <div class="modal fade" id="modify-contact-modal" tabindex="-1" role="dialog" aria-labelledby="modify-contact-modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            @Html.Action("RenderAttachContact", new {id = Model.Id})
+            @Html.Action("RenderAttachContact", new { id = Model.Id })
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @Html.Action("Edit", new { id = Model.Id })
         </div>
     </div>
 </div>

@@ -54,6 +54,20 @@ namespace Mohawk.Executive.Services.Services
             return true;
         }
 
+        public DonationTypeModel EditDonationType(int id, string donationType)
+        {
+            var donation = _context.DonationTypes.FirstOrDefault(c => c.Id == id);
+            if (donation == null) return null;
+            donation.DonationTypeString = donationType;
+            _context.SaveChanges();
+
+            return new DonationTypeModel() 
+            {
+                Id = donation.Id,
+                DonationTypeString = donationType
+            };
+        }
+
         public IEnumerable<PriorityTypeModel> GetPriorities()
         {
             return _context.PriorityTypes.Select(x => new PriorityTypeModel()
@@ -63,7 +77,7 @@ namespace Mohawk.Executive.Services.Services
             });
         }
 
-        public PriorityTypeModel AddOpportunityPriority(string priorityText)
+        public PriorityTypeModel AddPriorityType(string priorityText)
         {
 
             // throw new NotImplementedException();
@@ -77,7 +91,7 @@ namespace Mohawk.Executive.Services.Services
         }
 
 
-        public bool RemoveOpportunityPriority(int id)
+        public bool RemovePriorityType(int id)
         {
             // throw new NotImplementedException();
             var priority = _context.PriorityTypes.FirstOrDefault(c => c.Id == id);
@@ -87,6 +101,20 @@ namespace Mohawk.Executive.Services.Services
             _context.SaveChanges();
 
             return true;
+        }
+
+        public PriorityTypeModel EditPriorityType(int id, string priorityText)
+        {
+            var priority = _context.PriorityTypes.FirstOrDefault(c => c.Id == id);
+            if (priority == null) return null;
+            priority.PriorityString = priorityText;
+            _context.SaveChanges();
+
+            return new PriorityTypeModel()
+            {
+                Id = priority.Id,
+                PriorityString = priorityText
+            };
         }
 
         public DonationTypeModel GetDonationType(int id)

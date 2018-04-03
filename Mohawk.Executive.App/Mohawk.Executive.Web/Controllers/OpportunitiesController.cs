@@ -78,7 +78,7 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpPost]
         public ActionResult CreateOpportunity(OpportunityCreateViewModel model)
         {
-            var opportunity = OpportunityHandler.AddOpportunity(model.ContactId, model.Subject, model.Value,
+            var opportunity = OpportunityHandler.AddOpportunity(model.ContactId,model.Description, model.Subject, model.EstimatedValue,
                 model.Selected.FirstOrDefault(), User.Identity.GetUserId());
             return RedirectToAction("ViewOpportunity", new {id = opportunity.Id});
         }
@@ -124,8 +124,8 @@ namespace Mohawk.Executive.Web.Controllers
                 ContactHanlder.SearchContacts("General").FirstOrDefault(x => x.FirstName == "General") ??
                 ContactHanlder.AddContact("General", null, null, null, null, "Mohawk College", null);
 
-            var opportunity = OpportunityHandler.AddOpportunity(generalContact.Id, model.Subject,
-                model.Value, model.Selected.FirstOrDefault(), User.Identity.GetUserId());
+            var opportunity = OpportunityHandler.AddOpportunity(generalContact.Id, model.Subject,model.Description,
+                model.EstimatedValue, model.Selected.FirstOrDefault(), User.Identity.GetUserId());
             return RedirectToAction("ViewOpportunity", new {id = opportunity.Id});
         }
 
@@ -133,6 +133,31 @@ namespace Mohawk.Executive.Web.Controllers
         {
             OpportunityHandler.ResolveOpportunity(model.OpportunityId, model.ResolutionReason);
             return RedirectToAction("ViewOpportunity", new {id = model.OpportunityId});
+        }
+        [HttpGet]
+        public ActionResult Edit(Guid id)
+        {
+            var opp = OpportunityHandler.Get(id);
+
+            var model =  new OpportunityCreateViewModel
+            {
+                Id = id,
+                Subject = opp.Subject,
+                EstimatedValue = opp.EstimatedValue,
+                Description = opp.Description,
+                PrioritiesList = SettingsHandler.GetPriorities().Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.PriorityString,
+                    Selected = opp.PriorityId == x.Id
+                }).ToList()
+            };
+            return PartialView("_EditOpportunity", model);
+        }
+        [HttpPost]
+        public ActionResult Edit(OpportunityCreateViewModel model)
+        {
+            return RedirectToAction("ViewOpportunity", new {id = model.Id});
         }
 
         #region Donations

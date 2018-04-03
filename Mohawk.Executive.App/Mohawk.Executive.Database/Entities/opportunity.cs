@@ -14,7 +14,8 @@ namespace Mohawk.Executive.Database.Entities
         public int PriorityId { get; set; }
         public Guid ContactId { get; set; }
         public string OpportunitySubject { get; set; }
-        public string Value { get; set; }
+        public string Description { get; set; }
+        public string EstimatedValue { get; set; }
         public DateTime? RemovedOn { get; set; }
         public DateTime? ResolvedOn { get; set; }
         public string ResolutionReason { get; set; }
