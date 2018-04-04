@@ -163,6 +163,7 @@ namespace Mohawk.Executive.Services.Services
                     ContactId = opportunity.ContactId,
                     Subject = opportunity.OpportunitySubject,
                     EstimatedValue = opportunity.EstimatedValue,
+                    Description = opportunity.Description,
                     PriorityId = opportunity.PriorityId,
                     ResolvedOn = opportunity.ResolvedOn,
                     ResolutionReason = opportunity.ResolutionReason,
