@@ -40,7 +40,6 @@ namespace Mohawk.Executive.Services.Services
 
         }
 
-
         public bool RemoveDonationType(int id)
         {
             //throw new NotImplementedException();
@@ -66,6 +65,13 @@ namespace Mohawk.Executive.Services.Services
                 Id = donation.Id,
                 DonationTypeString = donationType
             };
+        }
+
+        public IEnumerable<Guid> GetAssociatedOpportunities(int id)
+        {
+            var opportunitiesDonations = _context.DonationTypes.SingleOrDefault(c => c.Id == id)?.OpportunityDonations;
+            var opportunities = opportunitiesDonations?.Select(oppDon => oppDon.Opportunity.Id);
+            return opportunities;
         }
 
         public IEnumerable<PriorityTypeModel> GetPriorities()

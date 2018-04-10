@@ -93,6 +93,7 @@ namespace Mohawk.Executive.Services.Services
                 ResolvedOn = opportunity.ResolvedOn,
                 ResolutionReason = opportunity.ResolutionReason,
                 RemovedOn = opportunity.RemovedOn,
+                Description = opportunity.Description
             });
         }
 

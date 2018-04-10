@@ -40,10 +40,14 @@
                             </div>
                         </td>
                         <td>
-
-                            <a href="@Url.Action("RemoveDonationType", new {id = item.Id})">Remove</a>
-
-
+                            <a href="#" data-toggle="modal" data-target="#remove-donation-type-modal-@item.Id">Remove </a>
+                            <div class="modal fade" id="remove-donation-type-modal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="remove-donation-modal-@item.Id" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        @Html.Action("ConfirmRemoveDonationType", new { id = item.Id })
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 }
@@ -62,4 +66,3 @@
         </div>
     </div>
 </div>
-

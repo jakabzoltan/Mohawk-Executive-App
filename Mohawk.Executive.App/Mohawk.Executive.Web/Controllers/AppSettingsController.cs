@@ -14,15 +14,17 @@ namespace Mohawk.Executive.Web.Controllers
     {
         // GET: AppSettings
         public ISettingsHandler SettingsHandler { get; set; }
+        public IOpportunityHandler OpportunityHandler { get; set; }
 
         public AppSettingsController()
         {
 
         }
 
-        public AppSettingsController(ISettingsHandler settings)
+        public AppSettingsController(ISettingsHandler settings, IOpportunityHandler opportunities)
         {
             SettingsHandler = settings;
+            OpportunityHandler = opportunities;
         }
         public ActionResult Index()
         {
@@ -48,6 +50,21 @@ namespace Mohawk.Executive.Web.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult ConfirmRemoveDonationType(int id)
+        {
+            var opportunityIds = SettingsHandler.GetAssociatedOpportunities(id);
+            var opportunities = OpportunityHandler.GetOpportunities().Where(opp => opportunityIds.Contains(opp.Id));
+            var model = new DontationTypeOpportunitiesViewModel()
+            {
+                Id = id,
+                Opportunities = opportunities
+            };
+
+            return PartialView("_RemoveDonationType", model); ;
+        }
+
+        [HttpPost]
         public ActionResult RemoveDonationType(int id)
         {
             SettingsHandler.RemoveDonationType(id);
