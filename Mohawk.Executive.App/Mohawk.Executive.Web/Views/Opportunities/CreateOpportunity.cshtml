@@ -1,22 +1,20 @@
 ﻿@model Mohawk.Executive.Web.Models.OpportunityCreateViewModel
 @{
-    ViewBag.Title = "CreateOpportunity";
+    ViewBag.Title = "Create Opportunity";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using (Html.BeginForm("CreateOpportunity", "Opportunities", FormMethod.Post))
+{
+    <div class="form-group">
 
-
-<div class="row">
-    <div class="col-sm-12">
-        <h2>
-            Create Contact
-        </h2>
+        <div class="col-sm-12">
+            <h2>
+                Create Opportunity
+            </h2>
+        </div>
     </div>
-</div>
-<hr />
 
-<div class="row">
-    @using (Html.BeginForm("AddContact", "Contact", FormMethod.Post))
-    {
+        <hr />
         @Html.AntiForgeryToken()
         <div class="form-group">
             <div class="col-sm-12">@Html.ValidationSummary(true, "", new { @class = "text-danger" })</div>
@@ -24,36 +22,52 @@
 
         <div class="form-group">
             <div class="col-sm-12">@Html.LabelFor(m => m.Subject)*</div>
-            <div class="col-sm-12">
-                @Html.TextBoxFor(m => m.Subject, new { @class = "form-control modified-input" })
+            <div class="col-sm-12 margin-bottom-10">
+                @Html.TextBoxFor(m => m.Subject, new { @class = "form-control modified-input", autocomplete = "off", autofocus="true" })
                 @Html.ValidationMessageFor(m => m.Subject, "", new { @class = "text-danger" })
             </div>
 
         </div>
+        <div class="form-group">
+            <div class="col-sm-12">@Html.LabelFor(m => m.EstimatedValue)*</div>
+            <div class="col-sm-12 margin-bottom-10">
+                @Html.TextBoxFor(m => m.EstimatedValue, new { @class = "form-control modified-input", autocomplete = "off" })
+                @Html.ValidationMessageFor(m => m.EstimatedValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">@Html.LabelFor(m => m.EstimatedValue)*</div>
+            <div class="col-sm-12 margin-bottom-10">
+                @Html.TextBoxFor(m => m.EstimatedValue, new { @class = "form-control modified-input", autocomplete = "off" })
+                @Html.ValidationMessageFor(m => m.EstimatedValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
-            <div class="col-sm-12">@Html.LabelFor(m => m.Value)</div>
             <div class="col-sm-12">
-                @Html.TextBoxFor(m => m.Value, new { @class = "form-control modified-input" })
-                @Html.ValidationMessageFor(m => m.Value, "", new { @class = "text-danger" })
+                <b>Importance*</b>
+                <br />
+                <small>The type of donation. These can be custom created in the settings of the application</small>
+            </div>
+            <div class="col-md-12 margin-bottom-10">
+                @Html.DropDownListFor(m => m.Selected, Model.PrioritiesList, new { @class = "selectpicker form-control", id = "donation-types" })
             </div>
         </div>
-
-        @*<div class="form-group">
-            <div class="col-sm-12">@Html.LabelFor(m => m.PriorityId)</div>
-            <div class="col-sm-12">
-                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control modified-input" })
-                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-        <div class="form-group text-center" style="margin-top: 100px;">
+        <div class="form-group text-center">
             <div class="col-xs-12">
-                <input type="submit" value="Submit" class="btn btn-success" style="width: 100%;" />
+                <input type="submit" value="Submit" class="btn btn-success" style="width: 100%;margin-top: 50px;" />
             </div>
         </div>
-    }
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
-</div>
+
+        <script>
+            $(document).ready(function () {
+                $('.selectpicker').selectpicker({
+                    size: 5
+                });
+            })
+        </script>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

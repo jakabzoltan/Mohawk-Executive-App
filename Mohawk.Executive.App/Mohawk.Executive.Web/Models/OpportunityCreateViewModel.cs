@@ -17,6 +17,7 @@ namespace Mohawk.Executive.Web.Models
 
         public int[] Selected { get; set; }
         
+        [DisplayName("Priority")]
         public IEnumerable<SelectListItem> PrioritiesList { get; set; }
     }
 }

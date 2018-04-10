@@ -1,1 +1,68 @@
-﻿
+﻿@using Mohawk.Executive.Services.ViewModels
+@model IEnumerable<Mohawk.Executive.Services.ViewModels.DonationTypeModel>
+<div class="row">
+    <div class="col-sm-12">
+        <h3>
+            Donation Types
+            <a class="btn btn-success pull-right" data-toggle="modal" data-target="#add-donation-type-modal"><span class="glyphicon glyphicon-plus"></span> Add Donation Type</a>
+        </h3>
+        <small>Donation types are the types you assign to donations in an opportunity. Example: "In-Kind Donation", "Monetary Donation", etc</small>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-sm-12">
+        <div class="col-sm-8"></div>
+        @if (Model.Any())
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td><b>Id</b></td>
+                        <td><b>Donation Type Name</b></td>
+                        <td class="text-left"><b>Actions</b></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td width="10%">@item.Id</td>
+                        <td width="70%">@item.DonationTypeString</td>
+                        <td>
+                            <a href="#" data-toggle="modal" data-target="#edit-donation-type-modal-@item.Id">Edit </a>
+                            <div class="modal fade" id="edit-donation-type-modal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="add-donation-modal-@item.Id" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        @Html.Partial("_EditDonationType", new DonationTypeModel(){Id = item.Id,DonationTypeString = item.DonationTypeString})
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="#" data-toggle="modal" data-target="#remove-donation-type-modal-@item.Id">Remove </a>
+                            <div class="modal fade" id="remove-donation-type-modal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="remove-donation-modal-@item.Id" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        @Html.Action("ConfirmRemoveDonationType", new { id = item.Id })
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p>There are no donation types at the moment. Add one.</p>
+        }
+    </div>
+</div>
+<div class="modal fade" id="add-donation-type-modal" tabindex="-1" role="dialog" aria-labelledby="add-donation-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @Html.Partial("_AddDonationType", new DonationTypeModel())
+        </div>
+    </div>
+</div>

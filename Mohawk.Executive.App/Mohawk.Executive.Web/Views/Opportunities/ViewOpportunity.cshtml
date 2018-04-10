@@ -17,7 +17,7 @@
         width: 1% !important;
     }
 
-    @@media only screen and (max-width:768px) {
+    @@media only screen and (max-width: 768px) {
         .low-remove-padding {
             padding-left: 0;
             padding-right: 0;
@@ -29,25 +29,46 @@
     <div class="col-sm-12">
         <h3>
             @Model.Subject
-            @if (Model.ResolutionReason != null && Model.ResolvedOn != null)
-            {
-                <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#resolution-modal">
-                    Resolve Opportunity
+            <div class="btn-group pull-right">
+                @if (Model.ResolutionReason == null && Model.ResolvedOn == null)
+                {
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#resolution-modal">
+                        Resolve Opportunity
+                    </button>
+                }
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modify-contact-modal">
+                    Modify Contact
                 </button>
-            }
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit-modal">
+                    Edit
+                </button>
+            </div>
         </h3>
     </div>
 
 
     <div class="col-sm-12">
-        
-        <p><b>@Model.Priority.PriorityString</b></p>
-        <p>@Model.Value</p>
 
+        <p>
+            <b>Priority Type: </b> @Model.Priority.PriorityString
+        </p>
+        <p>
+            <b>Primary Contact: </b><a href="@Url.Action("ViewContact", "Contact", new {id = Model.ContactId})">@Model.Contact.FirstName @Model.Contact.LastName</a>
+        </p>
+        <p>
+            <b>Description: </b> @Model.Description
+        </p>
+        <p>
+            <b>Estimated Value: </b>@Model.EstimatedValue
+        </p>
         @if (Model.ResolutionReason != null && Model.ResolvedOn != null)
         {
-            <p><b>Resolved On:</b> @Model.ResolvedOn</p>
-            <p><b>Reason:</b> @Model.ResolutionReason</p>
+            <p>
+                <b>Resolved On:</b> @Model.ResolvedOn
+            </p>
+            <p>
+                <b>Reason:</b> @Model.ResolutionReason
+            </p>
         }
     </div>
 </div>
@@ -60,18 +81,23 @@
                     $("#" + activeTab).addClass("active");
                     $("#" + activeTab.replace("-tab", "")).addClass("in");
                     $("#" + activeTab.replace("-tab", "")).addClass("active");
-                }
-                else {
+                } else {
                     $("#donations-tab").addClass("active");
                     $("#donations").addClass("in");
                     $("#donations").addClass("active");
-                    }
+                }
             })
         </script>
         <ul class="nav nav-tabs nav-justified">
-            <li id="donations-tab" role="presentation" ><a data-toggle="tab" href="#donations">Donations</a></li>
-            <li id="steps-tab" role="presentation"><a data-toggle="tab" href="#steps">Steps</a></li>
-            <li id="comments-tab" role="presentation"><a data-toggle="tab" href="#comments">Comments</a></li>
+            <li id="donations-tab" role="presentation">
+                <a data-toggle="tab" href="#donations">Donations</a>
+            </li>
+            <li id="steps-tab" role="presentation">
+                <a data-toggle="tab" href="#steps">Steps</a>
+            </li>
+            <li id="comments-tab" role="presentation">
+                <a data-toggle="tab" href="#comments">Comments</a>
+            </li>
         </ul>
     </div>
     <div class="tab-content">
@@ -109,7 +135,7 @@
         </div>
     </div>
 </div>
-@if (Model.ResolutionReason != null && Model.ResolvedOn != null)
+@if (Model.ResolutionReason == null && Model.ResolvedOn == null)
 {
     <div class="modal fade" id="resolution-modal" tabindex="-1" role="dialog" aria-labelledby="resolution-modal" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -131,6 +157,22 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             @Html.Partial("_AddStep", new OpportunityStepModel() { OpportunityId = Model.Id })
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modify-contact-modal" tabindex="-1" role="dialog" aria-labelledby="modify-contact-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @Html.Action("RenderAttachContact", new { id = Model.Id })
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @Html.Action("Edit", new { id = Model.Id })
         </div>
     </div>
 </div>

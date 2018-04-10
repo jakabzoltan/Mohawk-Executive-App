@@ -210,7 +210,9 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddDonationViewModel.cs" />
+    <Compile Include="Models\AttachContact.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
+    <Compile Include="Models\DontationTypeOpportunitiesViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OpportunityCreateViewModel.cs" />
@@ -301,7 +303,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Dashboard\_ContactBlock.cshtml" />
+    <Content Include="Views\Shared\_ContactBlock.cshtml" />
     <Content Include="Views\Shared\_SearchBarPartial.cshtml" />
     <Content Include="Views\Contact\ViewContact.cshtml" />
     <Content Include="Views\Contact\AddContact.cshtml" />
@@ -311,18 +313,23 @@
     <Content Include="Views\Opportunities\_OpportunitySteps.cshtml" />
     <Content Include="Views\Opportunities\CreateOpportunity.cshtml" />
     <Content Include="Views\Opportunities\QuickCreate.cshtml" />
-    <Content Include="Views\Dashboard\_OpportunityBlock.cshtml" />
+    <Content Include="Views\Shared\_OpportunityBlock.cshtml" />
     <Content Include="Views\AppSettings\Index.cshtml" />
-    <Content Include="Views\AppSettings\AddDonationType.cshtml" />
-    <Content Include="Views\AppSettings\EditDonationType.cshtml" />
-    <Content Include="Views\AppSettings\AddPriority.cshtml" />
-    <Content Include="Views\AppSettings\EditPriority.cshtml" />
+    <Content Include="Views\AppSettings\_AddDonationType.cshtml" />
+    <Content Include="Views\AppSettings\_AddPrioritytype.cshtml" />
     <Content Include="Views\AppSettings\_DonationTypes.cshtml" />
     <Content Include="Views\AppSettings\_Priorities.cshtml" />
     <Content Include="Views\Opportunities\_AddResolution.cshtml" />
     <Content Include="Views\Opportunities\_AddDonation.cshtml" />
     <Content Include="Views\Opportunities\_AddStep.cshtml" />
     <Content Include="Views\Opportunities\_PostComment.cshtml" />
+    <Content Include="Views\Contact\ContactBook.cshtml" />
+    <Content Include="Views\Opportunities\_AttachContact.cshtml" />
+    <Content Include="Views\Opportunities\_EditOpportunity.cshtml" />
+    <Content Include="Views\AppSettings\_EditDonationType.cshtml" />
+    <Content Include="Views\AppSettings\_EditPriorityType.cshtml" />
+    <Content Include="Views\Opportunities\_EditDonation.cshtml" />
+    <Content Include="Views\AppSettings\_RemoveDonationType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -353,7 +360,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51911</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

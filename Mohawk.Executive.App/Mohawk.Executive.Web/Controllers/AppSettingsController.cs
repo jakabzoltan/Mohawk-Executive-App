@@ -14,15 +14,17 @@ namespace Mohawk.Executive.Web.Controllers
     {
         // GET: AppSettings
         public ISettingsHandler SettingsHandler { get; set; }
+        public IOpportunityHandler OpportunityHandler { get; set; }
 
         public AppSettingsController()
         {
 
         }
 
-        public AppSettingsController(ISettingsHandler settings)
+        public AppSettingsController(ISettingsHandler settings, IOpportunityHandler opportunities)
         {
             SettingsHandler = settings;
+            OpportunityHandler = opportunities;
         }
         public ActionResult Index()
         {
@@ -35,31 +37,42 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpGet]
         public ActionResult GetDonationTypes()
         {
-            return PartialView("_DonationTypes");
-        }
+            var donationTypes = SettingsHandler.GetDonationTypes();
 
-        public ActionResult AddDonationType()
-        {
-            return PartialView("_AddDonationType");
-        }
-
-        public ActionResult EditDonationType(int donationTypeId)
-        {
-            return PartialView("_EditDonationType");
+            return PartialView("_DonationTypes", donationTypes);
         }
 
         [HttpPost]
         public ActionResult AddDonationType(DonationTypeModel donationType)
         {
-            return null;
-        }
-        public ActionResult EditDonationType(DonationTypeModel donationType)
-        {
-            return null;
+            SettingsHandler.AddDonationType(donationType.DonationTypeString);
+            return RedirectToAction("Index"); ;
         }
 
+
+        [HttpGet]
+        public ActionResult ConfirmRemoveDonationType(int id)
+        {
+            var opportunityIds = SettingsHandler.GetAssociatedOpportunities(id);
+            var opportunities = OpportunityHandler.GetOpportunities().Where(opp => opportunityIds.Contains(opp.Id));
+            var model = new DontationTypeOpportunitiesViewModel()
+            {
+                Id = id,
+                Opportunities = opportunities
+            };
+
+            return PartialView("_RemoveDonationType", model); ;
+        }
+
+        [HttpPost]
         public ActionResult RemoveDonationType(int id)
         {
+            SettingsHandler.RemoveDonationType(id);
+            return RedirectToAction("Index");
+        }
+        public ActionResult EditDonationType(DonationTypeModel model)
+        {
+            SettingsHandler.EditDonationType(model.Id, model.DonationTypeString);
             return RedirectToAction("Index");
         }
         #endregion
@@ -72,34 +85,27 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpGet]
         public ActionResult GetPriorities()
         {
-            return PartialView("_Priorities");
-        }
-       
-        public ActionResult AddPriority()
-        {
-            return PartialView("_AddPriority");
-        }
-
-        public ActionResult EditPriority(int priorityId)
-        {
-            return PartialView("_EditPriority");
+            var priTypes = SettingsHandler.GetPriorities();
+            return PartialView("_Priorities", priTypes);
         }
 
         [HttpPost]
         public ActionResult AddPriority(PriorityTypeModel priority)
         {
-            return View();
-        }
-        public ActionResult EditPriority(PriorityTypeModel priority)
-        {
-            return View();
-
+            SettingsHandler.AddPriorityType(priority.PriorityString);
+            return RedirectToAction("Index");
         }
         public ActionResult RemovePriority(int id)
         {
-            return GetPriorities();
+            SettingsHandler.RemovePriorityType(id);
+            return RedirectToAction("Index");
         }
 
+        public ActionResult EditPriorityType(PriorityTypeModel model)
+        {
+            SettingsHandler.EditPriorityType(model.Id, model.PriorityString);
+            return RedirectToAction("Index");
+        }
         #endregion
 
 

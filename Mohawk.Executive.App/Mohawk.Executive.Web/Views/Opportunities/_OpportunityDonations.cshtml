@@ -1,20 +1,39 @@
-﻿@model IEnumerable<Mohawk.Executive.Services.ViewModels.OpportunityDonationModel>
+﻿@using Mohawk.Executive.Web.Models
+@model IEnumerable<Mohawk.Executive.Services.ViewModels.OpportunityDonationModel>
 
 @if (Model.Any())
 {
     foreach (var item in Model.ToList())
     {
         <div class="row block-card">
-            @Html.LabelFor(i=>item.DonationText): @item.DonationText
-            <hr/>
-            @Html.LabelFor(i=>item.DonationTypes):
-            @foreach (var type in item.DonationTypes)
-            {
-                <span>@type.DonationTypeString </span>
-            }
+            <div class="col-xs-8">
+                @Html.LabelFor(i => item.DonationText): @item.DonationText
+                
+            </div>
+            <div class="col-xs-4 text-right">
+                <a href="#" data-toggle="modal" data-target="#edit-donation-modal-@item.Id">Edit Donation</a> &nbsp;
+                <a href="@Url.Action("RemoveDonation", new {id = item.Id, opportunityId = item.OpportunityId})" >Remove</a>
+            </div>
+            <br /><div class="col-xs-12">
+                @Html.LabelFor(i => item.DonationTypes):
+                @foreach (var type in item.DonationTypes)
+                {
+                    <span>@type.DonationTypeString </span>
+                }
+            </div>
         </div>
+
+        <div class="modal fade" id="edit-donation-modal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="edit-donation-modal-@item.Id" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    @Html.Action("RenderEditDonation", new AddDonationViewModel() {Id = item.Id, OpportunityId = item.OpportunityId, DonationText = item.DonationText, Selected = item.DonationTypes.Select(x=>x.Id).ToArray()})
+                </div>
+            </div>
+        </div>
+
+
     }
-    
+
 }
 else
 {

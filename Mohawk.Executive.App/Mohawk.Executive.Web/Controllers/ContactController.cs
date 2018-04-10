@@ -17,12 +17,20 @@ namespace Mohawk.Executive.Web.Controllers
         {
 
         }
-
+        
         public ContactController(IContactHanlder contactHanlder, IOpportunityHandler opportunityHandler)
         {
             ContactHanlder = contactHanlder;
             OpportunityHandler = opportunityHandler;
         }
+
+        public ActionResult ContactBook()
+        {
+            return View(ContactHanlder.GetAllContacts());
+        }
+
+
+
         // GET: Contact
         public ActionResult ViewContact(Guid id)
         {

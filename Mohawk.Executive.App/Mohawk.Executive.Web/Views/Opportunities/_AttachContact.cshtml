@@ -1,0 +1,33 @@
+﻿
+@model Mohawk.Executive.Web.Models.AttachContact
+
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Modify Contact</h5>
+</div>
+@using (Html.BeginForm("AttachContact", "Opportunities", FormMethod.Post))
+{
+    <div class="modal-body">
+        <div class="row">
+            @Html.HiddenFor(m => m.OpportunityId)
+            <div class="col-sm-12">
+                <label>Attach or modify the primary contact to the opportunity</label>
+            </div>
+            <div class="col-md-12">
+                @Html.DropDownListFor(m => m.Selected, Model.Contacts, new { @class = "selectpicker form-control", id = "contacts"})
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-success" value="Add" />
+    </div>
+
+}
+<script>
+    $(document).ready(function () {
+        $('.selectpicker').selectpicker({
+            size: 5,
+            liveSearch: "true"
+        });
+    })
+</script>

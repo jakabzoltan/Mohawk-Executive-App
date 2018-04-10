@@ -3,12 +3,13 @@
 <div class="modal-header">
     <h5 class="modal-title" id="exampleModalLabel">Add Donation</h5>
 </div>
-@using (Html.BeginForm("AddDonation", "Opportunities", FormMethod.Post))
+@using (Html.BeginForm("EditDonation", "Opportunities", FormMethod.Post))
 {
     <div class="modal-body">
         <div class="row">
             <div class="form-group">
                 @Html.HiddenFor(m => m.OpportunityId)
+                @Html.HiddenFor(m => m.Id);
                 <div class="col-sm-12">
                     @Html.LabelFor(m => m.DonationText)
                     <br />
@@ -32,7 +33,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <input type="submit" class="btn btn-success" value="Add" />
+        <input type="submit" class="btn btn-success" value="Save Changes" />
     </div>
 
 }

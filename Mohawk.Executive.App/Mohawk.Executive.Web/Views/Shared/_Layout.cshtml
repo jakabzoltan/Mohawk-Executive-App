@@ -21,6 +21,9 @@
                 display: none;
             }
         }
+        .margin-bottom-10 {
+            margin-bottom: 10px;   
+        }
     </style>
 </head>
 <body>
@@ -50,8 +53,12 @@
     {
         <ul class="nav navbar-nav" style="border-bottom: 1px solid gray;">
             <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
-            <li>@Html.ActionLink("Add Contact", "Index", "Dashboard")</li>
+            <li>@Html.ActionLink("Contact Book", "ContactBook", "Contact")</li>
+            <li>@Html.ActionLink("Create Contact", "AddContact", "Contact")</li>
             <li>@Html.ActionLink("Create Opportunity", "QuickCreate", "Opportunities")</li>
+        </ul>
+        <ul class="nav navbar-nav" style="border-bottom: 1px solid gray;">
+            <li>@Html.ActionLink("Global Settings", "Index", "AppSettings")</li>
         </ul>
     }
 

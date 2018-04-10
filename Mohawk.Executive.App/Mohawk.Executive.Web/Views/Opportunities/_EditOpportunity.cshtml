@@ -1,0 +1,67 @@
+﻿
+@model Mohawk.Executive.Web.Models.OpportunityCreateViewModel
+@using (Html.BeginForm("Edit", "Opportunities", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+
+
+
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Donation</h5>
+    </div>
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    <div class="modal-body">
+        <div class="row">
+
+            <div class="col-sm-12">
+                @Html.LabelFor(m => m.Subject)
+
+            </div>
+            <div class="col-md-12">
+                @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", autocomplete = "off", autofocus = "true" })
+            </div>
+
+            <div class="col-sm-12">
+                @Html.LabelFor(m => m.Description)
+
+            </div>
+            <div class="col-md-12">
+                @Html.TextBoxFor(m => m.Description, new { @class = "form-control", autocomplete = "off", autofocus = "false" })
+            </div>
+
+
+
+            <div class="col-sm-12">
+                @Html.LabelFor(m => m.EstimatedValue)
+            </div>
+            <div class="col-md-12">
+                @Html.TextBoxFor(m => m.EstimatedValue, new { @class = "form-control", autocomplete = "off", autofocus = "false" })
+            </div>
+
+
+
+            <div class="col-sm-12">
+                @Html.LabelFor(m => m.PrioritiesList)
+            </div>
+            <div class="col-md-12">
+                @Html.DropDownListFor(m => m.Selected, Model.PrioritiesList, new { @class = "selectpicker form-control", id = "donation-types" })
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-success" value="Save Changes" />
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('.selectpicker').selectpicker({
+                size: 5
+            });
+        })
+    </script>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

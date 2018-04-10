@@ -9,11 +9,13 @@
         width: 100%;
         height: auto;
     }
+
     .key {
         text-align: right;
         padding-right: 1em;
     }
-    .value{ padding-bottom: 5px; }
+
+    .value { padding-bottom: 5px; }
 </style>
 
 <h3>Contact Information</h3>
@@ -21,53 +23,76 @@
 <div class="information-container">
     <div class="container">
 
-            <table>
-                <tr>
-                    <td class="key"><label>Name</label></td>
-                    <td class="value">@Model.FirstName @Model.LastName</td>
-                </tr>
-                <tr>
-                    <td class="key">@Html.LabelFor(m=>m.Email)</td>
-                    <td class="value">@Html.DisplayFor(m=>m.Email)</td>
-                </tr>
-                <tr>
-                    <td class="key">@Html.LabelFor(m=>m.PhoneNumber)</td>
-                    <td class="value">@Html.DisplayFor(m=>m.PhoneNumber)</td>
-                </tr>
-                <tr>
-                    <td class="key">@Html.LabelFor(m=>m.Organization)</td>
-                    <td class="value">@Html.DisplayFor(m=>m.Organization)</td>
-                </tr>
-                <tr>
-                    <td class="key">@Html.LabelFor(m=>m.Location)</td>
-                    <td class="value">@Html.DisplayFor(m=>m.Location)</td>
-                </tr>
-            </table>
-
+        <table>
+            <tr>
+                <td class="key">
+                    <label>Name</label>
+                </td>
+                <td class="value">@Model.FirstName @Model.LastName</td>
+            </tr>
+            <tr>
+                <td class="key">@Html.LabelFor(m => m.Email)</td>
+                <td class="value">@Html.DisplayFor(m => m.Email)</td>
+            </tr>
+            <tr>
+                <td class="key">@Html.LabelFor(m => m.PhoneNumber)</td>
+                <td class="value">@Html.DisplayFor(m => m.PhoneNumber)</td>
+            </tr>
+            <tr>
+                <td class="key">@Html.LabelFor(m => m.Organization)</td>
+                <td class="value">@Html.DisplayFor(m => m.Organization)</td>
+            </tr>
+            <tr>
+                <td class="key">@Html.LabelFor(m => m.Role)</td>
+                <td class="value">@Html.DisplayFor(m => m.Role)</td>
+            </tr>
+            <tr>
+                <td class="key">@Html.LabelFor(m => m.Location)</td>
+                <td class="value">@Html.DisplayFor(m => m.Location)</td>
+            </tr>
+        </table>
 
 
     </div>
 </div>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-sm-12">
         <h2>
-            Contacts
-            <a href="@Url.Action("CreateOpportunity","Opportunities",new { contactId = Model.Id })" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> New Opportunity </a>
+            Opportunities
+            <a href="@Url.Action("CreateOpportunity", "Opportunities", new {contactId = Model.Id})" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> New Opportunity </a>
         </h2>
     </div>
 </div>
-<hr />
+<hr/>
 @if (Model.Opportunities.Any())
 {
     <table class="table table-striped">
         @{
+            <tr style="border-bottom: 2px solid gray">
+                <td width="20%">
+                    <b>Subject</b>
+                </td>
+                <td width="50%">
+                    <b>Value</b>
+                </td>
+                <td width="20%">
+                    <b>Priority Type</b>
+                </td>
+                <td width="10%">
+                    <b>Actions</b>
+                </td>
+            </tr>
             foreach (var opp in Model.Opportunities)
             {
                 <tr>
+
                     <td width="20%">@opp.Subject</td>
-                    <td width="60%">@opp.Value</td>
-                    <td width="20%" class="text-center">@opp.PriorityId</td>
+                    <td width="50%">@opp.EstimatedValue</td>
+                    <td width="20%">@opp.Priority.PriorityString</td>
+                    <td width="10%">
+                        <a href="@Url.Action("ViewOpportunity", "Opportunities", new {id = opp.Id})">View</a>
+                    </td>
                 </tr>
             }
         }
@@ -76,6 +101,7 @@
 }
 else
 {
-    
-    <div class="col-sm-12 text-center"><i>No opportunities with this contact... yet!</i></div>
+    <div class="col-sm-12 text-center">
+        <i>No opportunities with this contact... yet!</i>
+    </div>
 }

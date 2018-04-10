@@ -13,12 +13,17 @@ namespace Mohawk.Executive.Services.Interfaces
         IEnumerable<DonationTypeModel> GetDonationTypes();
         DonationTypeModel AddDonationType(string donationType);
         bool RemoveDonationType(int id);
-        #endregion
+        DonationTypeModel EditDonationType(int id, string donationType);
+        IEnumerable<Guid> GetAssociatedOpportunities(int id);
+
+            #endregion
 
         #region OpportunityPriority
         IEnumerable<PriorityTypeModel> GetPriorities();
-        PriorityTypeModel AddOpportunityPriority(string priorityText);
-        bool RemoveOpportunityPriority(int id);
+        PriorityTypeModel AddPriorityType(string priorityText);
+        bool RemovePriorityType(int id);
+        PriorityTypeModel EditPriorityType(int id, string priorityText);
+
         #endregion
 
 

@@ -38,7 +38,9 @@ namespace Mohawk.Executive.Web.Controllers
                 CommentHandler = new CommentService();
         }
 
-        public OpportunitiesController(IOpportunityHandler opportunityHandler, IContactHanlder contactHanlder, IDonationHandler donationHandler, ISettingsHandler settingsHandler, IStepHandler stepHandler, ICommentHandler commentHandler) : this()
+        public OpportunitiesController(IOpportunityHandler opportunityHandler, IContactHanlder contactHanlder,
+            IDonationHandler donationHandler, ISettingsHandler settingsHandler, IStepHandler stepHandler,
+            ICommentHandler commentHandler) : this()
         {
             OpportunityHandler = opportunityHandler;
             ContactHanlder = contactHanlder;
@@ -47,6 +49,7 @@ namespace Mohawk.Executive.Web.Controllers
             StepHandler = stepHandler;
             CommentHandler = commentHandler;
         }
+
         public ActionResult ViewOpportunity(Guid id, string activeTab = null)
         {
             if (id == Guid.Empty)
@@ -61,16 +64,21 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpGet]
         public ActionResult CreateOpportunity(Guid contactId)
         {
-            return View(new OpportunityCreateViewModel()
+            var model = new OpportunityCreateViewModel
             {
-                ContactId = contactId
-            });
+                PrioritiesList = SettingsHandler.GetPriorities().Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.PriorityString
+                }).ToList()
+            };
+            return View(model);
         }
 
         [HttpPost]
         public ActionResult CreateOpportunity(OpportunityCreateViewModel model)
         {
-            var opportunity = OpportunityHandler.AddOpportunity(model.ContactId, model.Subject, model.Value,
+            var opportunity = OpportunityHandler.AddOpportunity(model.ContactId, model.Description, model.Subject, model.EstimatedValue,
                 model.Selected.FirstOrDefault(), User.Identity.GetUserId());
             return RedirectToAction("ViewOpportunity", new { id = opportunity.Id });
         }
@@ -78,13 +86,15 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpGet]
         public ActionResult QuickCreate()
         {
-            var model = new OpportunityCreateViewModel();
-
-            model.PrioritiesList = SettingsHandler.GetPriorities().Select(x => new SelectListItem()
+            var model = new OpportunityCreateViewModel
             {
-                Value = x.Id.ToString(),
-                Text = x.PriorityString
-            }).ToList();
+                PrioritiesList = SettingsHandler.GetPriorities().Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.PriorityString
+                }).ToList()
+            };
+
 
             #region debug
 
@@ -102,7 +112,6 @@ namespace Mohawk.Executive.Web.Controllers
                 });
             }
 
-
             #endregion
 
             return View(model);
@@ -115,8 +124,8 @@ namespace Mohawk.Executive.Web.Controllers
                 ContactHanlder.SearchContacts("General").FirstOrDefault(x => x.FirstName == "General") ??
                 ContactHanlder.AddContact("General", null, null, null, null, "Mohawk College", null);
 
-            var opportunity = OpportunityHandler.AddOpportunity(generalContact.Id, model.Subject,
-                model.Value, model.Selected.FirstOrDefault(), User.Identity.GetUserId());
+            var opportunity = OpportunityHandler.AddOpportunity(generalContact.Id, model.Subject, model.Description,
+                model.EstimatedValue, model.Selected.FirstOrDefault(), User.Identity.GetUserId());
             return RedirectToAction("ViewOpportunity", new { id = opportunity.Id });
         }
 
@@ -124,6 +133,33 @@ namespace Mohawk.Executive.Web.Controllers
         {
             OpportunityHandler.ResolveOpportunity(model.OpportunityId, model.ResolutionReason);
             return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId });
+        }
+        [HttpGet]
+        public ActionResult Edit(Guid id)
+        {
+            var opp = OpportunityHandler.Get(id);
+
+            var model = new OpportunityCreateViewModel
+            {
+                Id = id,
+                Subject = opp.Subject,
+                EstimatedValue = opp.EstimatedValue,
+                Description = opp.Description,
+                PrioritiesList = SettingsHandler.GetPriorities().Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.PriorityString,
+                    Selected = opp.PriorityId == x.Id
+                }).ToList()
+            };
+            return PartialView("_EditOpportunity", model);
+        }
+        [HttpPost]
+        public ActionResult Edit(OpportunityCreateViewModel model)
+        {
+            OpportunityHandler.UpdateOpportunity(model.Id, model.Subject, model.Description, model.EstimatedValue,
+                model.Selected.FirstOrDefault());
+            return RedirectToAction("ViewOpportunity", new { id = model.Id });
         }
 
         #region Donations
@@ -142,8 +178,6 @@ namespace Mohawk.Executive.Web.Controllers
             };
 
 
-
-
             return PartialView("_AddDonation", model);
         }
 
@@ -154,6 +188,32 @@ namespace Mohawk.Executive.Web.Controllers
             return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId, activeTab = "donations-tab" });
         }
 
+        public ActionResult RenderEditDonation(AddDonationViewModel model)
+        {
+            //pass through method
+
+            model.DonationList = SettingsHandler.GetDonationTypes().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.DonationTypeString,
+                Selected = model.Selected.Contains(x.Id)
+            }).ToList();
+
+
+            return PartialView("_EditDonation", model);
+        }
+
+        public ActionResult EditDonation(AddDonationViewModel model)
+        {
+            DonationHandler.UpdateDonation(model.Id, model.DonationText, model.Selected);
+            return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId, activeTab = "donations-tab" });
+        }
+
+        public ActionResult RemoveDonation(int id, Guid opportunityId)
+        {
+            DonationHandler.RemoveDonation(id);
+            return RedirectToAction("ViewOpportunity", new { id = opportunityId, activeTab = "donations-tab" });
+        }
         #endregion
 
         #region Steps
@@ -187,8 +247,33 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpPost]
         public ActionResult PostComment(CommentViewModel model)
         {
-            CommentHandler.AddComment(model.OpportunityId, model.CommentString, User.Identity.GetUserId(), model.ReplyToId);
+            CommentHandler.AddComment(model.OpportunityId, model.CommentString, User.Identity.GetUserId(),
+                model.ReplyToId);
             return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId, activeTab = "comments-tab" });
+        }
+
+        #endregion
+
+        #region AttachContact
+
+        public ActionResult RenderAttachContact(Guid id)
+        {
+            var model = new AttachContact(id)
+            {
+                Contacts = ContactHanlder.GetAllContacts().Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = $"{x.FirstName} {x.LastName} -- {x.Organization}"
+                }).ToList()
+            };
+
+            return PartialView("_AttachContact", model);
+        }
+
+        public ActionResult AttachContact(AttachContact model)
+        {
+            OpportunityHandler.AttachContactToOpportunity(model.OpportunityId, model.Selected.FirstOrDefault());
+            return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId });
         }
 
         #endregion

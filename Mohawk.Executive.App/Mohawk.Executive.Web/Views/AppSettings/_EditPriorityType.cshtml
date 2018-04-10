@@ -1,0 +1,28 @@
+﻿@using Mohawk.Executive.Services.ViewModels
+@using Mohawk.Executive.Web.Models
+@model PriorityTypeModel
+
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Edit Priority Type</h5>
+</div>
+@using (Html.BeginForm("EditPriorityType", "AppSettings", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id)
+    <div class="modal-body row">
+        <div class="form-group">
+            <div class="col-sm-12">
+                @Html.LabelFor(m => m.PriorityString)
+                <br />
+                <small>Add a priority type such as "Very Important" or "Critical"</small>
+            </div>
+            <div class="col-md-12">
+                @Html.TextBoxFor(m => m.PriorityString, new { @class = "form-control", autocomplete = "off" })
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-success" value="Save Changes" />
+    </div>
+
+}

@@ -51,6 +51,7 @@ namespace Mohawk.Executive.Services.Services
             var toRemove = _context.OpportunityDonations.FirstOrDefault(x => x.Id == donationId);
             if (toRemove == null) return false;
             _context.OpportunityDonations.Remove(toRemove);
+            _context.SaveChanges();
             return true;
         }
 
@@ -61,6 +62,7 @@ namespace Mohawk.Executive.Services.Services
             if (toUpdate == null) return false;
             toUpdate.DonationText = donationText;
             toUpdate.DonationTypes = donationsTypesList;
+            _context.SaveChanges();
             return true;
         }
     }

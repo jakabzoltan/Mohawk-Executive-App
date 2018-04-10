@@ -3,7 +3,7 @@
 @model Mohawk.Executive.Web.Models.CommentListModel
 
 <div class="row">
-    <div id="comments-posting" class="comment-box">
+    <div id="comments-posting">
         @Html.Action("PostComment", new CommentViewModel(Model.OpportunityId))
     </div>
 </div>
@@ -23,7 +23,7 @@
                     <div class="col-sm-12">
                         <a id="@item.Id" class="reply-button">Reply</a>
                     </div>
-                    @foreach (var reply in item.Replies)
+                    @foreach (var reply in item.Replies.OrderBy(x => x.CommentDate))
                     {
                         <div class="row block-reply">
                             <div class="col-sm-12">

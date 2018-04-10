@@ -1,17 +1,21 @@
 ﻿@model Mohawk.Executive.Web.Models.OpportunityCreateViewModel
 @{
-    ViewBag.Title = "CreateOpportunity";
+    ViewBag.Title = "Create Opportunity";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-
-<h2>
-    Create Opportunity
-</h2>
-
 @using (Html.BeginForm("QuickCreate", "Opportunities", FormMethod.Post, new { @class = "form-horizontal" }))
 {
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <h2>
+                    Create Opportunity
+                </h2>
+            </div>
+        </div>
+
     <hr />
     @Html.AntiForgeryToken()
     <div class="form-group">
@@ -20,44 +24,45 @@
 
     <div class="form-group">
         <div class="col-sm-12">@Html.LabelFor(m => m.Subject)*</div>
-        <div class="col-sm-12">
-            @Html.TextBoxFor(m => m.Subject, new { @class = "form-control modified-input", autocomplete = "off" })
+        <div class="col-sm-12 margin-bottom-10">
+            @Html.TextBoxFor(m => m.Subject, new { @class = "form-control modified-input", autocomplete = "off", autofocus = "true" })
             @Html.ValidationMessageFor(m => m.Subject, "", new { @class = "text-danger" })
         </div>
 
     </div>
 
     <div class="form-group">
-        <div class="col-sm-12">@Html.LabelFor(m => m.Value)*</div>
-        <div class="col-sm-12">
-            @Html.TextBoxFor(m => m.Value, new { @class = "form-control modified-input", autocomplete = "off" })
-            @Html.ValidationMessageFor(m => m.Value, "", new { @class = "text-danger" })
+        <div class="col-sm-12">@Html.LabelFor(m => m.EstimatedValue)*</div>
+        <div class="col-sm-12 margin-bottom-10">
+            @Html.TextBoxFor(m => m.EstimatedValue, new { @class = "form-control modified-input", autocomplete = "off" })
+            @Html.ValidationMessageFor(m => m.EstimatedValue, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
         <div class="col-sm-12">
-            Importance*
+            <b>Importance*</b>
             <br />
             <small>The type of donation. These can be custom created in the settings of the application</small>
         </div>
-        <div class="col-md-12">
-            @Html.DropDownListFor(m => m.Selected, Model.PrioritiesList, new { @class = "selectpicker form-control", id = "donation-types"  })
+        <div class="col-md-12 margin-bottom-10">
+            @Html.DropDownListFor(m => m.Selected, Model.PrioritiesList, new { @class = "selectpicker form-control", id = "donation-types" })
         </div>
     </div>
-    <div class="form-group text-center" style="margin-top: 100px;">
+    <div class="form-group text-center">
         <div class="col-xs-12">
-            <input type="submit" value="Submit" class="btn btn-success" style="width: 100%;" />
+            <input type="submit" value="Submit" class="btn btn-success" style="width: 100%;margin-top: 50px;" />
         </div>
     </div>
-}
-<script>
-    $(document).ready(function () {
-        $('.selectpicker').selectpicker({
-            size: 5
-        });
-    })
-</script>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            $('.selectpicker').selectpicker({
+                size: 5
+            });
+        })
+    </script>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }

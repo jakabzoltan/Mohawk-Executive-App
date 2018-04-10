@@ -40,21 +40,38 @@ namespace Mohawk.Executive.Services.Services
 
         }
 
-
         public bool RemoveDonationType(int id)
         {
             //throw new NotImplementedException();
 
-            var donation =_context.DonationTypes.Where(c => c.Id == id).FirstOrDefault();
+            var donation =_context.DonationTypes.FirstOrDefault(c => c.Id == id);
 
-            if (donation != null)
+            if (donation == null) return false;
+            _context.DonationTypes.Remove(donation);
+            _context.SaveChanges();
+
+            return true;
+        }
+
+        public DonationTypeModel EditDonationType(int id, string donationType)
+        {
+            var donation = _context.DonationTypes.FirstOrDefault(c => c.Id == id);
+            if (donation == null) return null;
+            donation.DonationTypeString = donationType;
+            _context.SaveChanges();
+
+            return new DonationTypeModel() 
             {
-                _context.DonationTypes.Remove(donation);
-                _context.SaveChanges();
+                Id = donation.Id,
+                DonationTypeString = donationType
+            };
+        }
 
-                return true;
-            }
-            return false;
+        public IEnumerable<Guid> GetAssociatedOpportunities(int id)
+        {
+            var opportunitiesDonations = _context.DonationTypes.SingleOrDefault(c => c.Id == id)?.OpportunityDonations;
+            var opportunities = opportunitiesDonations?.Select(oppDon => oppDon.Opportunity.Id);
+            return opportunities;
         }
 
         public IEnumerable<PriorityTypeModel> GetPriorities()
@@ -66,7 +83,7 @@ namespace Mohawk.Executive.Services.Services
             });
         }
 
-        public PriorityTypeModel AddOpportunityPriority(string priorityText)
+        public PriorityTypeModel AddPriorityType(string priorityText)
         {
 
             // throw new NotImplementedException();
@@ -80,24 +97,35 @@ namespace Mohawk.Executive.Services.Services
         }
 
 
-        public bool RemoveOpportunityPriority(int id)
+        public bool RemovePriorityType(int id)
         {
             // throw new NotImplementedException();
-            var priority = _context.PriorityTypes.Where(c => c.Id == id).FirstOrDefault();
+            var priority = _context.PriorityTypes.FirstOrDefault(c => c.Id == id);
 
-            if (priority != null)
-            {
-                _context.PriorityTypes.Remove(priority);
-                _context.SaveChanges();
+            if (priority == null) return false;
+            _context.PriorityTypes.Remove(priority);
+            _context.SaveChanges();
 
-                return true;
-            }
-            return false;
+            return true;
         }
 
-        public ViewModels.DonationTypeModel GetDonationType(int id)
+        public PriorityTypeModel EditPriorityType(int id, string priorityText)
         {
-            return _context.DonationTypes.Where(c => c.Id == id).Select(c => new ViewModels.DonationTypeModel()
+            var priority = _context.PriorityTypes.FirstOrDefault(c => c.Id == id);
+            if (priority == null) return null;
+            priority.PriorityString = priorityText;
+            _context.SaveChanges();
+
+            return new PriorityTypeModel()
+            {
+                Id = priority.Id,
+                PriorityString = priorityText
+            };
+        }
+
+        public DonationTypeModel GetDonationType(int id)
+        {
+            return _context.DonationTypes.Where(c => c.Id == id).Select(c => new DonationTypeModel()
             {
                 Id = c.Id,
                 DonationTypeString = c.DonationTypeString,
@@ -108,9 +136,9 @@ namespace Mohawk.Executive.Services.Services
             .FirstOrDefault();
         }
 
-        public ViewModels.PriorityTypeModel GetPriorityType(int id)
+        public PriorityTypeModel GetPriorityType(int id)
         {
-            return _context.PriorityTypes.Where(c => c.Id == id).Select(c => new ViewModels.PriorityTypeModel()
+            return _context.PriorityTypes.Where(c => c.Id == id).Select(c => new PriorityTypeModel()
             {
                 Id = c.Id,
                 PriorityString = c.PriorityString,

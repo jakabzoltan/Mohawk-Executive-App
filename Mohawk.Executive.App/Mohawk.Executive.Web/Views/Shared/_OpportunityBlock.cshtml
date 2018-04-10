@@ -6,13 +6,14 @@
     {
         foreach (var opportunity in Model)
         {
-            <a href="@Url.Action("ViewOpportunity", "Opportunities", new {id = opportunity.Id})">
-                <div class="contact-block">
-                    <div class="circle">
-                        @opportunity.Subject
+
+                <a href="@Url.Action("ViewOpportunity", "Opportunities", new {id = opportunity.Id})">
+                    <div class="contact-block">
+                        <div class="circle">
+                            @opportunity.Subject
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
         }
     }
     else

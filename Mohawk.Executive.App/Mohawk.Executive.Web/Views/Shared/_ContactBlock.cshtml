@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Mohawk.Executive.Services.ViewModels.ContactModel>
+
+<link rel="stylesheet" type="text/css" href="~/Content/ContactBlock.css"/>
+
+@{
+    if (Model.Any())
+    {
+        foreach (var contact in Model)
+        {
+
+                <a href="@Url.Action("ViewContact", "Contact", new {id = contact.Id})">
+                    <div class="contact-block">
+                        <div class="circle">
+                            @contact.FirstName @contact.LastName
+                            <br/>
+                            <label class="organization-lbl">
+                                @contact.Organization
+                            </label>
+                        </div>
+                    </div>
+                </a>
+        }
+    }
+    else
+    {
+        <h4>
+            <i>No contacts were found!</i>
+        </h4>
+    }
+}
