@@ -1,7 +1,7 @@
 ﻿@model Mohawk.Executive.Web.Models.DontationTypeOpportunitiesViewModel
 
 <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Add Donation</h5>
+    <h5 class="modal-title" id="exampleModalLabel">Remove Donation</h5>
 </div>
 @using (Html.BeginForm("RemoveDonationType", "AppSettings", FormMethod.Post))
 {
@@ -9,6 +9,7 @@
     <div class="modal-body">
         <div class="row">
             <div class="col-sm-12">
+                <h4>Affected opportunities:</h4>
                 @if (Model.Opportunities.Any())
                 {
                     <table class="table table-striped">

@@ -2,7 +2,7 @@
 @model Mohawk.Executive.Web.Models.PriorityOpportunitiesViewModel
 
 <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Add Donation</h5>
+    <h5 class="modal-title" id="exampleModalLabel">Remove Priority</h5>
 </div>
 @using (Html.BeginForm("RemovePriority", "AppSettings", FormMethod.Post))
 {
@@ -10,15 +10,16 @@
     <div class="modal-body">
         <div class="row">
             <div class="col-sm-12">
+                <h4>Affected opportunites:</h4>
                 @if (Model.Opportunities.Any())
                 {
                     <table class="table table-striped">
                         <thead>
-                            <tr>
-                                <td><b>Subject</b></td>
-                                <td><b>Description</b></td>
-                                <td class="text-left"><b>Actions</b></td>
-                            </tr>
+                        <tr>
+                            <td><b>Subject</b></td>
+                            <td><b>Description</b></td>
+                            <td class="text-left"><b>Actions</b></td>
+                        </tr>
                         </thead>
                         @foreach (var item in Model.Opportunities)
                         {
