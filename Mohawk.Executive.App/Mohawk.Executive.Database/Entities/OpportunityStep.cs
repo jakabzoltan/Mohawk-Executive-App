@@ -11,7 +11,7 @@ namespace Mohawk.Executive.Database.Entities
 
         public int StepOrder { get; set; }
         public string Step { get; set; }
-
+        public bool Completed { get; set; }
         public virtual Opportunity Opportunity { get; set; }    
     }
 }

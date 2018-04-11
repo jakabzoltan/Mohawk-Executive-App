@@ -1,1 +1,23 @@
-﻿
+﻿.complete {
+    border-radius: 50%;
+    border: 2px solid green;
+    height: 35px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    width: 35px;
+    margin-bottom:15px;
+}
+
+.incomplete {
+    border-radius: 50%;
+    border: 2px solid gray;
+    height: 35px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    width: 35px;
+    margin-bottom: 15px;
+}
+
+.circled {
+    padding: 5px;
+}

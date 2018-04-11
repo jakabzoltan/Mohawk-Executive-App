@@ -115,6 +115,10 @@
     <Compile Include="Migrations\201804031417177_estimated-value.Designer.cs">
       <DependentUpon>201804031417177_estimated-value.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804110351470_Step completed flag.cs" />
+    <Compile Include="Migrations\201804110351470_Step completed flag.Designer.cs">
+      <DependentUpon>201804110351470_Step completed flag.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -131,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804031417177_estimated-value.resx">
       <DependentUpon>201804031417177_estimated-value.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804110351470_Step completed flag.resx">
+      <DependentUpon>201804110351470_Step completed flag.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

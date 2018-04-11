@@ -28,7 +28,8 @@ namespace Mohawk.Executive.Services.Services
                 Opportunity = _context.Opportunities.FirstOrDefault(x => x.Id == opportunityId),
                 OpportunityId = opportunityId,
                 Step = step,
-                StepOrder = currentStep
+                StepOrder = currentStep,
+                Completed = false
             });
             _context.SaveChanges();
             return true;
@@ -40,6 +41,7 @@ namespace Mohawk.Executive.Services.Services
             if (toUpdate == null) return false;
             toUpdate.StepOrder = updatedStep.StepOrder;
             toUpdate.Step = updatedStep.Step;
+            toUpdate.Completed = updatedStep.Completed;
             _context.SaveChanges();
             return true;
         }
@@ -60,25 +62,33 @@ namespace Mohawk.Executive.Services.Services
             return true;
         }
 
-        public bool ReorderStep(Guid opportunityId, int stepId, int step)
-        {
-            var toSwap = _context.OpportunitySteps.FirstOrDefault(x => x.Id == stepId);
-            var toSwapWith = _context.OpportunitySteps.Where(x => x.StepOrder == toSwap.StepOrder + step).FirstOrDefault();
-            var stepCount = _context.OpportunitySteps.Where(x => x.OpportunityId == opportunityId).Count();
-
-            if ((toSwap == null) || (step + toSwap.StepOrder > stepCount) || (step + toSwap.StepOrder <= 0)) return false;
-            toSwap.StepOrder += step;
-
-            if(toSwapWith != null)
-                toSwapWith.StepOrder -= step;
-            _context.SaveChanges();
-            return true;
-
-        }
-
         public void GetStepsForOpportunity(Guid opportunityId)
         {
             throw new NotImplementedException();
+        }
+
+        public OpportunityStepModel GetStep(int stepId)
+        {
+            return _context.OpportunitySteps.Where(x => x.Id == stepId).Select(x => new OpportunityStepModel()
+                   {
+                        Id = x.Id,
+                        OpportunityId = x.OpportunityId,
+                        Completed = x.Completed,
+                        Step = x.Step,
+                        StepOrder = x.StepOrder
+                   }).FirstOrDefault();
+        }
+
+        IEnumerable<OpportunityStepModel> IStepHandler.GetStepsForOpportunity(Guid opportunityId)
+        {
+            return _context.OpportunitySteps.Where(x => x.OpportunityId == opportunityId).Select(x => new OpportunityStepModel()
+            {
+                Id = x.Id,
+                OpportunityId = x.OpportunityId,
+                Completed = x.Completed,
+                Step = x.Step,
+                StepOrder = x.StepOrder
+            });
         }
     }
 }

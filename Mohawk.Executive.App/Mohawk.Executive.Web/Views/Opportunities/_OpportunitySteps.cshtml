@@ -6,18 +6,31 @@
     <div id="step-container">
     @foreach (var item in Model.OrderBy(x => x.StepOrder))
     {
-        <div class="row block-card">
+        <div class="row block-card @(item.Completed ? "resolved" : "") ">
             <div class="col-md-12">
-                <div style="display: inline-block;">
-                    <h4>@item.StepOrder</h4>
-                </div>
+                <div style="display: inline-block;text-align:center">
+                    @if(item.Completed) {
+                            <h4 class="circled complete"> @item.StepOrder </h4>
+                        }
+                        else
+                        {
+                            <h4 class="circled incomplete"> @item.StepOrder </h4>
+                        }
+                        </div>
                 <div style="display: inline-block; padding-left: 1em;">
                     @item.Step
                 </div>
                 <div class="pull-right button-group" style="display: inline-block;">
                     <button class="btn btn-default @item.StepOrder" onclick="window.location='@Url.Action("ReorderStep", new { stepId = item.Id, direction = "up", opportunityId = item.OpportunityId})'"><span class="glyphicon glyphicon-arrow-up"></span></button>
                     <button class="btn btn-default @item.StepOrder" onclick="window.location='@Url.Action("ReorderStep", new { stepId = item.Id, direction = "down", opportunityId = item.OpportunityId})'"><span class="glyphicon glyphicon-arrow-down"></span></button>
-                    <button class="btn btn-success" onclick="window.location='@Url.Action("RemoveStep", new { stepId = item.Id, opportunityId = item.OpportunityId})'"><span class="glyphicon glyphicon-check"></span></button>
+                    @if (item.Completed)
+                    {
+                        <button class="btn btn-warning unresolved" onclick="window.location='@Url.Action("ToggleStepCompletion", new { stepId = item.Id, opportunityId = item.OpportunityId })'"><span class="glyphicon glyphicon-edit"></span></button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-success" onclick="window.location='@Url.Action("ToggleStepCompletion", new { stepId = item.Id, opportunityId = item.OpportunityId })'"><span class="glyphicon glyphicon-check"></span></button>
+                    }
                     <button class="btn btn-danger" onclick="window.location='@Url.Action("RemoveStep", new { stepId = item.Id, opportunityId = item.OpportunityId})'">&times;</button>
                 </div>
             </div>
@@ -37,5 +50,8 @@ else
         $(document).ready(function () {
             $(".1:first-child").prop("disabled", true);
             $("." + @Model.ToList().Count + ":nth-child(2)").prop("disabled", true);
+
+            $(".resolved button").prop("disabled", true);
+            $(".unresolved").prop("disabled", false);
         });
     </script>

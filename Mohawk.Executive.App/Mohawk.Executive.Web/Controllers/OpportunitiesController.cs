@@ -224,10 +224,16 @@ namespace Mohawk.Executive.Web.Controllers
             return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId, activeTab = "steps-tab" });
         }
 
-        public ActionResult EditStep(OpportunityStepModel model)
+        public ActionResult ToggleStepCompletion(int stepId, Guid opportunityId)
         {
-            StepHandler.UpdateStep(model);
-            return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId, activeTab = "steps-tab" });
+            var toUpdate = StepHandler.GetStep(stepId);
+            if (toUpdate != null)
+            {
+                toUpdate.Completed = !toUpdate.Completed;
+                StepHandler.UpdateStep(toUpdate);
+            }
+            
+            return RedirectToAction("ViewOpportunity", new { id = opportunityId, activeTab = "steps-tab" });
         }
 
         public ActionResult RemoveStep(int stepId, Guid opportunityId)
@@ -238,8 +244,24 @@ namespace Mohawk.Executive.Web.Controllers
 
         public ActionResult ReorderStep(int stepId, string direction, Guid opportunityId)
         {
-            if (direction.Equals("up")) StepHandler.ReorderStep(opportunityId, stepId, -1);
-            if (direction.Equals("down")) StepHandler.ReorderStep(opportunityId, stepId, 1);
+            int step = -1;
+            if (direction.Equals("down")) step = 1;
+
+            var steps = StepHandler.GetStepsForOpportunity(opportunityId);
+            var toSwap = StepHandler.GetStep(stepId);
+            var toSwapWith = steps.Where(x => x.StepOrder == toSwap.StepOrder + step).FirstOrDefault();
+
+            if ((toSwap != null) && (step + toSwap.StepOrder <= steps.Count()) && (step + toSwap.StepOrder > 0))
+            {
+                toSwap.StepOrder += step;
+                StepHandler.UpdateStep(toSwap);
+
+                if (toSwapWith != null)
+                {
+                    toSwapWith.StepOrder -= step;
+                    StepHandler.UpdateStep(toSwapWith);
+                }
+            }
 
             return RedirectToAction("ViewOpportunity", new { id = opportunityId, activeTab = "steps-tab" });
         }

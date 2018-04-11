@@ -10,5 +10,6 @@ namespace Mohawk.Executive.Services.ViewModels
         public Guid OpportunityId { get; set; }
         public int StepOrder { get; set; }
         public string Step { get; set; }
+        public bool Completed { get; set; }
     }
 }

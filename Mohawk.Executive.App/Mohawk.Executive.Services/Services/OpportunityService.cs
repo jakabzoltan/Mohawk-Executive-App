@@ -245,7 +245,8 @@ namespace Mohawk.Executive.Services.Services
                         Id = s.Id,
                         OpportunityId = s.OpportunityId,
                         Step = s.Step,
-                        StepOrder = s.StepOrder
+                        StepOrder = s.StepOrder,
+                        Completed = s.Completed
                     }).ToList();
                 return op;
             }
