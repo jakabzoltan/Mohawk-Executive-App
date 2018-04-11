@@ -224,6 +224,26 @@ namespace Mohawk.Executive.Web.Controllers
             return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId, activeTab = "steps-tab" });
         }
 
+        public ActionResult EditStep(OpportunityStepModel model)
+        {
+            StepHandler.UpdateStep(model);
+            return RedirectToAction("ViewOpportunity", new { id = model.OpportunityId, activeTab = "steps-tab" });
+        }
+
+        public ActionResult RemoveStep(int stepId, Guid opportunityId)
+        {
+            StepHandler.RemoveStep(stepId);
+            return RedirectToAction("ViewOpportunity", new { id = opportunityId, activeTab = "steps-tab" });
+        }
+
+        public ActionResult ReorderStep(int stepId, string direction, Guid opportunityId)
+        {
+            if (direction.Equals("up")) StepHandler.ReorderStep(opportunityId, stepId, -1);
+            if (direction.Equals("down")) StepHandler.ReorderStep(opportunityId, stepId, 1);
+
+            return RedirectToAction("ViewOpportunity", new { id = opportunityId, activeTab = "steps-tab" });
+        }
+
         #endregion
 
         #region Comments

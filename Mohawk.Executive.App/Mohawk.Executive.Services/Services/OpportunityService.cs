@@ -242,6 +242,7 @@ namespace Mohawk.Executive.Services.Services
                 op.Steps = _context.OpportunitySteps.Where(i => i.OpportunityId == opportunityId).Select(s =>
                     new OpportunityStepModel()
                     {
+                        Id = s.Id,
                         OpportunityId = s.OpportunityId,
                         Step = s.Step,
                         StepOrder = s.StepOrder

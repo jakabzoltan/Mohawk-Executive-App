@@ -54,7 +54,12 @@ namespace Mohawk.Executive.Web.Controllers
         public ActionResult ConfirmRemoveDonationType(int id)
         {
             var opportunityIds = SettingsHandler.GetAssociatedOpportunities(id);
-            var opportunities = OpportunityHandler.GetOpportunities().Where(opp => opportunityIds.Contains(opp.Id));
+            var opportunities = new List<OpportunityModel>();
+            foreach (var opportunityId in opportunityIds)
+            {
+                opportunities.Add(OpportunityHandler.Get(opportunityId));
+            }
+            //var opportunities = OpportunityHandler.GetOpportunities().Where(opp => opportunityIds.Contains(opp.Id));
             var model = new DontationTypeOpportunitiesViewModel()
             {
                 Id = id,
