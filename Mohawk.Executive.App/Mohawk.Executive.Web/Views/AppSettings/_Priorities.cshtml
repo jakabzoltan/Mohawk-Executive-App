@@ -1,15 +1,6 @@
 ﻿@using Mohawk.Executive.Services.ViewModels
 @model IEnumerable<Mohawk.Executive.Services.ViewModels.PriorityTypeModel>
-<div class="row">
-    <div class="col-sm-12">
-        <h3>
-            Opportunity Priorities
-            <a class="btn btn-success pull-right" data-toggle="modal" data-target="#add-priority-type-modal"><span class="glyphicon glyphicon-plus"></span> Add Priority Type </a>
-        </h3>
-        <small>An Opportunity Priority specifies how important an opportunity is. Example: "High Priority", "Low Priority", "Prioritize Later", etc</small>
-    </div>
-</div>
-<hr />
+
 <div class="row">
     <div class="col-sm-12">
         @if (Model.Any())

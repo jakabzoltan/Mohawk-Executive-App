@@ -4,28 +4,56 @@
 }
 
 
+<div class="row">
+    <div class="col-sm-12">
+        <h3>
+            Donation Types
+            <a class="btn btn-success pull-right" data-toggle="modal" data-target="#add-donation-type-modal"><span class="glyphicon glyphicon-plus"></span> Add Donation Type</a>
+        </h3>
+        <small>Donation types are the types you assign to donations in an opportunity. Example: "In-Kind Donation", "Monetary Donation", etc</small>
+    </div>
+</div>
+<hr />
 <div id="donation-type-section">
 
 </div>
+<div id="don-prog" class="progress" style="margin-top: 10%;;margin-bottom:10%">
+    <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+</div>
 
 
-
+<div class="row">
+    <div class="col-sm-12">
+        <h3>
+            Opportunity Priorities
+            <a class="btn btn-success pull-right" data-toggle="modal" data-target="#add-priority-type-modal"><span class="glyphicon glyphicon-plus"></span> Add Priority Type </a>
+        </h3>
+        <small>An Opportunity Priority specifies how important an opportunity is. Example: "High Priority", "Low Priority", "Prioritize Later", etc</small>
+    </div>
+</div>
+<hr />
 <div id="priority-section">
-
+</div>
+<div id ="prop-prog" class="progress" style="margin-top: 10%;margin-bottom:10%">
+    <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
 </div>
 
 
 <script>
     $(document).ready(function () {
+        $("#prop-prog").show();
+        $("#don-prog").show();
         $.ajax({
             url: "@Url.Action("GetDonationTypes","AppSettings")"
-        }).done(function(data) {
+        }).done(function (data) {
             $("#donation-type-section").html(data);
+            $("#don-prog").hide();
         });
         $.ajax({
             url: "@Url.Action("GetPriorities","AppSettings")"
-        }).done(function(data) {
+        }).done(function (data) {
             $("#priority-section").html(data);
+            $("#prop-prog").hide();
         });
 
 
