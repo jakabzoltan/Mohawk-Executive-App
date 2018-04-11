@@ -12,6 +12,7 @@ using DonationType = Mohawk.Executive.Services.ViewModels.DonationTypeModel;
 
 namespace Mohawk.Executive.Web.Controllers
 {
+    [ValidateInput(false)]
     [Authorize]
     public class OpportunitiesController : Controller
     {
