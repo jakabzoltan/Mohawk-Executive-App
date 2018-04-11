@@ -1,0 +1,47 @@
+﻿
+@model Mohawk.Executive.Web.Models.PriorityOpportunitiesViewModel
+
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Add Donation</h5>
+</div>
+@using (Html.BeginForm("RemovePriority", "AppSettings", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id)
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12">
+                @if (Model.Opportunities.Any())
+                {
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td><b>Subject</b></td>
+                                <td><b>Description</b></td>
+                                <td class="text-left"><b>Actions</b></td>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model.Opportunities)
+                        {
+                            <tr>
+                                <td width="30%">@item.Subject</td>
+                                <td width="70%">@item.Description</td>
+                                <td>
+                                    <a href="@Url.Action("ViewOpportunity", "Opportunities", item)">View</a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <p>There are no associated opportunites.</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-danger" value="Remove" />
+    </div>
+
+}

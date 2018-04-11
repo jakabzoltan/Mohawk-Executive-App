@@ -53,7 +53,7 @@ namespace Mohawk.Executive.Web.Controllers
         [HttpGet]
         public ActionResult ConfirmRemoveDonationType(int id)
         {
-            var opportunityIds = SettingsHandler.GetAssociatedOpportunities(id);
+            var opportunityIds = SettingsHandler.GetAssociatedDonationsOpportunities(id);
             var opportunities = new List<OpportunityModel>();
             foreach (var opportunityId in opportunityIds)
             {
@@ -99,6 +99,25 @@ namespace Mohawk.Executive.Web.Controllers
         {
             SettingsHandler.AddPriorityType(priority.PriorityString);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult ConfirmPriorityRemove(int id)
+        {
+            var opportunityIds = SettingsHandler.GetAssociatedPrioritiesOpportunities(id);
+            var opportunities = new List<OpportunityModel>();
+            foreach (var opportunityId in opportunityIds)
+            {
+                opportunities.Add(OpportunityHandler.Get(opportunityId));
+            }
+            //var opportunities = OpportunityHandler.GetOpportunities().Where(opp => opportunityIds.Contains(opp.Id));
+            var model = new PriorityOpportunitiesViewModel()
+            {
+                Id = id,
+                Opportunities = opportunities
+            };
+
+            return PartialView("_RemovePriorityType", model); ;
         }
         public ActionResult RemovePriority(int id)
         {

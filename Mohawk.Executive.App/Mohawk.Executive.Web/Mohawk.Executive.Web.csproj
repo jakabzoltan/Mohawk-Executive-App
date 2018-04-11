@@ -217,6 +217,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OpportunityCreateViewModel.cs" />
     <Compile Include="Models\OpportunityResolutionViewModel.cs" />
+    <Compile Include="Models\PriorityOpportunitiesViewModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\SearchResultModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
@@ -330,6 +331,7 @@
     <Content Include="Views\AppSettings\_EditPriorityType.cshtml" />
     <Content Include="Views\Opportunities\_EditDonation.cshtml" />
     <Content Include="Views\AppSettings\_RemoveDonationType.cshtml" />
+    <Content Include="Views\AppSettings\_RemovePriorityType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

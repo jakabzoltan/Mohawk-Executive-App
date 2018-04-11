@@ -14,7 +14,8 @@ namespace Mohawk.Executive.Services.Interfaces
         DonationTypeModel AddDonationType(string donationType);
         bool RemoveDonationType(int id);
         DonationTypeModel EditDonationType(int id, string donationType);
-        IEnumerable<Guid> GetAssociatedOpportunities(int id);
+        IEnumerable<Guid> GetAssociatedDonationsOpportunities(int id);
+        IEnumerable<Guid> GetAssociatedPrioritiesOpportunities(int id);
 
             #endregion
 

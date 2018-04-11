@@ -67,12 +67,20 @@ namespace Mohawk.Executive.Services.Services
             };
         }
 
-        public IEnumerable<Guid> GetAssociatedOpportunities(int id)
+        public IEnumerable<Guid> GetAssociatedDonationsOpportunities(int id)
         {
             var opportunitiesDonations = _context.DonationTypes.SingleOrDefault(c => c.Id == id)?.OpportunityDonations;
             var opportunities = opportunitiesDonations?.Select(oppDon => oppDon.Opportunity.Id);
             return opportunities;
         }
+
+        public IEnumerable<Guid> GetAssociatedPrioritiesOpportunities(int id)
+        {
+            var opportunitiesDonations = _context.PriorityTypes.SingleOrDefault(c => c.Id == id)?.Opportunities;
+            var opportunities = opportunitiesDonations?.Select(oppDon => oppDon.Id);
+            return opportunities;
+        }
+
 
         public IEnumerable<PriorityTypeModel> GetPriorities()
         {
