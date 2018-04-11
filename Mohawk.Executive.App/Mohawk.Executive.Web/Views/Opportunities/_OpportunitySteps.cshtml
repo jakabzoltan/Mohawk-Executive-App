@@ -3,7 +3,8 @@
 
 @if (Model.Any())
 {
-    foreach (var item in Model.OrderBy(x => x.StepOrder))
+    <div id="step-container">
+    @foreach (var item in Model.OrderBy(x => x.StepOrder))
     {
         <div class="row block-card">
             <div class="col-md-12">
@@ -13,9 +14,9 @@
                 <div style="display: inline-block; padding-left: 1em;">
                     @item.Step
                 </div>
-                <div class="pull-right" style="display: inline-block;">
-                    <button class="btn btn-default" onclick="window.location='@Url.Action("ReorderStep", new { stepId = item.Id, direction = "up", opportunityId = item.OpportunityId})'"><span class="glyphicon glyphicon-arrow-up"></span></button>
-                    <button class="btn btn-default" onclick="window.location='@Url.Action("ReorderStep", new { stepId = item.Id, direction = "down", opportunityId = item.OpportunityId})'"><span class="glyphicon glyphicon-arrow-down"></span></button>
+                <div class="pull-right button-group" style="display: inline-block;">
+                    <button class="btn btn-default @item.StepOrder" onclick="window.location='@Url.Action("ReorderStep", new { stepId = item.Id, direction = "up", opportunityId = item.OpportunityId})'"><span class="glyphicon glyphicon-arrow-up"></span></button>
+                    <button class="btn btn-default @item.StepOrder" onclick="window.location='@Url.Action("ReorderStep", new { stepId = item.Id, direction = "down", opportunityId = item.OpportunityId})'"><span class="glyphicon glyphicon-arrow-down"></span></button>
                     <button class="btn btn-success" onclick="window.location='@Url.Action("RemoveStep", new { stepId = item.Id, opportunityId = item.OpportunityId})'"><span class="glyphicon glyphicon-check"></span></button>
                     <button class="btn btn-danger" onclick="window.location='@Url.Action("RemoveStep", new { stepId = item.Id, opportunityId = item.OpportunityId})'">&times;</button>
                 </div>
@@ -24,9 +25,17 @@
 
         </div>
     }
+    </div>
 
 }
 else
 {
     <div>This opportunity has no steps to achieve at the moment. Add one!</div>
 }
+
+    <script>
+        $(document).ready(function () {
+            $(".1:first-child").prop("disabled", true);
+            $("." + @Model.ToList().Count + ":nth-child(2)").prop("disabled", true);
+        });
+    </script>
