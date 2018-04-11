@@ -15,7 +15,7 @@
             {
                 <div class="row block-card">
                     <div class="col-sm-12">
-                        <i>@item.PostedBy.Name - @item.CommentDate</i>
+                        <b>[@item.PostedBy.Name]</b> - <i>@item.CommentDate</i>
                     </div>
                     <div class="col-sm-12" style="padding-top: 15px; padding-bottom: 15px">
                         @item.CommentString
@@ -27,8 +27,8 @@
                     {
                         <div class="row block-reply">
                             <div class="col-sm-12">
-                                <i>@reply.PostedBy.Name - @reply.CommentDate</i>
-                                
+                                <b>[@reply.PostedBy.Name]</b> - <i>@reply.CommentDate</i>
+
                             </div>
                             <div class="col-sm-12">
                                 @reply.CommentString

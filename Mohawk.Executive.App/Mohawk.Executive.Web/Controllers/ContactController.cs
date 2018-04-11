@@ -8,6 +8,7 @@ using Mohawk.Executive.Services.ViewModels;
 
 namespace Mohawk.Executive.Web.Controllers
 {
+    [ValidateInput(false)]
     [Authorize]
     public class ContactController : Controller
     {

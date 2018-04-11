@@ -9,6 +9,7 @@ using Mohawk.Executive.Services.Interfaces;
 
 namespace Mohawk.Executive.Web.Controllers
 {
+    [ValidateInput(false)]
     [Authorize]
     public class AppSettingsController : Controller
     {

@@ -10,6 +10,7 @@ using Mohawk.Executive.Web.Models;
 
 namespace Mohawk.Executive.Web.Controllers
 {
+    [ValidateInput(false)]
     [Authorize]
     public class ManageController : Controller
     {
